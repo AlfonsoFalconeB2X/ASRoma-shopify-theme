@@ -1,0 +1,85 @@
+{%- comment -%}
+  ----------------------------------------------------------------------------------------------------------------------
+  CHECKBOX COMPONENT
+  ----------------------------------------------------------------------------------------------------------------------
+
+  This component is used to create the necessary markup to create an input checkbox
+
+  ********************************************
+  Supported variables
+  ********************************************
+
+  * name: the HTML name attribute that is used when the field is submitted.
+  * type: by default the snippet generates a checkbox, but you can pass a "radio" type to generate radio buttons
+  * form: if specified, define the form ID linked to this input
+  * checked: if the checkbox is checked or not
+  * disabled: if the checkbox is disabled or not
+  * required: if the checkbox needs to be checked or not
+  * value: the value to use (use 1 if none is passed)
+  * switch: if set to true, the checkbox is rendered as a switch
+  * label: the label to show
+  * hide_checkbox: if set to true, the checkbox itself is hidden and a dot will appear when selected. This is used for
+  instance in collection page
+  * id_prefix: an optional prefix to be used to dissociate the ID
+  * custom_class: an optional custom CSS class to add to the input element
+  * style: an optional style to add to the input element (e.g. 'checkbox')
+  * id: an optional custom ID to use instead of the generated one
+{%- endcomment -%}
+
+{%- if id -%}
+  {%- assign final_id = id -%}
+{%- else -%}
+  {%- capture final_id -%}checkbox-{{ id_prefix }}-{{ section.id }}-{{ form }}-{{ name }}-{{ value | handle }}{%- endcapture -%}
+{%- endif -%}
+{%- capture optional_attributes -%}
+  {% if form %}form="{{ form }}"{% endif %}
+  {% if value %}value="{{ value | default: 1 }}"{% endif %}
+  {% if disabled %}disabled{% endif %}
+  {% if required %}required{% endif %}
+  {% if checked %}checked{% endif %}
+  {% if badge_label or badge_group %}
+    data-filter-badge="true"
+    {% if badge_group %}data-filter-badge-group="{{ badge_group | escape }}"{% endif %}
+    {% if badge_label %}data-filter-badge-label="{{ badge_label | escape }}"{% endif %}
+    {% if badge_value %}data-filter-badge-value="{{ badge_value | escape }}"{% endif %}
+    data-filter-badge-input="{{ final_id | escape }}"
+  {% endif %}
+{%- endcapture -%}
+<div class="checkbox-control" {{ block.shopify_attributes }}>
+  {%- if switch -%}
+    <input
+      id="{{ final_id | escape }}"
+      class="switch{% if custom_class %} {{ custom_class }}{% endif %}"
+      type="{{ type | default: 'checkbox' }}"
+      role="switch"
+      name="{{ name }}"
+      {{ optional_attributes }}>
+  {%- else -%}
+    {%- liquid
+      assign input_type = type | default: 'checkbox'
+      assign css_class = 'checkbox'
+
+      if hide_checkbox
+        assign css_class = 'dot-checkbox'
+      elsif style == 'checkbox' and input_type == 'radio'
+        assign css_class = 'checkbox checkbox-style-radio'
+      elsif input_type == 'radio' and style != 'checkbox'
+        assign css_class = 'checkbox'
+      endif
+
+      if custom_class
+        assign css_class = css_class | append: ' ' | append: custom_class
+      endif
+    -%}
+    <input
+      id="{{ final_id | escape }}"
+      class="{{ css_class }}"
+      type="{{ input_type }}"
+      name="{{ name }}"
+      {{ optional_attributes }}>
+  {%- endif -%}
+
+  {%- if label != blank -%}
+    <label for="{{ final_id | escape }}" class="text-black Body">{{ label }}</label>
+  {%- endif -%}
+</div>

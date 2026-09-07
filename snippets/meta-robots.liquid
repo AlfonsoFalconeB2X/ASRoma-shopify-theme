@@ -1,0 +1,28 @@
+{%- liquid
+  assign robots_metafield = nil
+  case request.page_type
+    when 'product'
+      assign robots_metafield = product.metafields.custom.seo_robots
+    when 'collection'
+      assign robots_metafield = collection.metafields.custom.seo_robots
+    when 'page'
+      assign robots_metafield = page.metafields.custom.seo_robots
+    when 'article'
+      assign robots_metafield = article.metafields.custom.seo_robots
+    when 'blog'
+      assign robots_metafield = blog.metafields.custom.seo_robots
+  endcase
+  assign robots_content = nil
+  if robots_metafield != blank
+    assign metaobject = robots_metafield.value
+    if metaobject.role
+      assign robots_content = metaobject.role
+    endif
+  endif
+  if robots_content == blank
+    assign robots_content = 'index,follow'
+  endif
+-%}
+{%- if robots_content != blank -%}
+  <meta name="robots" content="{{ robots_content | escape }}">
+{%- endif -%}

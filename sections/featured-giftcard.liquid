@@ -1,0 +1,252 @@
+{%- assign product = section.settings.product -%}
+
+
+<div class="section-spacing {% if section.settings.separate_section_with_border %}bordered-section{% endif %}">
+  <div class=" {% unless section.settings.container_size == 'full' %}container container--{{ section.settings.container_size }}{% endunless %}">
+    <div
+      class="featured-giftcard"
+      data-section-id="{{ section.id }}"
+      data-product-url="{{ product.url }}">
+      <div class="featured-giftcard__media">
+        {%- if product != blank and product.featured_media != blank -%}
+          {%- assign alt_text = product.featured_media.alt | default: product.title | default: section.settings.title | default: shop.name -%}
+          {{- product.featured_media | image_url: width: product.featured_media.width | image_tag: sizes: '(max-width: 699px) 100vw, (max-width: 999px) 50vw, 640px', widths: '320,480,640,750,900,1080,1280', class: 'featured-giftcard__image', loading: 'lazy', alt: alt_text -}}
+        {%- else -%}
+          {{- 'product-apparel-1' | placeholder_svg_tag: 'placeholder featured-giftcard__image' -}}
+        {%- endif -%}
+      </div>
+
+      <div class="featured-giftcard__content v-stack justify-items-{{ section.settings.text_alignment }} text-{{ section.settings.text_alignment }}">
+        {%- if section.settings.title != blank -%}
+          <h2 class="Headline-4 Medium">{{ section.settings.title }}</h2>
+        {%- endif -%}
+
+        {%- if product != blank -%}
+          <div class="v-stack justify-items-{{ section.settings.text_alignment }} variant-picker__option">
+            {%- if product.variants.size > 1 -%}
+              <div class="variant-picker__option-values h-stack gap-2.5 wrap">
+                {%- for variant in product.variants -%}
+                  <input
+                    class="sr-only"
+                    type="radio"
+                    id="variant-{{ variant.id }}"
+                    name="variant"
+                    value="{{ variant.id }}">
+                  <label class="block-swatch" for="variant-{{ variant.id }}">
+                    <span>{{ variant.price | money_without_trailing_zeros }}</span>
+                  </label>
+                {%- endfor -%}
+              </div>
+            {%- else -%}
+              <div class="featured-giftcard__price">
+                <span class="price Heading-3 Medium">{{ product.price | money }}</span>
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+        <div class="featured-giftcard__product-info w-full text-center">
+          {%- if section.settings.button_text != blank -%}
+            {%- assign button_href = '' -%}
+            {%- if product != blank -%}
+              {%- assign button_href = product.url -%}
+              {%- if product.selected_or_first_available_variant -%}
+                {%- assign button_href = product.url | append: '?variant=' | append: product.selected_or_first_available_variant.id -%}
+              {%- endif -%}
+            {%- endif -%}
+
+            <a
+              href="{{ button_href }}"
+              class="ASRomaFont Small ExtraBold Uppercase asroma-button button--{{ section.settings.button_style }} button-{{ section.settings.button_variant }} w-full"
+              id="giftcard-buy-button"
+              data-product-url="{{ product.url }}">
+              {{ section.settings.button_text }}
+            </a>
+          {%- endif -%}
+
+          {%- if section.settings.subtext != blank -%}
+            <div class="ExtraSmall text-grey-900 featured-giftcard__subtext">
+              {% render 'icon' with 'as-roma-info'
+                , width: '12px'
+                , height: '12px' %}
+              {{ section.settings.subtext }}
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+  const giftcardSection = document.querySelector('[data-section-id="{{ section.id }}"]');
+  if (!giftcardSection) return;
+  const variantInputs = giftcardSection.querySelectorAll('input[name="variant"]');
+  const buyButton = giftcardSection.querySelector('#giftcard-buy-button');
+  const productUrl = giftcardSection.dataset.productUrl;
+  
+  if (!buyButton || !productUrl || variantInputs.length === 0) return;
+  
+  // Function to update button href with selected variant
+  function updateButtonHref(variantId) {
+    if (variantId && productUrl) {
+      const newHref = productUrl + '?variant=' + variantId;
+      buyButton.href = newHref;
+    }
+  }
+  
+  // Add event listeners to all variant radio inputs
+  variantInputs.forEach(function(input) {
+    input.addEventListener('change', function() {
+      if (this.checked) {
+        updateButtonHref(this.value);
+      }
+    });
+  });
+  
+  // Set initial variant if one is already selected or select the first one
+  const checkedInput = giftcardSection.querySelector('input[name="variant"]:checked');
+  if (checkedInput) {
+    updateButtonHref(checkedInput.value);
+  } else if (variantInputs.length > 0) {
+    // Select first variant by default
+    variantInputs[0].checked = true;
+    updateButtonHref(variantInputs[0].value);
+  }
+  });
+</script>
+
+{% schema %}
+  {
+    "name": "Featured gift card",
+    "class": "shopify-section--featured-giftcard",
+    "tag": "section",
+    "disabled_on": {
+      "groups": ["header", "custom.overlay"]
+    },
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "separate_section_with_border",
+        "label": "t:global.section.separate_section_with_border",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "container_size",
+        "label": "t:global.sizes.section_width",
+        "options": [
+          {
+            "value": "sm",
+            "label": "t:global.sizes.small"
+          },
+          {
+            "value": "md",
+            "label": "t:global.sizes.medium"
+          },
+          {
+            "value": "lg",
+            "label": "t:global.sizes.large"
+          },
+          {
+            "value": "xl",
+            "label": "t:global.sizes.x_large"
+          },
+          {
+            "value": "full",
+            "label": "t:global.sizes.full_width"
+          }
+        ],
+        "default": "lg"
+      },
+      {
+        "type": "select",
+        "id": "text_alignment",
+        "label": "t:global.text.alignment",
+        "options": [
+          {
+            "value": "start",
+            "label": "t:global.position.left"
+          },
+          {
+            "value": "center",
+            "label": "t:global.position.center"
+          },
+          {
+            "value": "end",
+            "label": "t:global.position.right"
+          }
+        ],
+        "default": "center"
+      },
+      {
+        "type": "product",
+        "id": "product",
+        "label": "t:sections.featured_product.product"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "t:global.text.heading",
+        "default": "Scegli l'Importo"
+      },
+      {
+        "type": "text",
+        "id": "subtext",
+        "label": "t:global.text.text",
+        "default": "Utilizzabile solo per acquisti online"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "t:global.text.button_text",
+        "default": "Acquista ora"
+      },
+      {
+        "type": "select",
+        "id": "button_style",
+        "label": "t:global.text.button_style",
+        "options": [
+          {
+            "value": "solid",
+            "label": "t:global.text.button_style_options.solid"
+          },
+          {
+            "value": "outline",
+            "label": "t:global.text.button_style_options.outline"
+          },
+          {
+            "value": "link",
+            "label": "link"
+          }
+        ],
+        "default": "outline"
+      },
+      {
+        "type": "select",
+        "id": "button_variant",
+        "label": "t:global.text.button_variant",
+        "options": [
+          {
+            "value": "primary",
+            "label": "t:global.text.button_variant_options.primary"
+          },
+          {
+            "value": "secondary",
+            "label": "t:global.text.button_variant_options.secondary"
+          }
+        ],
+        "default": "primary"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured gift card",
+        "settings": {
+          "title": "Carte regalo AS Roma",
+          "button_text": "Acquista ora"
+        }
+      }
+    ]
+  }
+{% endschema %}

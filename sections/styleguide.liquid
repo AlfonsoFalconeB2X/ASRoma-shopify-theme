@@ -1,0 +1,570 @@
+{%- comment -%}
+  Typography Style Guide
+  Showcase all typography styles and font weights available in the theme
+{%- endcomment -%}
+
+
+<style>
+
+  .prose div:first-child {
+    margin-block-start: 1.25rem !important;
+  }
+</style>
+
+<div class="container">
+  <div class="section-spacing">
+    <h1 class="Headline-1">Typography Style Guide</h1>
+    <p class="Body">Complete reference for all typography styles and ASRoma font variants available in this theme.</p>
+
+    <!-- Headlines -->
+    <div style="margin-top: 3rem; margin-bottom: 2rem;">
+
+      <div style="margin-top: 2rem;">
+        <h1 class="Headline-1">Headline 1 - 48px/28px mobile</h1>
+        <p class="Small" style="color: #666; margin-bottom: 1rem;">Desktop: 48px, Mobile: 28px, Line-height: 1.2</p>
+
+        <h2 class="Headline-2">Headline 2 - 36px/24px mobile</h2>
+        <p class="Small" style="color: #666; margin-bottom: 1rem;">Desktop: 36px, Mobile: 24px, Line-height: 1.2</p>
+
+        <h3 class="Headline-3">Headline 3 - 28px/20px mobile</h3>
+        <p class="Small" style="color: #666; margin-bottom: 1rem;">Desktop: 28px, Mobile: 20px, Line-height: 1.2</p>
+
+        <h4 class="Headline-4">Headline 4 - 20px/18px mobile</h4>
+        <p class="Small" style="color: #666; margin-bottom: 1rem;">Desktop: 20px, Mobile: 18px, Line-height: 1.2</p>
+
+        <h5 class="Headline-5">Headline 5 - 18px/16px mobile</h5>
+        <p class="Small" style="color: #666; margin-bottom: 1rem;">Desktop: 18px, Mobile: 16px, Line-height: 1.2</p>
+      </div>
+    </div>
+
+    <!-- Body Text -->
+    <div style="margin-top: 3rem; margin-bottom: 2rem;">
+
+      <div style="margin-top: 2rem;">
+        <p class="Body">Body text - 16px - Line-height: 1.5</p>
+        <p class="Small" style="color: #666; margin-bottom: 1rem;">Standard body text for content</p>
+
+        <p class="Small">Small text - 14px - Line-height: 1.5</p>
+        <p class="ExtraSmall" style="color: #666; margin-bottom: 1rem;">Used for captions and secondary information</p>
+
+        <p class="ExtraSmall">Extra small text - 12px - Line-height: 1.5</p>
+        <p class="Exception" style="color: #666; margin-bottom: 1rem;">Used for fine print and labels</p>
+
+        <p class="Exception">Exception text - 10px - Line-height: 1.5</p>
+        <p class="Exception" style="color: #666;">Smallest text size for disclaimers</p>
+      </div>
+    </div>
+
+    <!-- Colors -->
+    <div style="margin-top: 3rem; margin-bottom: 2rem;">
+      <h2 class="Headline-2">Color Palette</h2>
+      <p class="Body">Brand colors and utility classes for AS Roma theme.</p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 0.75rem; margin-top: 2rem;">
+
+        <!-- Red -->
+        <div style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px;">
+          <div class="bg-red" style="width: 100%; height: 40px; border-radius: 4px; margin-bottom: 0.5rem;"></div>
+          <p class="Small" style="margin-bottom: 0.25rem;">
+            <strong>Red</strong>
+          </p>
+          <p class="ExtraSmall text-grey-700">#8e001c</p>
+          <p class="Exception">Classes: .text-red, .bg-red, .border-red</p>
+        </div>
+
+        <!-- Red Gradient -->
+        <div style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px;">
+          <div class="bg-red-gradient" style="width: 100%; height: 40px; border-radius: 4px; margin-bottom: 0.5rem;"></div>
+          <p class="Small" style="margin-bottom: 0.25rem;">
+            <strong>Red Gradient</strong>
+          </p>
+          <p class="ExtraSmall text-grey-700">Light to Red</p>
+          <p class="Exception">Classes: .bg-red-gradient</p>
+        </div>
+
+        <!-- Yellow -->
+        <div style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px;">
+          <div class="bg-yellow" style="width: 100%; height: 40px; border-radius: 4px; margin-bottom: 0.5rem;"></div>
+          <p class="Small" style="margin-bottom: 0.25rem;">
+            <strong>Yellow</strong>
+          </p>
+          <p class="ExtraSmall text-grey-700">#ffb300</p>
+          <p class="Exception">Classes: .text-yellow, .bg-yellow, .border-yellow</p>
+        </div>
+
+        <!-- Black -->
+        <div style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px;">
+          <div class="bg-black" style="width: 100%; height: 40px; border-radius: 4px; margin-bottom: 0.5rem;"></div>
+          <p class="Small" style="margin-bottom: 0.25rem;">
+            <strong>Black</strong>
+          </p>
+          <p class="ExtraSmall text-grey-700">#170207</p>
+          <p class="Exception">Classes: .text-black, .bg-black, .border-black</p>
+        </div>
+
+        <!-- Red Light -->
+        <div style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px;">
+          <div class="bg-red-light" style="width: 100%; height: 40px; border-radius: 4px; margin-bottom: 0.5rem;"></div>
+          <p class="Small" style="margin-bottom: 0.25rem;">
+            <strong>Red Light</strong>
+          </p>
+          <p class="ExtraSmall text-grey-700">#af062f</p>
+          <p class="Exception">Classes: .text-red-light, .bg-red-light, .border-red-light</p>
+        </div>
+
+        <!-- Red Lighter -->
+        <div style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px;">
+          <div class="bg-red-lighter" style="width: 100%; height: 40px; border-radius: 4px; margin-bottom: 0.5rem;"></div>
+          <p class="Small" style="margin-bottom: 0.25rem;">
+            <strong>Red Lighter</strong>
+          </p>
+          <p class="ExtraSmall text-grey-700">#f1e2e6</p>
+          <p class="Exception">Classes: .text-red-lighter, .bg-red-lighter, .border-red-lighter</p>
+        </div>
+
+        <!-- Yellow Light -->
+        <div style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px;">
+          <div class="bg-yellow-light" style="width: 100%; height: 40px; border-radius: 4px; margin-bottom: 0.5rem;"></div>
+          <p class="Small" style="margin-bottom: 0.25rem;">
+            <strong>Yellow Light</strong>
+          </p>
+          <p class="ExtraSmall text-grey-700">#ffedc2</p>
+          <p class="Exception">Classes: .text-yellow-light, .bg-yellow-light, .border-yellow-light</p>
+        </div>
+
+        <!-- Grey 100 -->
+        <div style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px;">
+          <div class="bg-grey-100" style="width: 100%; height: 40px; border-radius: 4px; margin-bottom: 0.5rem; border: 1px solid #ccc;"></div>
+          <p class="Small" style="margin-bottom: 0.25rem;">
+            <strong>Grey 100</strong>
+          </p>
+          <p class="ExtraSmall text-grey-700">#f6f6f6</p>
+          <p class="Exception">Classes: .text-grey-100, .bg-grey-100, .border-grey-100</p>
+        </div>
+
+        <!-- Grey 300 -->
+        <div style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px;">
+          <div class="bg-grey-300" style="width: 100%; height: 40px; border-radius: 4px; margin-bottom: 0.5rem;"></div>
+          <p class="Small" style="margin-bottom: 0.25rem;">
+            <strong>Grey 300</strong>
+          </p>
+          <p class="ExtraSmall text-grey-700">#e3e3e3</p>
+          <p class="Exception">Classes: .text-grey-300, .bg-grey-300, .border-grey-300</p>
+        </div>
+
+        <!-- Grey 500 -->
+        <div style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px;">
+          <div class="bg-grey-500" style="width: 100%; height: 40px; border-radius: 4px; margin-bottom: 0.5rem;"></div>
+          <p class="Small" style="margin-bottom: 0.25rem;">
+            <strong>Grey 500</strong>
+          </p>
+          <p class="ExtraSmall text-grey-700">#c2c2c2</p>
+          <p class="Exception">Classes: .text-grey-500, .bg-grey-500, .border-grey-500</p>
+        </div>
+
+        <!-- Grey 700 -->
+        <div style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px;">
+          <div class="bg-grey-700" style="width: 100%; height: 40px; border-radius: 4px; margin-bottom: 0.5rem;"></div>
+          <p class="Small" style="margin-bottom: 0.25rem;">
+            <strong>Grey 700</strong>
+          </p>
+          <p class="ExtraSmall text-grey-700">#656565</p>
+          <p class="Exception">Classes: .text-grey-700, .bg-grey-700, .border-grey-700</p>
+        </div>
+
+        <!-- Grey 900 -->
+        <div style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px;">
+          <div class="bg-grey-900" style="width: 100%; height: 40px; border-radius: 4px; margin-bottom: 0.5rem;"></div>
+          <p class="Small" style="margin-bottom: 0.25rem;">
+            <strong>Grey 900</strong>
+          </p>
+          <p class="ExtraSmall text-grey-700">#4b4b4b</p>
+          <p class="Exception">Classes: .text-grey-900, .bg-grey-900, .border-grey-900</p>
+        </div>
+
+        <!-- Error -->
+        <div style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px;">
+          <div class="bg-error" style="width: 100%; height: 40px; border-radius: 4px; margin-bottom: 0.5rem;"></div>
+          <p class="Small" style="margin-bottom: 0.25rem;">
+            <strong>Error</strong>
+          </p>
+          <p class="ExtraSmall text-grey-700">#dc3545</p>
+          <p class="Exception">Classes: .text-error, .bg-error, .border-error</p>
+        </div>
+
+        <!-- Warning -->
+        <div style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px;">
+          <div class="bg-warning" style="width: 100%; height: 40px; border-radius: 4px; margin-bottom: 0.5rem;"></div>
+          <p class="Small" style="margin-bottom: 0.25rem;">
+            <strong>Warning</strong>
+          </p>
+          <p class="ExtraSmall text-grey-700">#ffb300</p>
+          <p class="Exception">Classes: .text-warning, .bg-warning, .border-warning</p>
+        </div>
+
+        <!-- Success -->
+        <div style="padding: 0.75rem; border: 1px solid #ddd; border-radius: 6px;">
+          <div class="bg-success" style="width: 100%; height: 40px; border-radius: 4px; margin-bottom: 0.5rem;"></div>
+          <p class="Small" style="margin-bottom: 0.25rem;">
+            <strong>Success</strong>
+          </p>
+          <p class="ExtraSmall text-grey-700">#28a745</p>
+          <p class="Exception">Classes: .text-success, .bg-success, .border-success</p>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Buttons -->
+    <div style="margin-top: 3rem; margin-bottom: 2rem; padding: 1rem;">
+      <h2 class="Headline-2">Buttons</h2>
+      <p class="Body">Button components with primary, secondary and link variants.</p>
+
+      <!-- Primary Buttons -->
+      <div style="margin-top: 2rem;">
+        <h3 class="Headline-3">Primary Buttons</h3>
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem; align-items: flex-start;">
+          <div>
+            {% render 'button'
+              , content: 'Primary Solid'
+              , style: 'solid'
+              , variant: 'primary'
+              , extra_classes: 'Uppercase' %}
+            <p class="Exception" style="margin-top: 0.5rem;">style: 'solid', variant: 'button-primary'</p>
+          </div>
+          <div>
+            {% render 'button'
+              , content: 'Primary Disabled'
+              , style: 'solid'
+              , variant: 'primary'
+              , disabled: true %}
+            <p class="Exception" style="margin-top: 0.5rem;">disabled: true</p>
+          </div>
+
+          <div>
+            {% render 'button'
+              , content: 'Primary Outline'
+              , style: 'outline'
+              , variant: 'primary'
+              , extra_classes: 'Uppercase' %}
+            <p class="Exception" style="margin-top: 0.5rem;">style: 'outline', variant: 'button-primary'</p>
+          </div>
+
+          <div>
+            {% render 'button'
+              , content: 'Primary Outline Disabled'
+              , style: 'outline'
+              , variant: 'primary'
+              , disabled: true %}
+            <p class="Exception" style="margin-top: 0.5rem;">disabled: true</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Secondary Buttons -->
+      <div style="margin-top: 2rem;background: #170207; padding: 1rem;">
+        <h3 class="Headline-3 text-white">Secondary Buttons</h3>
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem; align-items: flex-start;">
+          <div>
+            {% render 'button'
+              , content: 'Secondary Solid'
+              , style: 'solid'
+              , variant: 'secondary' %}
+            <p class="Exception text-white" style="margin-top: 0.5rem;">style: 'solid', variant: 'button-secondary'</p>
+          </div>
+          <div>
+            {% render 'button'
+              , content: 'Secondary Disabled'
+              , style: 'solid'
+              , variant: 'secondary'
+              , disabled: true %}
+            <p class="Exception text-white" style="margin-top: 0.5rem;">disabled: true</p>
+          </div>
+          <div>
+            {% render 'button'
+              , content: 'Secondary Outline'
+              , style: 'outline'
+              , variant: 'secondary' %}
+            <p class="Exception text-white" style="margin-top: 0.5rem;">style: 'outline', variant: 'button-secondary'</p>
+          </div>
+
+          <div>
+            {% render 'button'
+              , content: 'Secondary Outline Disabled'
+              , style: 'outline'
+              , variant: 'secondary'
+              , disabled: true %}
+            <p class="Exception text-white" style="margin-top: 0.5rem;">disabled: true</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Link Buttons -->
+      <div style="margin-top: 2rem;">
+        <h3 class="Headline-3">Link Buttons</h3>
+        <h3 class="Headline-3">Primary</h3>
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem; align-items: flex-start;">
+
+          <div>
+            {% render 'button'
+              , content: 'Link Button'
+              , style: 'link'
+              , variant: 'primary'
+              , href: '#'
+              , icon: 'as-roma-arrow-dx' %}
+            <p class="Exception" style="margin-top: 0.5rem;">style: 'link', variant: 'primary'</p>
+          </div>
+          <div>
+            {% render 'button'
+              , content: 'Link Disabled'
+              , style: 'link'
+              , variant: 'primary'
+              , href: '#'
+              , icon: 'as-roma-arrow-dx'
+              , disabled: true %}
+            <p class="Exception" style="margin-top: 0.5rem;">disabled: true</p>
+          </div>
+        </div>
+        <!-- Secondary Buttons -->
+        <div style="margin-top: 2rem;background: #170207; padding: 1rem;">
+          <h3 class="Headline-3 text-white">Secondary</h3>
+          <div style="display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem; align-items: flex-start;">
+
+            <div>
+              {% render 'button'
+                , content: 'Link Button'
+                , style: 'link'
+                , variant: 'secondary'
+                , icon: 'as-roma-arrow-dx'
+                , href: '#' %}
+              <p class="Exception text-white" style="margin-top: 0.5rem;">style: 'link', variant: 'secondary', href: '#'</p>
+            </div>
+            <div>
+              {% render 'button'
+                , content: 'Link Disabled'
+                , style: 'link'
+                , variant: 'secondary'
+                , icon: 'as-roma-arrow-dx'
+                , href: '#'
+                , disabled: true %}
+              <p class="Exception text-white" style="margin-top: 0.5rem;">disabled: true</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- AS Roma Icons -->
+    <div style="margin-top: 3rem; margin-bottom: 2rem;">
+      <h2 class="Headline-2">AS Roma Icons</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: center;margin-top: 3rem;">
+        <div style="text-align: center;">
+          {% render 'icon' with 'as-roma-search' %}
+          <div class="Small">as-roma-search</div>
+        </div>
+        <div style="text-align: center;">
+          {% render 'icon' with 'as-roma-close' %}
+          <div class="Small">as-roma-close</div>
+        </div>
+        <div style="text-align: center;">
+          {% render 'icon' with 'as-roma-customize' %}
+          <div class="Small">as-roma-customize</div>
+        </div>
+        <div style="text-align: center;">
+          {% render 'icon' with 'as-roma-cart' %}
+          <div class="Small">as-roma-cart</div>
+        </div>
+        <div style="text-align: center;">
+          {% render 'icon' with 'as-roma-account' %}
+          <div class="Small">as-roma-account</div>
+        </div>
+        <div style="text-align: center;">
+          {% render 'icon' with 'as-roma-wishlist' %}
+          <div class="Small">as-roma-wishlist</div>
+        </div>
+        <div style="text-align: center;">
+          {% render 'icon' with 'as-roma-language' %}
+          <div class="Small">as-roma-language</div>
+        </div>
+        <div style="text-align: center;">
+          {% render 'icon' with 'as-roma-menu' %}
+          <div class="Small">as-roma-menu</div>
+        </div>
+        <div style="text-align: center;">
+          {% render 'icon' with 'as-roma-carousel-arrow-dx' %}
+          <div class="Small">as-roma-carousel-arrow-dx</div>
+        </div>
+        <div style="text-align: center;">
+          {% render 'icon' with 'as-roma-carousel-arrow-sx' %}
+          <div class="Small">as-roma-carousel-arrow-sx</div>
+        </div>
+        <div style="text-align: center;">
+          {% render 'icon' with 'as-roma-arrow-up' %}
+          <div class="Small">as-roma-arrow-up</div>
+        </div>
+        <div style="text-align: center;">
+          {% render 'icon' with 'as-roma-arrow-down' %}
+          <div class="Small">as-roma-arrow-down</div>
+        </div>
+        <div style="text-align: center;">
+          {% render 'icon' with 'as-roma-arrow-sx' %}
+          <div class="Small">as-roma-arrow-sx</div>
+        </div>
+        <div style="text-align: center;">
+          {% render 'icon' with 'as-roma-arrow-dx' %}
+          <div class="Small">as-roma-arrow-dx</div>
+        </div>
+        <div style="text-align: center;">
+          {% render 'icon' with 'as-roma-check' %}
+          <div class="Small">as-roma-check</div>
+        </div>
+        <div style="text-align: center;">
+          {% render 'icon' with 'as-roma-filters' %}
+          <div class="Small">as-roma-filters</div>
+        </div>
+        <div style="text-align: center;">
+          {% render 'icon' with 'as-roma-subscription-discount' %}
+          <div class="Small">as-roma-subscription-discount</div>
+        </div>
+      </div>
+    </div>
+
+
+    <div>
+      <h2 class="Headline-2">AS Roma Filters</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: center;margin-top: 3rem;">
+        <div class="removable-facet">
+
+          <span class="ASRomaFont Small Medium">Kit gara home</span>
+          <facet-link>
+            <a
+              href="#"
+              aria-label="{{ 'collection.faceting.remove_filter' | t: name: 'Filtro' }}"
+              data-no-instant>
+              {%- render 'icon' with 'as-roma-close'
+                , width: 10 -%}
+            </a>
+          </facet-link>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top: 3rem;">
+      <h2 class="Headline-2">AS Roma Input</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: center;margin-top: 3rem;">
+
+        {% render 'input'
+          , type: 'text'
+          , name: 'test_input'
+          , label: 'Campo normale' %}
+
+        {% render 'input'
+          , type: 'text'
+          , name: 'test_disabled'
+          , label: 'Campo disabilitato'
+          , disabled: true %}
+
+
+        <div class="form-control form-control--error">
+          {% render 'input'
+            , type: 'text'
+            , name: 'test_error'
+            , label: 'Campo con errore'
+            , required: true %}
+          <div class="form-control__error">
+            Error message
+          </div>
+        </div>
+
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: center;margin-top: 3rem;">
+
+
+        {% capture country_select %}
+          <option value="">Seleziona una nazione</option>
+          <option value="italia">Italia</option>
+          <option value="francia">Francia</option>
+          <option value="spagna">Spagna</option>
+          <option value="germania">Germania</option>
+          <option value="inghilterra">Inghilterra</option>
+        {% endcapture %}
+        {% render 'select'
+          , name: 'country_select'
+          , options: country_select %}
+
+
+      </div>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: center;margin-top: 3rem;">
+        {% render 'checkbox' 
+          , name: 'test_checkbox'
+          , label: 'Accetta i termini e condizioni' %}
+
+        {% render 'checkbox' 
+          , name: 'test_checkbox_checked'
+          , label: 'Checkbox già selezionata'
+          , checked: true %}
+
+        {% render 'checkbox' 
+          , name: 'test_checkbox_disabled'
+          , label: 'Checkbox disabilitata'
+          , disabled: true %}
+
+        {% render 'checkbox' 
+          , name: 'test_checkbox_disabled'
+          , label: 'Checkbox pressed disabilitata'
+          , checked: true
+          , disabled: true %}
+
+        <div style="margin-left: 2rem; border-left: 1px solid #ddd; padding-left: 2rem;">
+          <h4 class="Headline-4" style="margin-bottom: 1rem;">Radio Buttons</h4>
+
+          {% render 'checkbox' 
+            , type: 'radio'
+            , name: 'size_radio'
+            , value: 'small'
+            , label: 'Small' %}
+
+          {% render 'checkbox' 
+            , type: 'radio'
+            , name: 'size_radio'
+            , value: 'medium'
+            , label: 'Medium'
+            , checked: true %}
+
+          {% render 'checkbox' 
+            , type: 'radio'
+            , name: 'size_radio'
+            , value: 'large'
+            , label: 'Large'
+            , disabled: true %}
+
+          {% render 'checkbox' 
+            , type: 'radio'
+            , name: 'size_radio'
+            , value: 'disabled & checked'
+            , label: 'disabled & checked'
+            , disabled: true 
+            , checked: true %}
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Typography Style Guide",
+    "tag": "section",
+    "class": "shopify-section--styleguide",
+    "settings": [],
+    "presets": [
+      {
+        "name": "Typography Style Guide"
+      }
+    ]
+  }
+{% endschema %}

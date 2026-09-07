@@ -1,0 +1,26 @@
+{%- comment -%}
+  PRODUCT CUSTOMIZATION PRICE
+
+  Mount point for the React component that displays the total price of the current customization.
+{%- endcomment -%}
+{% assign selected_variant = product.selected_or_first_available_variant %}
+{% assign symbol = shop.currency %}
+
+<div class="product-customization-price-wrapper">
+  <div
+    class="product-customization-price-react"
+    data-store-name="{%- if useSharedHook == true or useSharedHook == 'true' -%}shared{%- elsif store_name and store_name != '' -%}{{ store_name }}{%- else -%}custom-{{ product.handle }}{%- endif -%}"
+    data-language="{{ request.locale.iso_code }}"
+    data-selected-variant="{{ selected_variant | json | escape }}"
+    data-currency-code="{{ localization.country.currency.iso_code }}"
+    data-show-only-price="{{ show_only_price | default: false }}"
+    data-extra-text-class-name="{{ extra_text_class_name | default: '' }}"
+    data-extra-price-class-name="{{ extra_price_class_name | default: '' }}"
+    data-extra-compare-at-price-class-name="{{ extra_compare_at_price_class_name | default: '' }}"
+    data-select-variant-price="{{ selected_variant.price | money }}"
+    data-currency="{{ symbol }}">
+    <div class="Headline-5 price-customization">{{ selected_variant.price | money }}</div>
+  </div>
+</div>
+
+<script type="module" src="{{ 'react-productCustomizationPrice.min.js' | asset_url }}"></script>

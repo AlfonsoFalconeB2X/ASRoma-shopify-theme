@@ -1,0 +1,79 @@
+{%- comment -%}
+  ----------------------------------------------------------------------------------------------------------------------
+  MEGA MENU COMPONENT
+  ----------------------------------------------------------------------------------------------------------------------
+
+  Render the mega-menu. The mega-menu is a kind of menu optimized for showing a large number of items into several
+  columns.
+
+  ********************************************
+  Supported variables
+  ********************************************
+
+  * link: the link from which we need to render the mega-menu. The link must always be a second level link, but it can
+  also be empty (no links), which is the case if the merchant only want to show images, for instance.
+  * block: the block containing all the information about the menu to render
+{%- endcomment -%}
+
+{%- capture mega_menu_content -%}
+    {%- render 'mega-menu-images', context: 'menu', block: block -%}
+{%- endcapture -%}
+<div class="header-menu-overlay"></div>
+<div
+  class="mega-menu mega-menu--with-shadow {% if block.settings.images_position == 'left' %}mega-menu--reverse{% endif %}"
+  style="--collections-header-image-height: {{ block.settings.collections_header_image_height | default: 160 }}px;"
+  {{ block.shopify_attributes }}>
+  {%- if link.levels > 0 -%}
+  <div class="mega-menu__container"> 
+    <ul class="mega-menu__linklist {% if mega_menu_content != blank %}image-promo{% endif %} unstyled-list">
+
+      {%- for sub_link in link.links -%}
+        <li class="v-stack justify-items-{{ block.settings.content_position }} gap-1">
+          {%- if sub_link.object.metafields.custom.header_image != blank -%}
+            <div class=" justify-items-{{ block.settings.content_position }}">
+              <a class="mega-menu__container__image" href="{{ sub_link.url }}">
+                {%- assign sublink_image = sub_link.object.metafields.custom.header_image -%}
+                {%- assign alt_text = sublink_image.alt | default: sub_link.title | default: shop.name -%}
+                {{ sublink_image | image_url: width: 130 | image_tag: loading: 'lazy', sizes: '200px', widths: '200,400', class: 'mega-menu__image', alt: alt_text }}
+              </a>
+            </div>
+          {%- endif -%}
+          <a href="{{ sub_link.url }}" class="ASRomaFont Body ExtraBold Uppercase mega-menu__sub">{{ sub_link.title }}</a>
+          {%- if sub_link.links.size > 0 -%}
+            <ul class="v-stack unstyled-list mega-menu__sub-sub">
+              {%- for sub_sub_link in sub_link.links -%}
+                <li>
+                  <a href="{{ sub_sub_link.url }}" class="ASRomaFont Body">{{ sub_sub_link.title }}</a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          {%- endif -%}
+        </li>
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+
+  {%- if mega_menu_content != blank -%}
+    <div class="mega-menu__promo">
+      {{- mega_menu_content -}}
+    </div>
+  {%- endif -%}
+  </div>
+</div>
+
+<script>
+  (function() {
+    // Trova l'overlay appena renderizzato (ultimo nel DOM)
+    const overlays = document.querySelectorAll('.header-menu-overlay');
+    const overlay = overlays[overlays.length - 1];
+    if (!overlay || overlay.dataset.initialized) return;
+    
+    overlay.dataset.initialized = 'true';
+    overlay.addEventListener('mouseenter', function() {
+      const megaMenuDisclosure = this.closest('mega-menu-disclosure');
+      if (megaMenuDisclosure) {
+        megaMenuDisclosure.toggle(false);
+      }
+    });
+  })();
+</script>

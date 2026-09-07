@@ -1,0 +1,57 @@
+<div class="store-locator section-spacing">
+  <div class="container container--sm">
+    {%- liquid
+      assign all_stores = shop.metaobjects.store.values
+
+      assign stores = all_stores | sort: 'order'
+    -%}
+
+    {%- if stores.size > 0 -%}
+      {%- for store in stores -%}
+
+        {%- capture title -%}
+            <span class="Headline-5 Medium">{{store.name}}</span>
+          {%- endcapture -%}
+        {%- capture content_store -%}
+            <div class="v-stack gap-3 store-locator__accordion-content">
+                <div class="h-stack store-locator__accordion-content-info">
+                  <p class="text-grey-900 store-locator__accordion-item">{{ store.address | newline_to_br }}</p>
+                  {%- if store.opening_hours -%}
+                    <p class="text-grey-900 store-locator__accordion-item">{{ 'sections.store_locator.opening_hours' | t }}:<br />{{ store.opening_hours | newline_to_br }}</p>
+                  {%- endif -%}
+                </div>
+              <div class="h-stack">
+                {%- assign button_content = 'sections.store_locator.view_map' | t -%}
+                {%- render 'button', content: button_content, href: store.map_url, style: 'link', text_tyle: 'text-grey-700' -%}
+              </div>
+            </div>
+          {%- endcapture -%}
+        <div class="store-locator__accordion">
+          {%- render 'accordion'
+            , title: title
+            , content: content_store
+            , show_title_as_text: false
+            , show_arrow: true
+            , open: forloop.first
+            , block: block -%}
+        </div>
+
+      {%- endfor -%}
+    {%- else -%}
+      <p>{{ 'sections.store_locator.no_stores_available' | t }}</p>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "t:sections.store_locator.name",
+    "class": "shopify-section--store-locator",
+    "tag": "section",
+    "presets": [
+      {
+        "name": "t:sections.store_locator.name"
+      }
+    ]
+  }
+{% endschema %}

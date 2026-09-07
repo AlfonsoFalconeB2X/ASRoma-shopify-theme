@@ -1,0 +1,152 @@
+{%- comment -%}
+  ----------------------------------------------------------------------------------------------------------------------
+  QUANTITY SELECTOR
+  ----------------------------------------------------------------------------------------------------------------------
+
+  This component renders a quantity selector that can be used either on product page (by passing a "variant") or on a
+  cart page (by passing a "line_item"). It also automatically checks for inventory in the case of cart page.
+
+  ********************************************
+  Supported variables
+  ********************************************
+
+  * variant: when the quantity selector is used in product page context
+  * line_item: when the quantity selector is used in cart page context
+  * quick_order: when set to true, the variant will be used in context of quick order. Specifically, this will
+  use a quantity of zero if nothing is in the cart yet.
+  * size: if set to "sm", we render a reduced size
+  * form: an optional form ID to submit to
+  * show_spinner: when set to true, a spinner is added to the quantity selector, that is visible when the "aria-busy"
+  attribute is set to true
+  * index: the index of the item in the list, used for tracking purposes
+{%- endcomment -%}
+
+<div class="quantity-selector_roma {% if size %}quantity-selector--{{ size }}{% endif %}">
+  {%- liquid
+    assign max_quantity = ''
+    assign variant = line_item.variant | default: variant
+
+    # When we don' t have line_item (example: product page), we don' t limit the quantity the buyer can choose
+    if variant.inventory_management != blank and variant.inventory_policy == 'deny'
+      if line_item != blank
+        assign current_quantity_for_variant = cart | item_count_for_variant: variant.id
+        assign max_quantity = variant.inventory_quantity | minus: current_quantity_for_variant | plus: line_item.quantity
+      elsif quick_order
+        assign max_quantity = variant.inventory_quantity
+      endif
+    endif
+
+    if variant.quantity_rule.max != nil
+      assign max_quantity = max_quantity | default: 999999 | at_most: variant.quantity_rule.max
+    endif
+
+    if line_item != blank
+      assign quantity_value = line_item.quantity
+    else
+      if quick_order
+        assign quantity_value = cart | item_count_for_variant: variant.id
+      else
+        assign quantity_value = variant.quantity_rule.min | default: 1
+      endif
+    endif
+
+    assign min_quantity = variant.quantity_rule.min | default: 1
+    assign increment = variant.quantity_rule.increment | default: 1
+    assign select_max_quantity = max_quantity | default: 10
+  -%}
+
+  <div class="quantity-selector__select-wrapper">
+    <select
+      class="quantity-selector__select Small"
+      name="{% if line_item != blank %}updates[]{% else %}quantity{% endif %}"
+      {% if form %}
+      form="{{ form }}"
+      {% endif %}
+      {% if line_item != blank %}
+      data-line-key="{{ line_item.key }}"
+      {% endif %}
+      aria-label="{{ 'product.quantity.change_quantity' | t | escape }}">
+
+      {%- if quick_order -%}
+        <option
+          value="0"
+          {% if quantity_value == 0 %}
+          selected{% endif %}>0</option>
+      {%- endif -%}
+
+      {%- for i in (min_quantity..select_max_quantity) -%}
+        {%- assign option_value = min_quantity | plus: forloop.index0 | times: increment -%}
+        {%- if option_value <= select_max_quantity -%}
+
+          {%- if settings.enable_datalayer -%}
+            {%- capture add_to_cart_datalayer -%}
+              {
+                "event": "add_to_cart",
+                "ecommerce": {
+                  "currency": "{{ cart.currency.iso_code }}",
+                  "items": [
+                    {%- assign variant = line_item.variant | default: variant -%}
+                    {%- assign line_item_qty = line_item.quantity | default: 0 -%}
+                    {%- assign quantity_delta = option_value | minus: line_item_qty -%}
+                    {%- render 'datalayer-item', product: line_item.product, variant: variant, line_item: line_item, quantity: quantity_delta, index: index, item_list_id: 'current', item_list_name: 'current' -%}  
+                  ]
+                }
+              }
+            {%- endcapture -%}
+            {%- capture remove_from_cart_datalayer -%}
+              {
+                "event": "remove_from_cart",
+                "ecommerce": {
+                  "currency": "{{ cart.currency.iso_code }}",
+                  "items": [
+                    {%- assign variant = line_item.variant | default: variant -%}
+                    {%- assign line_item_qty = line_item.quantity | default: 0 -%}
+                    {%- assign quantity_delta = line_item_qty | minus: option_value -%}
+                    {%- render 'datalayer-item', product: line_item.product, variant: variant, line_item: line_item, quantity: quantity_delta, index: index, item_list_id: 'current', item_list_name: 'current' -%}
+                  ]
+                }
+              }
+            {%- endcapture -%}
+          {%- endif -%}
+
+          <option
+            {% if settings.enable_datalayer and option_value != line_item.quantity %}
+            {% if option_value > line_item.quantity %}
+            data-datalayer-info='{{ add_to_cart_datalayer | strip_newlines | escape }}'
+            data-datalayer-event="add_to_cart"
+            {% else %}
+            data-datalayer-info='{{ remove_from_cart_datalayer | strip_newlines | escape }}'
+            data-datalayer-event="remove_from_cart"
+            {% endif %}
+            {%- endif -%}
+            value="{{ option_value }}"
+            {% if quantity_value == option_value %}
+            selected{% endif %}>
+            {{ option_value }}
+          </option>
+        {%- endif -%}
+      {%- endfor -%}
+    </select>
+
+    {%- if show_spinner -%}
+      <svg
+        class="quantity-selector__spinner"
+        width="14"
+        height="14"
+        fill="none"
+        viewBox="0 0 14 14">
+        <circle
+          cx="7"
+          cy="7"
+          r="6"
+          stroke="currentColor"
+          stroke-width="1.5"
+          opacity=".2" />
+        <path
+          stroke="currentColor"
+          stroke-width="1.5"
+          d="M11.638 3.194a6 6 0 1 0-.395 8.049" />
+      </svg>
+    {%- endif -%}
+  </div>
+</div>

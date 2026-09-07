@@ -1,0 +1,170 @@
+{%- comment -%}
+  ----------------------------------------------------------------------------------------------------------------------
+  BREADCRUMBS COMPONENT
+  ----------------------------------------------------------------------------------------------------------------------
+
+  Generate breadcrumbs.
+
+  ********************************************
+  Supported variables
+  ********************************************
+
+  * menu: the menu to use as the base for the breadcrumbs
+  * collection: the menu to use as the base for the breadcrumbs
+  * product_title: the menu to use as the base for the breadcrumbs
+  * color_scheme: the color scheme to use for the breadcrumbs
+{%- endcomment -%}
+
+{%- assign lv1_branch = false -%}
+{%- assign lv2_branch = false -%}
+{%- assign lv3_branch = false -%}
+{%- assign current_page = false -%}
+
+{%- if color_scheme -%}
+  <style>
+    .breadcrumb__list-item span,
+    .breadcrumb__list-item a {
+      color: var(--color-{{ color_scheme }}-text);
+    }
+  </style>
+{% endif -%}
+
+{%- if product.metafields.custom.collection -%}
+  {%- assign collection = product.metafields.custom.collection.value -%}
+{%- endif -%}
+{%- if page.title -%}
+  {%- assign current_page = page.title -%}
+{%- endif -%}
+
+{%- unless current_page -%}
+  {%- for link_lv1 in menu.links -%}
+    {%- if link_lv1.object.handle != blank and link_lv1.active or link_lv1.object.handle == product.handle or link_lv1.object.handle == collection.handle -%}
+      {%- if link_lv1.object.handle != collection.handle -%}
+        {%- assign lv1_branch = link_lv1 -%}
+      {%- endif -%}
+      {% break %}
+    {%- else -%}
+      {%- for link_lv2 in link_lv1.links -%}
+        {%- if link_lv2.object.handle != blank and link_lv2.active or link_lv2.object.handle == product.handle or link_lv2.object.handle == collection.handle -%}
+          {%- if link_lv2.object.handle != collection.handle -%}
+            {%- assign lv2_branch = link_lv2 -%}
+          {%- endif -%}
+          {%- assign lv1_branch = link_lv1 -%}
+          {% break %}
+        {%- else -%}
+
+          {%- for link_lv3 in link_lv2.links -%}
+            {%- if link_lv3.object.handle != blank and link_lv3.active or link_lv3.object.handle == product.handle or link_lv3.object.handle == collection.handle -%}
+              {%- if link_lv3.object.handle != collection.handle -%}
+                {%- assign lv3_branch = link_lv3 -%}
+              {%- endif -%}
+              {%- assign lv2_branch = link_lv2 -%}
+              {%- assign lv1_branch = link_lv1 -%}
+              {% break %}
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+
+        {%- if lv2_branch or lv3_branch -%}
+          {% break %}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+
+    {%- if lv1_branch or lv2_branch or lv3_branch -%}
+      {% break %}
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- unless current_page -%}
+    {%- if lv3_branch -%}
+      {%- assign current_page = lv3_branch.title -%}
+    {%- elsif lv2_branch -%}
+      {%- assign current_page = lv2_branch.title -%}
+    {%- elsif lv1_branch -%}
+      {%- assign current_page = lv1_branch.title -%}
+    {%- endif -%}
+  {%- endunless -%}
+{%- endunless -%}
+{%- unless template == 'index' or template == 'cart' or template == '404' or article -%}
+  <nav class="breadcrumb" aria-label="{{ 'general.breadcrumb.label' | t | escape }}">
+    <ol class="breadcrumb__list unstyled-list">
+      {%- if lv1_branch.url != routes.root_url and lv2_branch.url != routes.root_url and lv3_branch.url != routes.root_url -%}
+        <li class="breadcrumb__list-item">
+          <a href="{{ routes.root_url }}" class="Regular text-red">{{ 'general.breadcrumb.home' | t }}</a>
+          {%- render 'icon' with 'as-roma-arrow-dx' -%}
+        </li>
+      {%- endif -%}
+
+      {%- if section.settings.show_all_collections and lv1_branch.url != routes.collections_url and lv2_branch.url != routes.collections_url and lv3_branch.url != routes.collections_url -%}
+        <li class="breadcrumb__list-item">
+          <a href="{{ routes.collections_url }}" class="Regular text-red">{{ 'general.breadcrumb.shop' | t }}</a>
+          {%- render 'icon' with 'as-roma-arrow-dx' -%}
+        </li>
+      {%- endif -%}
+
+      {%- if lv1_branch and lv1_branch.title != current_page -%}
+        <li class="breadcrumb__list-item lv1">
+          <a
+            href="{{ lv1_branch.url }}"
+            aria-current="page"
+            class="Regular text-red">{{ lv1_branch.title }}</a>
+          {%- render 'icon' with 'as-roma-arrow-dx' -%}
+        </li>
+      {%- endif -%}
+
+      {%- if lv2_branch and lv2_branch.title != current_page -%}
+        <li class="breadcrumb__list-item lv2">
+          <a
+            href="{{ lv2_branch.url }}"
+            aria-current="page"
+            class="Regular text-red">{{ lv2_branch.title }}</a>
+          {%- render 'icon' with 'as-roma-arrow-dx' -%}
+        </li>
+      {%- endif -%}
+
+      {%- if lv3_branch and lv3_branch.title != current_page -%}
+        <li class="breadcrumb__list-item lv3">
+          <a
+            href="{{ lv3_branch.url }}"
+            aria-current="page"
+            class="Regular text-red">{{ lv3_branch.title }}</a>
+          {%- render 'icon' with 'as-roma-arrow-dx' -%}
+        </li>
+      {%- endif -%}
+
+      {%- if collection and lv1_branch.url != collection.url and lv2_branch.url != collection.url and lv3_branch.url != collection.url -%}
+        <li class="breadcrumb__list-item">
+          {%- if template.name == 'collection' -%}
+            <span aria-current="page" class="Regular text-grey-900">{{ collection.title }}</span>
+          {%- else -%}
+            <a
+              href="{{ collection.url }}"
+              aria-current="page"
+              class="Regular text-red">{{ collection.title }}</a>
+            {%- render 'icon' with 'as-roma-arrow-dx' -%}
+          {%- endif -%}
+        </li>
+      {%- endif -%}
+
+      {%- if product and lv1_branch.handle != product.handle and lv2_branch.handle != product.handle and lv3_branch.url != product.handle -%}
+        <li class="breadcrumb__list-item">
+          <span aria-current="page" class="Regular text-grey-900">{{ product.title }}</span>
+        </li>
+      {%- endif -%}
+
+      {%- if blog and lv1_branch.handle != blog.handle and lv2_branch.handle != blog.handle and lv3_branch.url != blog.handle -%}
+        <li class="breadcrumb__list-item">
+          <span aria-current="page" class="Regular text-grey-900">{{ blog.title }}</span>
+        </li>
+      {%- endif -%}
+
+      {%- if current_page -%}
+        <li class="breadcrumb__list-item">
+          <span aria-current="page" class="Regular text-grey-900">{{ current_page }}</span>
+        </li>
+      {%- endif -%}
+
+    </ol>
+  </nav>
+{%- endunless -%}

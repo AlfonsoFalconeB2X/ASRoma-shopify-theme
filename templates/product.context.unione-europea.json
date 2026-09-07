@@ -1,0 +1,68 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "context": {
+    "market": "unione-europea"
+  },
+  "parent": "product.json",
+  "sections": {
+    "main": {
+      "disabled": false,
+      "settings": {},
+      "blocks": {
+        "omnibus_insight_am_omnibus_price_RcfaC": {
+          "type": "shopify://apps/omnibus-insight/blocks/am-omnibus-price/bbd11345-5020-46a7-ac9f-70443833fce9",
+          "disabled": false,
+          "settings": {
+            "product": "{{product}}"
+          }
+        },
+        "info_message_aQHKYH": {
+          "type": "info_message",
+          "name": "Shipping message",
+          "disabled": false,
+          "settings": {
+            "text": "<p>Il costo della spedizione verrà calcolato nel carrello in base al paese di spedizione.</p>",
+            "show_icon": true
+          }
+        },
+        "free_shipping_message_nfCBaE": {
+          "disabled": true,
+          "settings": {
+            "text": "<p><strong>Le spese di spedizione verranno calcolate nel carrello in base al paese di destinazione.</strong></p>"
+          }
+        },
+        "liquid_hHPKkH": {
+          "disabled": false,
+          "settings": {
+            "liquid": "{% if product.tags contains 'no-usa-ship' %}\n  <div style=\"border: 1px solid #7d1f2c; color: #7d1f2c; padding: 12px 16px; border-radius: 4px; margin: 15px 0; font-size: 14px; line-height: 1.4; text-align: center;\">\n    {% if request.locale.iso_code == 'it' %}\n      A causa di restrizioni doganali, al momento <strong>non è possibile spedire</strong> questo prodotto negli <strong>STATI UNITI</strong>. Di conseguenza, l'intero ordine che lo contiene verrà annullato.\n    {% else %}\n      This product is temporarily <strong>unable to be shipped</strong> to the <strong>UNITED STATES</strong> due to customs restrictions. As a result, the entire order containing it will be cancelled.\n    {% endif %}\n  </div>\n{% endif %}"
+          }
+        }
+      },
+      "block_order": [
+        "badges_PbjenX",
+        "title",
+        "price",
+        "omnibus_insight_am_omnibus_price_RcfaC",
+        "sku_8DwcFH",
+        "payment_terms",
+        "separator",
+        "variant_picker",
+        "info_message_HcFebC",
+        "buy_buttons",
+        "info_message_aQHKYH",
+        "free_shipping_message_nfCBaE",
+        "liquid_hHPKkH",
+        "description",
+        "complementary_products"
+      ]
+    }
+  }
+}

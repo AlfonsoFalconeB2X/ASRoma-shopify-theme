@@ -1,0 +1,59 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-cart",
+      "settings": {
+        "show_cart_note": false,
+        "show_order_weight": false,
+        "show_shipping_text": false,
+        "show_accelerated_buttons": false,
+        "show_shipping_estimator": false,
+        "show_free_shipping_bar": true
+      }
+    },
+    "featured_collections_XRwTXR": {
+      "type": "featured-collections",
+      "blocks": {
+        "collection_EmNm9U": {
+          "type": "collection",
+          "settings": {
+            "collection": "kit-gara",
+            "products_count": 8,
+            "title": "",
+            "link_url": "",
+            "link_text": "",
+            "link_type": "primary",
+            "link_position": "top",
+            "show_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "collection_EmNm9U"
+      ],
+      "name": "t:sections.featured_collections.presets.featured_collections.name",
+      "settings": {
+        "separate_section_with_border": false,
+        "hide_product_information": false,
+        "stack_products": false,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "content_position": "center",
+        "main_title": "POTREBBERO INTERESSARTI"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "featured_collections_XRwTXR"
+  ]
+}

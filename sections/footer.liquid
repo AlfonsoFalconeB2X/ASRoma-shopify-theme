@@ -1,0 +1,447 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    --footer-content-justify-items: {% if section.settings.blocks.size <= 2 %}start{% else %}space-between{% endif %};
+}
+</style>
+
+<div
+  class="footer {% if section.settings.separate_section_with_border %}bordered-section{% endif %}"
+  data-show-social-media="{{ section.settings.show_social_media }}"
+  data-show-payment-icons="{{ section.settings.show_payment_icons }}"
+  data-section-id="{{ section.id }}">
+  <div class="container">
+    <div class="footer__inner">
+      {%- comment -%}
+        ------------------------------------------------------------------------------------------------------------------
+        FOOTER BLOCKS (MAIN CONTENT)
+        ------------------------------------------------------------------------------------------------------------------
+      {%- endcomment -%}
+
+      {%- if section.blocks.size > 0 -%}
+        <div class="footer__block-list">
+          {%- for block in section.blocks -%}
+            {%- capture block_content -%}
+              {%- case block.type -%}
+                {%- when '@app' -%}
+                  {%- render block -%}
+
+                {%- when 'image' -%}
+                  {%- if block.settings.image != blank -%}
+                    {%- capture sizes -%}{{ block.settings.image_width }}px{%- endcapture -%}
+                    {%- capture widths -%}{{ block.settings.image_width }}, {{ block.settings.image_width | times: 2 | at_most: block.settings.image.width }}{%- endcapture -%}
+                    {%- capture style -%}--image-max-width: {{ block.settings.image_width }}px{%- endcapture -%}
+                    {%- assign alt_text = block.settings.image.alt | default: block.settings.title | default: section.settings.title | default: shop.name -%}
+
+                    {%- if block.settings.link != blank -%}
+                      <a href="{{ block.settings.link }}">
+                        {{- block.settings.image | image_url: width: block.settings.image.width | image_tag: sizes: sizes, widths: widths, style: style, class: 'constrained-image', alt: alt_text -}}
+                      </a>
+                    {%- else -%}
+                      {{- block.settings.image | image_url: width: block.settings.image.width | image_tag: sizes: sizes, widths: widths, style: style, class: 'constrained-image', alt: alt_text -}}
+                    {%- endif -%}
+                  {%- endif -%}
+
+                {%- when 'text' -%}
+                  {%- if block.settings.title != blank or block.settings.content != blank or shop.features.follow_on_shop? and block.settings.enable_follow_on_shop -%}
+                    <div class="v-stack gap-4 sm:gap-5">
+                      {%- if block.settings.title != blank -%}
+                        <p class="h6 text-yellow">{{ block.settings.title }}</p>
+                      {%- endif -%}
+
+                      {%- if block.settings.content != blank -%}
+                        <div class="prose text-subdued text-white">
+                          {{- block.settings.content -}}
+                        </div>
+                      {%- endif -%}
+
+                      {%- if shop.features.follow_on_shop? and block.settings.enable_follow_on_shop -%}
+                        <div class="follow-on-shop">
+                          {{- shop | login_button: action: 'follow' -}}
+                        </div>
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
+
+                {%- when 'links' -%}
+                  {%- liquid
+                    if request.locale.iso_code == 'en' and block.settings.menu_en != blank and block.settings.menu_en.links.size > 0
+                      assign menu = block.settings.menu_en
+                    else
+                      assign menu = block.settings.menu
+                    endif
+                  -%}
+
+                  {%- if menu != blank and menu.links.size > 0 -%}
+
+                    {%- capture menu_links -%}
+                      <ul class="v-stack unstyled-list footer-menu-list" role="list">
+                        {%- for link in menu.links -%}
+                          <li>
+                            <a href="{{ link.url }}" class="text-white link-faded">{{ link.title }}</a>
+                          </li>
+                        {%- endfor -%}
+
+                        <div class="extra-link">
+                          {{ block.settings.extra_link }}
+                        </div>
+                      </ul>
+                    {%- endcapture -%}
+
+                    <div class="hidden lg:block">
+                      <div class="v-stack gap-3">
+                        {%- if block.settings.show_menu_title != blank -%}
+                          <p class="Headline-4 Uppercase Bold">{{ block.settings.menu_title | default: menu.title }}</p>
+                        {%- endif -%}
+                        {{ menu_links }}
+                      </div>
+                    </div>
+                    
+                    <div class="block lg:hidden">
+                      {%- render 'accordion', title: block.settings.menu_title, content: menu_links, show_title_as_text: true, block: block, show_arrow: true, exclusive_group: 'footer-menu' -%}
+                    </div>
+                  {%- endif -%}
+
+                {%- when 'newsletter' -%}
+                  <div id="{{ block.settings.newsletter_form_id }}">
+                  </div>
+                  
+                {%- when 'store_locator' -%}
+                   <a href="{{ block.settings.url }}" class="link-store-locator text-white">
+                    <div class="md-max:hidden">
+                      {%- render 'icon' with 'as-roma-location', width: 18, height: 18 -%}
+                    </div>
+                    <span class="hidden lg:block Underline Headline-4 ">Store Locator</span>
+                    <span class="lg:hidden Body Medium Underline">Store Locator</span>
+                   </a>
+
+              {%- endcase -%}
+            {%- endcapture -%}
+            {%- if block_content != blank -%}
+              <div class="footer__block footer__block--{{ block.type | remove_first: '@' }}" {{ block.shopify_attributes }}>
+                {{- block_content -}}
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      {%- comment -%}
+        ------------------------------------------------------------------------------------------------------------------
+        FOOTER SOCIAL MEDIA
+        ------------------------------------------------------------------------------------------------------------------
+      {%- endcomment -%}
+
+
+      {%- comment -%}
+        ------------------------------------------------------------------------------------------------------------------
+        FOOTER ASIDE (COPYRIGHT + LOCALIZATION SELECTORS + PAYMENT METHODS)
+        ------------------------------------------------------------------------------------------------------------------
+      {%- endcomment -%}
+
+      <div class="footer__aside block">
+        {%- comment -%}
+          ------------------------------------------------------------------------------------------------------------------
+          FOOTER ASIDE MOBILE
+          ------------------------------------------------------------------------------------------------------------------
+        {%- endcomment -%}
+        <div class="lg:hidden">
+          {%- if section.settings.show_country_selector and localization.available_countries.size > 1 -%}
+            {%- assign show_country_selector = true -%}
+          {%- endif -%}
+
+          {%- if section.settings.show_locale_selector and localization.available_languages.size > 1 -%}
+            {%- assign show_locale_selector = true -%}
+          {%- endif -%}
+
+          {%- if show_country_selector or show_locale_selector -%}
+            <div class="lg:hidden">
+              {%- if show_country_selector or show_locale_selector -%}
+                <div class="localization-selectors-container">
+                  <div class="localization-selectors Body ExtraBold">
+
+                    {% render 'icon' with 'as-roma-language'
+                      , width: 16
+                      , height: 16 -%}
+                    {%- if show_country_selector -%}
+                      {%- render 'localization-selector'
+                        , type: 'country'
+                        , placement: 'top-start'
+                        , show_country_name: section.settings.show_country_name
+                        , show_country_flag: section.settings.show_country_flag
+                        , id_prefix: 'header-sidebar' -%}
+                    {%- endif -%}
+
+                    {%- if show_country_selector and show_locale_selector -%}
+                      <span class="localization-selectors__separator" aria-hidden="true"></span>
+                    {%- endif -%}
+
+                    {%- if show_locale_selector -%}
+                      {%- render 'localization-selector'
+                        , type: 'locale'
+                        , placement: 'top-start'
+                        , id_prefix: 'header-sidebar' -%}
+                    {%- endif -%}
+                  </div>
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+
+          {%- if section.settings.show_social_media -%}
+            {%- render 'social-media'
+              , layout: 'list' -%}
+          {%- endif -%}
+
+          <div class="sub-footer bg-grey-100">
+            <div class="ExtraSmall text-black">{{ section.settings.copyright_text | replace: '<p>', '' | replace: '</p>', '' }}</div>
+
+            {%- if section.settings.show_payment_icons and shop.enabled_payment_types.size > 0 -%}
+              <ul class="payment-methods unstyled-list">
+                {%- for type in shop.enabled_payment_types -%}
+                  <li>{{- type | payment_type_svg_tag -}}</li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+          </div>
+        </div>
+
+        {%- comment -%}
+          ------------------------------------------------------------------------------------------------------------------
+          FOOTER ASIDE DESKTOP
+          ------------------------------------------------------------------------------------------------------------------
+        {%- endcomment -%}
+
+        <div class="lg-max:hidden block">
+          <div class="h-stack justify-between">
+            {%- if section.settings.show_payment_icons and shop.enabled_payment_types.size > 0 -%}
+              <ul class="payment-methods unstyled-list">
+                {%- for type in shop.enabled_payment_types -%}
+                  <li>{{- type | payment_type_svg_tag -}}</li>
+                {%- endfor -%}
+              </ul>
+            {%- endif -%}
+
+            {%- if section.settings.show_social_media -%}
+              {%- render 'social-media'
+                , layout: 'list' -%}
+            {%- endif -%}
+          </div>
+          <hr class="separator-line" />
+
+          <div class="h-stack justify-between sub-menu-container">
+            <div class="Small text-white copyright-text">{{ section.settings.copyright_text | replace: '<p>', '' | replace: '</p>', '' }}</div>
+
+            {%- assign menu_sub_footer = section.settings.menu_sub_footer -%}
+
+            <ul class="sub-footer-menu unstyled-list" role="list">
+              {%- for link in menu_sub_footer.links -%}
+                <li>
+                  <a href="{{ link.url }}" class="text-white Exception link-faded">{{ link.title }}</a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "t:sections.footer.name",
+    "class": "shopify-section--footer",
+    "tag": "footer",
+    "max_blocks": 6,
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "separate_section_with_border",
+        "label": "t:global.section.separate_section_with_border",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "show_social_media",
+        "label": "t:sections.footer.show_social_media",
+        "info": "t:sections.footer.show_social_media_info",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_payment_icons",
+        "label": "t:sections.footer.show_payment_icons",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "t:global.localization.country_region_selector_category",
+        "info": "t:global.localization.country_region_selector_category_info"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_country_selector",
+        "label": "t:global.localization.show_country_region_selector",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_country_name",
+        "label": "t:global.localization.show_country_name",
+        "default": true,
+        "visible_if": "{{ section.settings.show_country_selector }}"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_country_flag",
+        "label": "t:global.localization.show_country_flag",
+        "default": true,
+        "visible_if": "{{ section.settings.show_country_selector }}"
+      },
+      {
+        "type": "header",
+        "content": "t:global.localization.language_selector_category",
+        "info": "t:global.localization.language_selector_category_info"
+      },
+      {
+        "type": "checkbox",
+        "id": "show_locale_selector",
+        "label": "t:global.localization.show_locale_selector",
+        "default": true
+      },
+      {
+        "type": "header",
+        "content": "t:sections.footer.sub_footer"
+      },
+      {
+        "type": "link_list",
+        "id": "menu_sub_footer",
+        "label": "t:sections.footer.sub_footer_menu"
+      },
+      {
+        "type": "richtext",
+        "id": "copyright_text",
+        "label": "t:sections.footer.copyright_text",
+        "default": "<p>Content</p>"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "@app"
+      },
+      {
+        "type": "image",
+        "name": "t:sections.footer.blocks.image.name",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "t:global.image.image",
+            "info": "t:sections.footer.blocks.image.image_size_recommendation"
+          },
+          {
+            "type": "range",
+            "id": "image_width",
+            "min": 50,
+            "max": 300,
+            "step": 10,
+            "unit": "px",
+            "label": "t:global.image.width",
+            "default": 150
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "t:global.text.link"
+          }
+        ]
+      },
+      {
+        "type": "text",
+        "name": "t:sections.footer.blocks.text.name",
+        "settings": [
+          {
+            "type": "inline_richtext",
+            "id": "title",
+            "label": "t:global.text.heading",
+            "default": "About our store"
+          },
+          {
+            "type": "richtext",
+            "id": "content",
+            "label": "t:global.text.content",
+            "default": "<p>Use this text area to tell your customers about your brand and vision. You can change it in the theme editor.</p>"
+          },
+          {
+            "type": "checkbox",
+            "id": "enable_follow_on_shop",
+            "label": "t:sections.footer.blocks.text.show_follow_on_shop",
+            "info": "t:sections.footer.blocks.text.show_follow_on_shop_info",
+            "default": true
+          }
+        ]
+      },
+      {
+        "type": "links",
+        "name": "t:sections.footer.blocks.links.name",
+        "settings": [
+          {
+            "type": "link_list",
+            "id": "menu",
+            "label": "t:sections.footer.blocks.links.menu",
+            "info": "t:sections.footer.blocks.links.menu_info",
+            "default": "footer"
+          },
+          {
+            "type": "link_list",
+            "id": "menu_en",
+            "label": "Menu (English)"
+          },
+          {
+            "type": "checkbox",
+            "id": "show_menu_title",
+            "label": "t:sections.footer.blocks.links.show_menu_title",
+            "default": true
+          },
+          {
+            "type": "inline_richtext",
+            "id": "menu_title",
+            "label": "t:sections.footer.blocks.links.menu_title",
+            "info": "t:sections.footer.blocks.links.menu_title_info",
+            "visible_if": "{{ block.settings.show_menu_title }}"
+          },
+          {
+            "type": "richtext",
+            "id": "extra_link",
+            "label": "Extra Link"
+          }
+        ]
+      },
+      {
+        "type": "newsletter",
+        "name": "t:sections.footer.blocks.newsletter.name",
+        "limit": 1,
+        "settings": [
+          {
+            "type": "text",
+            "id": "newsletter_form_id",
+            "label": "Form ID",
+            "default": "salesmanago-newsletter-form",
+            "info": "ID used by external newsletter services (e.g. Salesmanago)"
+          }
+        ]
+      },
+      {
+        "type": "store_locator",
+        "name": "t:sections.store_locator.name",
+        "settings": [
+          {
+            "type": "url",
+            "id": "url",
+            "label": "t:global.text.link"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

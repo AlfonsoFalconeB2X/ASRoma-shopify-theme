@@ -1,0 +1,271 @@
+{%- comment -%}
+  ----------------------------------------------------------------------------------------------------------------------
+  HEADER SIDEBAR COMPONENT
+  ----------------------------------------------------------------------------------------------------------------------
+
+  This snippet the navigation sidebar for the header. It is used for both the mobile menu and for the desktop menu when
+  the merchant configures the drawer mode.
+
+  ********************************************
+  Supported variables
+  ********************************************
+
+  * menu: the menu to render
+  * color_scheme: the color scheme to use for the sidebar
+  * show_dividers: whether dividers are shown for the collapsible
+  * open_second_level_menus: if true, second level dropdown are open by default
+{%- endcomment -%}
+
+{%- comment -%}
+  IMPLEMENTATION NOTE: while being a drawer, the sidebar has a completely different structure for the content. We are
+  therefore using a different structure for the Shadow DOM template
+{%- endcomment -%}
+
+<template id="header-sidebar-template">
+  <div part="base">
+    <div part="overlay"></div>
+
+    <div part="content">
+      <header
+        part="header"
+        class="header-sidebar__header"
+        style="--sidebar-logo-width: {{ logo_mobile_width | default: 109 }}px;">
+        {%- comment -%}Logo section{%- endcomment -%}
+        <a href="{{ routes.root_url }}">
+          {%- if section.settings.logo -%}
+            {%- capture sizes -%}{{ logo_mobile_width | default: 109 }}px{%- endcapture -%}
+            {%- capture widths -%}{{ logo_mobile_width | default: 109 | times: 2 }}, {{ logo_mobile_width | default: 109 | times: 3 }}{%- endcapture -%}
+            {%- assign alt_text = section.settings.logo.alt | default: shop.name -%}
+            {{- section.settings.logo | image_url: width: logo_mobile_width | image_tag: sizes: sizes, alt: alt_text, widths: widths, class: 'header-sidebar__logo-image' -}}
+          {%- else -%}
+            <span class="header-sidebar__logo-text h5">{{ shop.name }}</span>
+          {%- endif -%}
+        </a>
+
+        <dialog-close-button class="contents">
+          <button
+            type="button"
+            part="close-button tap-area"
+            aria-label="{{ 'general.accessibility.close' | t | escape }}">
+            {%- render 'icon' with 'as-roma-close'
+              , width: 13
+              , height: 13 -%}
+          </button>
+        </dialog-close-button>
+      </header>
+
+      <div part="panel-list">
+        <slot name="main-panel"></slot>
+
+        {%- if menu.levels > 0 -%}
+          <slot name="collapsible-panel"></slot>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</template>
+
+<header-sidebar
+  id="sidebar-menu"
+  class="header-sidebar drawer drawer--sm color-scheme color-scheme--{{ color_scheme.id }}"
+  template="header-sidebar-template"
+  open-from="left">
+  {%- comment -%}We are using a Shadow DOM where each panel has a slot, so we can directly render each level individually{%- endcomment -%}
+
+  {%- comment -%}Panel 1 is the first level{%- endcomment -%}
+  <div class="header-sidebar__main-panel" slot="main-panel">
+    <div class="header-sidebar__scroller">
+      <ul class="header-sidebar__linklist {% if show_dividers %}divide-y{% endif %} unstyled-list" role="list">
+        {%- for link in menu.links -%}
+          <li>
+            {%- if link.links.size > 0 -%}
+              <button
+                type="button"
+                class="header-sidebar__linklist-button {% if section.settings.sidebar_text_font == 'heading' %}Body Medium Uppercase{% endif %}"
+                aria-controls="header-panel-{{ forloop.index }}"
+                aria-expanded="false">
+                {{- link.title -}}
+                {%- render 'icon' with 'as-roma-arrow-dx'
+                  , width: 5
+                  , height: 10
+                  , direction_aware: true -%}
+              </button>
+            {%- else -%}
+              <a href="{{ link.url }}" class="header-sidebar__linklist-button {% if section.settings.sidebar_text_font == 'heading' %}Body Medium Uppercase{% endif %}">
+                {{- link.title -}}
+              </a>
+            {%- endif -%}
+          </li>
+        {%- endfor -%}
+
+        {% if settings.wishlist_enabled %}
+          <li>
+            <a
+              href="{{ routes.root_url |  append: '/apps/iwish' | replace: '//apps', '/apps' }}"
+              rel="nofollow"
+              class="header-sidebar__linklist-button {% if section.settings.sidebar_text_font == 'heading' %}Body Medium Uppercase{% endif %}"
+              title="Wishlist">
+              Wishlist
+            </a>
+          </li>
+        {% endif %}
+      </ul>
+    </div>
+
+    {%- liquid
+      if section.settings.show_country_selector and localization.available_countries.size > 1
+        assign show_country_selector = true
+      endif
+
+      if section.settings.show_locale_selector and localization.available_languages.size > 1
+        assign show_locale_selector = true
+      endif
+    -%}
+
+    {%- if shop.customer_accounts_enabled or show_country_selector or show_locale_selector -%}
+
+      <div class="header-sidebar__footer">
+        {%- if show_country_selector or show_locale_selector -%}
+          <div class="localization-selectors-container">
+            <div class="localization-selectors Body ExtraBold">
+
+              {%- if show_locale_selector -%}
+                {%- render 'localization-selector'
+                  , type: 'locale'
+                  , placement: 'top-start'
+                  , id_prefix: 'header-sidebar' -%}
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endif -%}
+        <div class="header-sidebar__footer-spacer"></div>
+        {%- if shop.customer_accounts_enabled -%}
+          <a href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" class="text-with-icon ASRomaFont Body Medium Underline sm:hidden">
+            {%- render 'icon' with 'as-roma-account'
+              , width: 20 -%}
+
+            {%- if customer -%}
+              {{- 'header.general.account' | t -}}
+            {%- else -%}
+              {{- 'header.general.login' | t -}}
+            {%- endif -%}
+
+            {%- if section.settings.mobile_footer_logo -%}
+              {%- assign alt_text = section.settings.mobile_footer_logo.alt | default: shop.name -%}
+              <img
+                src="{{ section.settings.mobile_footer_logo | image_url: width: 100 }}"
+                alt="{{ alt_text }}"
+                class="header-sidebar__footer-logo"
+                loading="lazy"
+                width="71">
+            {%- endif -%}
+          </a>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- comment -%}Panel 2 holds all the second levels{%- endcomment -%}
+  {%- if menu.levels > 0 -%}
+    <header-sidebar-collapsible-panel class="header-sidebar__collapsible-panel" slot="collapsible-panel">
+      <div class="header-sidebar__scroller">
+        {%- for link in menu.links -%}
+          {%- if link.links.size > 0 -%}
+            <div
+              id="header-panel-{{ forloop.index }}"
+              class="header-sidebar__sub-panel"
+              hidden>
+              <button
+                type="button"
+                class="header-sidebar__back-button {% if show_dividers %}is-divided{% endif %} text-with-icon {% if section.settings.sidebar_text_font == 'heading' %}Body text-red ExtraBold{% endif %} md:hidden"
+                data-action="close-panel">
+                {%- render 'icon' with 'as-roma-arrow-sx'
+                  , width: 4
+                  , height: 7 -%}
+                {{- link.title -}}
+              </button>
+
+              {%- liquid
+                assign link_title_downcase = link.title | strip | downcase
+                assign mega_menu_block = ''
+                assign current_show_collections_header_image_on_mobile = false
+
+                for block in section.blocks
+                  assign menu_item_downcase = block.settings.menu_item | strip | downcase
+
+                  if menu_item_downcase == link_title_downcase
+                    assign mega_menu_block = block
+                    assign current_show_collections_header_image_on_mobile = block.settings.show_collections_header_image_on_mobile
+                    break
+                  endif
+
+                endfor
+              -%}
+
+              <ul class="header-sidebar__linklist {% if show_dividers %}divide-y{% endif %} unstyled-list" role="list">
+                {%- for sub_link in link.links -%}
+                  <li>
+                    {%- if sub_link.links.size > 0 -%}
+                      <accordion-disclosure>
+                        <details
+                          class="accordion__disclosure group"
+                          {% if open_second_level_menus %}
+                          open{% endif %}>
+                          <summary class="header-sidebar__linklist-button {% if section.settings.sidebar_text_font == 'heading' %}ASRomaFont Body Medium Uppercase{% endif %}">
+                            {{- sub_link.title -}}
+                            {%- render 'icon' with 'as-roma-arrow-down'
+                              , class: 'group-expanded:rotate'
+                              , width: 10
+                              , height: 5 -%}
+                          </summary>
+
+                          <div class="header-sidebar__nested-linklist ASRomaFont Body Regular text-ink">
+                            {%- for sub_sub_link in sub_link.links -%}
+                              <a href="{{ sub_sub_link.url }}" class="link-faded-reverse">{{ sub_sub_link.title }}</a>
+                            {%- endfor -%}
+                          </div>
+                        </details>
+                      </accordion-disclosure>
+                    {%- else -%}
+                      <a href="{{ sub_link.url }}" class="header-sidebar__linklist-button header-sidebar__submenu-link {% if section.settings.sidebar_text_font == 'heading' %}ASRomaFont Body Medium Uppercase{% endif %}">
+                        <span class="ASRomaFont Body Medium Uppercase">{{- sub_link.title -}}</span>
+                        {%- if current_show_collections_header_image_on_mobile and sub_link.object.metafields.custom.header_image != blank -%}
+                          <div class="header-sidebar__submenu-image">
+                            {%- assign sublink_image = sub_link.object.metafields.custom.header_image -%}
+                            {%- assign alt_text = sublink_image.alt | default: sub_link.title | default: shop.name -%}
+                            {{ sublink_image | image_url: width: 50 | image_tag: loading: 'lazy', sizes: '40px', widths: '40,80', class: 'header-sidebar__submenu-image-tag', alt: alt_text }}
+                          </div>
+                        {%- endif -%}
+                      </a>
+                    {%- endif -%}
+                  </li>
+                {%- endfor -%}
+              </ul>
+
+              {%- if link.url -%}
+                {%- assign view_all_text = 'header.general.view_all' | t | append: ' ' | append: link.title -%}
+                <div class="header-sidebar__view-all-container">
+                  {% render 'button'
+                    , content: view_all_text
+                    , href: link.url
+                    , style: 'link'
+                    , variant: 'primary'
+                    , icon: 'as-roma-arrow-dx' %}
+                </div>
+              {%- endif -%}
+
+              {%- capture mega_menu_content -%}
+                                    {%- render 'mega-menu-images', context: 'sidebar', block: mega_menu_block -%}
+                                  {%- endcapture -%}
+              {%- if mega_menu_content != blank -%}
+                <div class="header-sidebar__promo scroll-area bleed md:unbleed">
+                  {{- mega_menu_content -}}
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </header-sidebar-collapsible-panel>
+  {%- endif -%}
+</header-sidebar>

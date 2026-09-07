@@ -1,0 +1,59 @@
+{%- comment -%}
+  ----------------------------------------------------------------------------------------------------------------------
+  FREE SHIPPING BAR
+  ----------------------------------------------------------------------------------------------------------------------
+
+  Renders the free shipping bar component. It is used on cart page and cart drawer to render the remaining amount before
+  being eligible for free shipping.
+{%- endcomment -%}
+
+{%- liquid
+  assign calculated_total_price = 0
+
+  for line_item in cart.items
+    if line_item.requires_shipping
+      assign calculated_total_price = calculated_total_price | plus: line_item.final_line_price
+    endif
+  endfor
+
+  # We have to remove the cart level discount from the calculated amount
+
+  assign total_cart_discount = 0
+
+  for discount_application in cart.cart_level_discount_applications
+    assign total_cart_discount = total_cart_discount | plus: discount_application.total_allocated_amount
+  endfor
+
+  assign calculated_total_price = calculated_total_price | minus: total_cart_discount
+  assign free_shipping_percentage = calculated_total_price | divided_by: settings.cart_free_shipping_threshold
+-%}
+
+{%- if cart.requires_shipping -%}
+  <free-shipping-bar
+    class="free-shipping-bar"
+    threshold="{{ settings.cart_free_shipping_threshold }}"
+    total-price="{{ calculated_total_price }}"
+    reached-message="{{ 'cart.free_shipping_bar.limit_reached_html' | t | escape }}"
+    unreached-message="{{ 'cart.free_shipping_bar.limit_unreached_html' | t | escape }}">
+    <div class="v-stack gap-6">
+      {%- comment -%}The span below is the placeholder where the content will be inserted in JS{%- endcomment -%}
+      <span class="text-subdued text-black Body">&nbsp;</span>
+      {% comment %} <span class="text-subdued text-black">{{ 'cart.free_shipping_bar.remaining_amount' | t: amount: settings.cart_free_shipping_threshold | minus: calculated_total_price | money }}</span> {% endcomment %}
+      <div class="v-stack gap-2">
+        <div class="h-stack justify-between Small">
+          <span class="">{{ calculated_total_price | money }}</span>
+          <span class="">{{ settings.cart_free_shipping_threshold | times: 100 | money }}</span>
+        </div>
+        <div class="free-shipping-bar__progress-bar">
+          <div class="free-shipping-bar__progress-bar-fill"></div>
+        </div>
+      </div>
+    </div>
+  </free-shipping-bar>
+
+  <style>
+    .free-shipping-bar {
+      --progress-bar-width: {{ free_shipping_percentage }}%;
+    }
+  </style>
+{%- endif -%}

@@ -1,0 +1,37 @@
+{%- comment -%}
+  ----------------------------------------------------------------------------------------------------------------------
+  COUNTRY AND LANGUAGE BUTTON
+  ----------------------------------------------------------------------------------------------------------------------
+
+  This snippet renders the button to open the country and language modal selector
+{%- endcomment -%}
+
+{% comment %} <button class="btn-country-language text-white">
+        {%- render 'icon' with 'as-roma-language'
+          , width: 16
+          , direction_aware: true -%}
+        <span class="Medium Small md:ExtraSmall">
+          {{ localization.country.name }} -
+          <span class="Uppercase">
+            {{ localization.language.iso_code }}
+          </span>
+        </span>
+</button> {% endcomment %}
+
+<li class="localization-selectors">
+  {%- if show_country_selector -%}
+    {%- render 'localization-selector'
+      , type: 'country'
+      , placement: 'bottom-end'
+      , show_country_name: section.settings.show_country_name
+      , show_country_flag: section.settings.show_country_flag
+      , id_prefix: 'header-nav' -%}
+  {%- endif -%}
+
+  {%- if show_locale_selector -%}
+    {%- render 'localization-selector'
+      , type: 'locale'
+      , placement: 'bottom-end'
+      , id_prefix: 'header-nav' -%}
+  {%- endif -%}
+</li>

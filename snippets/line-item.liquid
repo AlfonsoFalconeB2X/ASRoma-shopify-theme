@@ -1,0 +1,277 @@
+{%- comment -%}
+  ----------------------------------------------------------------------------------------------------------------------
+  LINE ITEM (GROUPED)
+  ----------------------------------------------------------------------------------------------------------------------
+
+  This component renders line item(s) product information. It can handle single items or grouped items with same _groupId.
+
+  ********************************************
+  Supported variables
+  ********************************************
+
+  * line_item: the line item to render (required) - can be single item or main product of a group
+  * grouped_items: array of additional line items that belong to the same group (optional)
+  * show_quantity_selector: if set to true, the quantity selector is displayed (useful for instance of mini-cart)
+  * group_id: the group ID for grouped items removal (optional)
+  * index: the index of the line item in the cart (optional, used for tracking)
+{%- endcomment -%}
+{%- if settings.enable_datalayer -%}{%- capture remove_from_cart_datalayer -%}
+    {
+      "event": "remove_from_cart",
+      "ecommerce": {
+        "currency": "{{ cart.currency.iso_code }}",
+        "items": [
+          {%- render 'datalayer-item', product: line_item.product, variant: line_item.variant, line_item: line_item, index: index, item_list_id: 'current', item_list_name: 'current' -%}
+        ]
+      }
+    }
+  {%- endcapture -%}
+{%- endif -%}
+
+  <line-item class="line-item"> <div class="line-item__inner">
+    <div class="{% if cart_grouped_line %}line-item__grouped-item__media-wrapper-cart{% else %}line-item__media-wrapper{% endif %}">
+      {%- if line_item.image != blank -%}
+        {%- assign alt_text = line_item.image.alt | default: line_item.product.title | default: line_item.title | default: shop.name -%}
+        {{- line_item.image | image_url: width: line_item.image.width | image_tag: loading: 'lazy', sizes: '(max-width: 699px) 120px', widths: '120,140,210,240,360', class: 'line-item__media', alt: alt_text -}}
+      {%- endif -%}
+    </div>
+    <div class="line-item-info">
+      {%- assign text_class = '' -%}
+
+      {%- if settings.product_card_text_font == 'heading' -%}
+        {%- assign text_class = 'Medium Body' -%}
+      {%- endif -%}
+
+      <div class="v-stack justify-items-start gap-4">
+        {%- if settings.show_vendor and line_item.vendor != blank -%}
+          {%- capture vendor_class -%}smallcaps {% if settings.product_card_text_font == 'heading' %}heading{% endif %}{% endcapture %}
+          {%- render 'vendor' with line_item.vendor
+            , class: vendor_class -%}
+        {%- endif -%}
+
+        <div class="v-stack justify-items-start gap-1 line-item-info__content">
+          {%- if line_item.url != blank -%}
+            <a href="{{ line_item.url }}" class="{{ text_class }}">{{ line_item.product.metafields.custom.customization_label.value | default: line_item.product.title }}</a>
+          {%- else -%}
+            <p class="{{ text_class }}">{{ line_item.product.metafields.custom.customization_label.value | default: line_item.product.title }}</p>
+          {%- endif -%}
+
+          {%- if line_item.properties['_customizationName'] != blank -%}
+            <div class="d-flex Small Regular">
+              <p class="Small Medium">{{- 'product.customization.name_label' | t -}}:
+              </p>
+              {{ line_item.properties['_customizationName'] }}</div>
+          {%- endif -%}
+          {%- if line_item.properties['_customizationNumber'] != blank -%}
+            <div class="d-flex Small Regular">
+              <p class="Small Medium">{{- 'product.customization.number_label' | t -}}:
+              </p>
+              {{ line_item.properties['_customizationNumber'] }}</div>
+          {%- endif -%}
+
+          {%- unless line_item.product.has_only_default_variant or line_item.gift_card -%}
+            <p class="smallcaps text-subdued Small Uppercase line-item__variant-size text-black">{{ 'general.label.size' | t }} {{ line_item.variant.title }}</p>
+          {%- endunless -%}
+        </div>
+
+        {%- capture secondary_information -%}
+
+        {%- if line_item.selling_plan_allocation -%}
+          <p class="text-subdued">{{ line_item.selling_plan_allocation.selling_plan.name }}</p>
+        {%- endif -%}
+
+        {%- unless line_item.properties == empty -%}
+          <ul class="text-subdued">
+            {%- for property in line_item.properties -%}
+              {%- assign first_character_in_key = property.first | truncate: 1, '' -%}
+
+              {%- if property.last == blank or first_character_in_key == '_' -%}
+                {%- continue -%}
+              {%- endif -%}
+
+              {%- liquid
+                assign property_label = property.first
+                
+                if property.first == 'Recipient name'
+                  assign property_label = 'gift_card.recipient.name_label' | t
+                elsif property.first == 'Recipient email'
+                  assign property_label = 'gift_card.recipient.email_label' | t
+                elsif property.first == 'Message'
+                  assign property_label = 'gift_card.message.message_label' | t
+                endif
+              -%}
+
+              <li>
+                {%- if property.last contains '/uploads/' -%}
+                  <a href="{{ property.last }}">{{ property.last | split: '/' | last }}</a>
+                {%- else -%}
+                  {{ property_label }}: {{ property.last }}
+                {%- endif -%}
+              </li>
+            {%- endfor -%}
+          </ul>
+        {%- endunless -%}
+      {%- endcapture -%}
+        {%- if secondary_information != blank and cart_grouped_line != true -%}
+          <div class="v-stack justify-items-start gap-1">
+            {{- secondary_information -}}
+          </div>
+        {%- endif -%}
+
+        {%- if show_quantity_selector -%}
+          <line-item-quantity class="h-stack gap-4 {% if request.page_type == 'cart' %} {% endif %}">
+            <div class="hidden-on-cart-desktop{% if group_id %} hidden{% endif %}">
+              {%- render 'quantity-selector'
+                , line_item: line_item
+                , size: 'sm'
+                , index: index -%}
+            </div>
+
+            {%- assign button_label = 'cart.order.remove' | t -%}
+            {%- if group_id -%}
+              <a
+                {% if settings.enable_datalayer %}
+                data-datalayer-info='{{ remove_from_cart_datalayer | strip_newlines | escape }}'
+                data-datalayer-event="click"
+                {% endif %}
+                href="#"
+                class="text-gray-900 link d-flex align-center gap-2 remove-group-link"
+                data-group-id="{{ group_id }}"
+                aria-label="{{ 'cart.order.remove_with_title' | t: title: line_item.title | escape }}">
+                {% render 'icon' with 'as-roma-delete'
+                  , width: 12
+                  , height: 12 %}
+                {{- 'cart.order.remove' | t -}}
+              </a>
+            {%- else -%}
+              <a
+                {% if settings.enable_datalayer %}
+                data-datalayer-info='{{ remove_from_cart_datalayer | strip_newlines | escape }}'
+                data-datalayer-event="click"
+                {% endif %}
+                href="{{ line_item.url_to_remove }}"
+                class="text-gray-900 link d-flex align-center gap-2"
+                aria-label="{{ 'cart.order.remove_with_title' | t: title: line_item.title | escape }}">
+                {% render 'icon' with 'as-roma-delete'
+                  , width: 12
+                  , height: 12 %}
+                {{- 'cart.order.remove' | t -}}
+              </a>
+            {%- endif -%}
+          </line-item-quantity>
+        {%- else -%}
+          {% unless cart_grouped_line %}
+            <line-item-quantity class="h-stack gap-4 {% if request.page_type == 'cart' %} {% endif %}">
+              {%- assign button_label = 'cart.order.remove' | t -%}
+              {%- if group_id -%}
+                <a
+                  {% if settings.enable_datalayer %}
+                  data-datalayer-info='{{ remove_from_cart_datalayer | strip_newlines | escape }}'
+                  data-datalayer-event="click"
+                  {% endif %}
+                  href="#"
+                  class="text-gray-900 link d-flex align-center gap-2 remove-group-link"
+                  data-group-id="{{ group_id }}"
+                  aria-label="{{ 'cart.order.remove_with_title' | t: title: line_item.title | escape }}">
+                  {% render 'icon' with 'as-roma-delete'
+                    , width: 12
+                    , height: 12 %}
+                  {{- 'cart.order.remove' | t -}}
+                </a>
+              {%- else -%}
+                <a
+                  {% if settings.enable_datalayer %}
+                  data-datalayer-info='{{ remove_from_cart_datalayer | strip_newlines | escape }}'
+                  data-datalayer-event="click"
+                  {% endif %}
+                  href="{{ line_item.url_to_remove }}"
+                  class="text-gray-900 link d-flex align-center gap-2"
+                  aria-label="{{ 'cart.order.remove_with_title' | t: title: line_item.title | escape }}">
+                  {% render 'icon' with 'as-roma-delete'
+                    , width: 12
+                    , height: 12 %}
+                  {{- 'cart.order.remove' | t -}}
+                </a>
+              {%- endif -%}
+            </line-item-quantity>
+          {% endunless %}
+          <p class="text-subdued item-quantity text-sm sm:hidden">{{ 'customer.order.quantity' | t }}: {{ line_item.quantity }}</p>
+        {%- endif -%}
+
+        {%- if line_item.properties['_Gifted'] -%}
+          <p class="gift-text Headline-5 text-red Medium Uppercase">{{ 'cart.general.gift' | t }}</p>
+        {%- endif -%}
+        <div class="h-stack w-full justify-end hidden-on-cart-desktop">
+          <div class="line-item__price">
+            {%- render 'price-list'
+              , line_item: line_item
+              , context: 'line_item' -%}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  {%- comment -%} Render grouped customization items {%- endcomment -%}
+  {%- if grouped_items and grouped_items.size > 0 -%}
+    <div class="line-item__grouped-items_container w-full">
+      {%- for grouped_item in grouped_items -%}
+        <div class="line-item__grouped-item">
+          <div class="line-item__grouped-item__media-wrapper">
+            {%- if grouped_item.image != blank -%}
+              {%- assign alt_text = grouped_item.image.alt | default: grouped_item.title | default: shop.name -%}
+              {{- grouped_item.image | image_url: width: 120 | image_tag: loading: 'lazy', sizes: '120', widths: '60,120', class: 'line-item__grouped-item__media', alt: alt_text -}}
+            {%- endif -%}
+          </div>
+
+          <div class="line-item-info">
+            <div class="v-stack justify-items-start gap-2">
+              <div class="v-stack justify-items-start gap-1 w-full d-flex">
+                <div class="line-item__grouped-item__title w-full Medium Body">
+                  {%- if grouped_item.properties['_customizationProduct'] -%}
+                    <div class="Medium Body">
+                      {{ grouped_item.product.metafields.custom.customization_label.value | default: grouped_item.product.title }}
+                    </div>
+                    <div>
+                      {%- if grouped_item.properties['_customizationName'] != blank -%}
+                        <div class="d-flex Small Regular">
+                          <p class="Small Medium">{{- 'product.customization.name_label' | t -}}:
+                          </p>
+                          {{ grouped_item.properties['_customizationName'] }}</div>
+                      {%- endif -%}
+                      {%- if grouped_item.properties['_customizationNumber'] != blank -%}
+                        <div class="d-flex Small Regular">
+                          <p class="Small Medium">{{- 'product.customization.number_label' | t -}}:
+                          </p>
+                          {{ grouped_item.properties['_customizationNumber'] }}</div>
+                      {%- endif -%}
+                    </div>
+                  {%- elsif grouped_item.properties['_customizationProductType'] == 'add_on' -%}
+                    {{ grouped_item.product.metafields.custom.customization_label.value | default: grouped_item.product.title }}
+                  {%- else -%}
+                    {{ grouped_item.product.metafields.custom.customization_label.value | default: grouped_item.product.title }}
+                  {%- endif -%}
+                </div>
+                {%- if grouped_item.final_price > 0 -%}
+                  <div class="justify-end hidden-on-cart-desktop">
+                    <div class="line-item__price">
+                      {%- render 'price-list'
+                        , line_item: grouped_item
+                        , context: 'line_item' -%}
+                    </div>
+                  </div>
+                {%- else -%}
+                  <div class="justify-end hidden-on-cart-desktop">
+                    <div class="line-item__price Body ">
+                      {{ 'cart.general.free' | t }}
+                    </div>
+                  </div>
+                {%- endif -%}
+              </div>
+            </div>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  {%- endif -%}
+</line-item>

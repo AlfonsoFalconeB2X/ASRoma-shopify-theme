@@ -1,0 +1,61 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "image_with_text_overlay_Xm8CTe": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading_nDG4EY": {
+          "type": "heading",
+          "disabled": true,
+          "settings": {
+            "text": "PUNTI VENDITA"
+          }
+        }
+      },
+      "block_order": [
+        "heading_nDG4EY"
+      ],
+      "name": "t:sections.image_with_text_overlay.presets.image_with_text_overlay.name",
+      "settings": {
+        "image_size": "md",
+        "image": "shopify://shop_images/2500x900-slider-store-locator_222c088c-44d6-43e9-8710-120df0a3aa94.jpg",
+        "mobile_image": "shopify://shop_images/1200x1600-slider-store-locator.jpg",
+        "allow_transparent_header": false,
+        "reveal_on_scroll": true,
+        "remove_vertical_spacing": true,
+        "content_width": "md",
+        "mobile_text_position": "place-self-center text-center",
+        "desktop_text_position": "sm:place-self-center sm:text-center",
+        "overlay_bg": false,
+        "style_olverlay": "opacity"
+      }
+    },
+    "store_locator_6frkVp": {
+      "type": "store-locator",
+      "name": "t:sections.store_locator.name",
+      "settings": {}
+    },
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_title": true,
+        "page_width": "xs"
+      }
+    }
+  },
+  "order": [
+    "image_with_text_overlay_Xm8CTe",
+    "store_locator_6frkVp",
+    "main"
+  ]
+}

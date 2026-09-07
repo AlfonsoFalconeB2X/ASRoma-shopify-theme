@@ -1,0 +1,23 @@
+<script
+  type="text/javascript"
+  src="{{ 'scripts-common.min.js' | asset_url }}"
+  defer></script>
+
+<script
+  type="text/javascript"
+  src="{{ 'scripts-free-product.min.js' | asset_url }}"
+  data-theme-settings='{{ settings | json | escape }}'
+  data-cart-url='{{ routes.cart_url }}'
+  defer></script>
+
+<script
+  type="text/javascript"
+  src="{{ 'scripts-cart-validator.min.js' | asset_url }}"
+  defer></script>
+
+{%- if settings.enable_datalayer -%}
+  <script
+    type="text/javascript"
+    src="{{ 'scripts-datalayer-events.min.js' | asset_url }}"
+    defer></script>
+{%- endif -%}

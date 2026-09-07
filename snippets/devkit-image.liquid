@@ -1,0 +1,53 @@
+{%- comment -%}
+  SRCSET
+
+  Input: source_sets
+{%- endcomment -%}
+{%- unless source_sets -%} 
+{%- assign source_sets = "128, 256, 384, 640, 750, 828, 1080, 1200, 1680, 1920, 2048, 2600, 3200" -%} 
+{%- endunless -%}
+
+{%- assign desired_source_sets = source_sets | split: ',' -%} 
+{%- assign src_sets = '' -%} 
+{%- for set in desired_source_sets -%} 
+  {%- assign size_as_int = set | times: 1 -%}  
+  {% assign image_url = image | image_url: width: size_as_int%}
+  
+  {% assign image_w = set | append: 'w' %} 
+  {% assign set_item = image_url | append: ' ' | append: image_w | append: ', ' %}
+  {% assign src_sets = src_sets | append: set_item %} 
+{%- endfor-%}
+
+{%- comment -%}
+  SIZES
+
+  Input: desktop_size
+  Input: tablet_size
+  Input: default_size
+{%- endcomment -%}
+
+{% assign sizes = "" %}
+{%- if desktop_size -%}
+  {%- assign desktop_size = "(min-width: " | append: settings.desktop_breakpoint | append: 'px) ' | append: desktop_size | append: ', ' -%}
+  {% assign sizes = sizes | append: desktop_size %}
+{%- endif -%}
+
+{%- if tablet_size -%}
+  {%- assign tablet_size = "(min-width: " | append: settings.tablet_breakpoint | append: 'px) ' | append: tablet_size | append: ', ' -%}
+  {% assign sizes = sizes | append: tablet_size %}
+{%- endif -%}
+
+{%- if default_size -%}
+  {% assign sizes = sizes | append: default_size %}
+{% else %}
+  {% assign sizes = sizes | append: "100vw" %}
+{%- endif -%}
+
+{%- assign fallback_alt = default_alt | default: shop.name -%}
+<img
+  src="{{image | image_url}}"
+  alt="{{ image.alt | default: fallback_alt }}"
+  class="devkit__block-image__image"
+  srcset="{{src_sets}}"
+  sizes="{{sizes}}"
+/>

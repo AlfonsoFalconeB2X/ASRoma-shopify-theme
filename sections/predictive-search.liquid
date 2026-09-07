@@ -1,0 +1,88 @@
+{%- comment -%}
+  ----------------------------------------------------------------------------------------------------------------------
+  PREDICTIVE SEARCH
+  ----------------------------------------------------------------------------------------------------------------------
+
+  This section is rendered by the <predictive-search> component, that renders the content of the search. It is used, for
+  instance, by the header search.
+
+  This component uses the predictive search (if available) or fallback to standard search if nothing is visible.
+
+  ********************************************
+  Supported variables
+  ********************************************
+
+  Nothing
+{%- endcomment -%}
+
+{%- if predictive_search.performed -%}
+  {%- assign results_count = 0 -%}
+
+  {%- for resource in predictive_search.resources -%}
+    {%- assign results_count = results_count | plus: resource.last.size -%}
+  {%- endfor -%}
+
+  {%- if predictive_search.resources.products.size > 0 -%}
+    <div class="predictive-search__results">
+      <div class="w-full md-max:hidden">
+        <div class="justify-self-end">
+          {%- assign button_content = 'search.general.view_all_results' | t -%}
+          {%- render 'button'
+            , type: 'submit'
+            , form: 'predictive-search-form'
+            , content: button_content
+            , style: 'link'
+            , variant: 'primary' -%}
+        </div>
+      </div>
+      <div class="predictive-search__resource-item">
+        {%- assign products_count = 4 -%}
+        {%- assign product_results = predictive_search.resources.products | slice: 0, products_count -%}
+
+        <div class="v-stack gap-8 sm:gap-12">
+          <div class="predictive-search__products" style="--product-list-items-per-row: {{ products_count }}">
+            {%- render 'predictive-search-result-item' for product_results as product
+              , type: 'product'
+              , index: forloop.index0 -%}
+          </div>
+        </div>
+      </div>
+      <div class="justify-self-center md:hidden">
+        {%- assign button_content = 'search.general.view_all_results' | t -%}
+        {%- render 'button'
+          , type: 'submit'
+          , form: 'predictive-search-form'
+          , content: button_content
+          , style: 'link'
+          , variant: 'primary' -%}
+      </div>
+    </div>
+  {%- else -%}
+    <p class="predictive-search__no-results text-lg">{{ 'search.general.no_results' | t: terms: predictive_search.terms }}</p>
+  {%- endif -%}
+{%- elsif search.performed -%}
+  {%- assign product_results = search.results | where: 'object_type', 'product' -%}
+  {%- if product_results.size > 0 -%}
+    <div class="predictive-search__results">
+      <div class="predictive-search__resource-item">
+        {%- assign products_count = 4 -%}
+        {%- assign product_results = product_results | slice: 0, products_count -%}
+
+        <div class="v-stack gap-8 sm:gap-12">
+          <div class="predictive-search__products" style="--product-list-items-per-row: {{ products_count }}">
+            {%- render 'predictive-search-result-item' for product_results as product
+              , type: 'product'
+              , index: forloop.index0 -%}
+          </div>
+
+        </div>
+      </div>
+    </div>
+  {%- else -%}
+    <p class="predictive-search__no-results text-lg">{{ 'search.general.no_results' | t: terms: search.terms }}</p>
+  {%- endif -%}
+{%- endif -%}
+
+{% schema %}
+  {"name": "t:sections.predictive_search.predictive_search"}
+{% endschema %}

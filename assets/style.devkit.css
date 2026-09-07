@@ -1,0 +1,116 @@
+.devkit > div.shopify-section:not(.devkit-section),
+.devkit > section:not(.devkit-section) {
+  width: 100%;
+  flex-grow: 1;
+}
+.devkit-d-flex,
+.devkit .d-flex {
+  display: flex;
+}
+.devkit .d-inline-flex {
+  display: inline-flex;
+}
+.devkit .flex-row {
+  flex-direction: row;
+}
+.devkit .flex-column {
+  flex-direction: column;
+}
+.devkit .flex-row-reverse {
+  flex-direction: row-reverse;
+}
+.devkit .flex-column-reverse {
+  flex-direction: column-reverse;
+}
+.devkit-flex-wrap,
+.devkit .flex-wrap {
+  flex-wrap: wrap;
+}
+.devkit .flex-nowrap {
+  flex-wrap: nowrap;
+}
+.devkit .flex-wrap-reverse {
+  flex-wrap: wrap-reverse;
+}
+.devkit .justify-content-start {
+  justify-content: flex-start;
+}
+.devkit .justify-content-end {
+  justify-content: flex-end;
+}
+.devkit .justify-content-center {
+  justify-content: center;
+}
+.devkit .justify-content-between {
+  justify-content: space-between;
+}
+.devkit .justify-content-around {
+  justify-content: space-around;
+}
+.devkit .align-items-start {
+  align-items: flex-start;
+}
+.devkit .align-items-end {
+  align-items: flex-end;
+}
+.devkit .align-items-center {
+  align-items: center;
+}
+.devkit .align-items-baseline {
+  align-items: baseline;
+}
+.devkit .align-items-stretch {
+  align-items: stretch;
+}
+.devkit .align-content-start {
+  align-content: flex-start;
+}
+.devkit .align-content-end {
+  align-content: flex-end;
+}
+.devkit .align-content-center {
+  align-content: center;
+}
+.devkit .align-content-between {
+  align-content: space-between;
+}
+.devkit .align-content-around {
+  align-content: space-around;
+}
+.devkit .align-content-stretch {
+  align-content: stretch;
+}
+.devkit .align-self-auto {
+  align-self: auto;
+}
+.devkit .align-self-start {
+  align-self: flex-start;
+}
+.devkit .align-self-end {
+  align-self: flex-end;
+}
+.devkit .align-self-center {
+  align-self: center;
+}
+.devkit .align-self-baseline {
+  align-self: baseline;
+}
+.devkit .align-self-stretch {
+  align-self: stretch;
+}
+.devkit .flex-break {
+  height: 0;
+  flex-basis: 100%;
+}
+.devkit .h-100 {
+  height: 100%;
+}
+.devkit .w-100 {
+  width: 100%;
+}
+.devkit .w-auto {
+  width: auto;
+}
+.devkit .devkit__block-image__container, .devkit .devkit__block-image__image {
+  width: 100%;
+}

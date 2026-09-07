@@ -1,0 +1,59 @@
+{%- unless template == 'index' or template == 'cart' or template == '404' or article or template == blank -%}
+  <div class="container container--{{ section.settings.content_width }}">
+    {%- render 'breadcrumbs'
+      , menu: section.settings.menu -%}
+  </div>
+{%- endunless -%}
+
+{% schema %}
+  {
+    "name": "Breadcrumbs",
+    "class": "shopify-section--breadcrumbs",
+    "limit": 1,
+    "settings": [
+      {
+        "type": "link_list",
+        "id": "menu",
+        "label": "Menu to base breadcrumbs on",
+        "default": "main-menu"
+      },
+      {
+        "type": "select",
+        "id": "content_width",
+        "label": "t:global.sizes.content_width",
+        "options": [
+          {
+            "value": "xs",
+            "label": "t:global.sizes.x_small"
+          },
+          {
+            "value": "sm",
+            "label": "t:global.sizes.small"
+          },
+          {
+            "value": "md",
+            "label": "t:global.sizes.medium"
+          },
+          {
+            "value": "lg",
+            "label": "t:global.sizes.large"
+          },
+          {
+            "value": "xl",
+            "label": "t:global.sizes.x_large"
+          },
+          {
+            "value": "full",
+            "label": "t:global.sizes.full_width"
+          }
+        ],
+        "default": "full"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Breadcrumbs"
+      }
+    ]
+  }
+{% endschema %}

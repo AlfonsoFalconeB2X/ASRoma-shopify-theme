@@ -1,0 +1,23 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "parent": "page.store-locator.json",
+  "context": {
+    "market": "italia"
+  },
+  "sections": {
+    "image_with_text_overlay_Xm8CTe": {
+      "settings": {
+        "image_size": "md"
+      },
+      "blocks": {}
+    }
+  }
+}

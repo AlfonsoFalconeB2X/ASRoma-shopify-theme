@@ -1,0 +1,64 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "color_scheme": "",
+        "show_title": true,
+        "page_width": "xs"
+      }
+    },
+    "personal_area_MMemfG": {
+      "type": "personal-area",
+      "blocks": {
+        "button_c3bc9G": {
+          "type": "button",
+          "settings": {
+            "title": "ACCOUNT MYASR",
+            "link": "https://account.asroma.com/?callbackLogoutUrl=https://store.asroma.com/account/logout",
+            "icon": "as-roma-account"
+          }
+        },
+        "button_PG9htb": {
+          "type": "button",
+          "settings": {
+            "title": "Ordini",
+            "link": "/account/orders",
+            "icon": "as-roma-cart"
+          }
+        }
+      },
+      "block_order": [
+        "button_c3bc9G",
+        "button_PG9htb"
+      ],
+      "name": "t:sections.personal_area.name",
+      "settings": {
+        "image": "shopify://shop_images/1500x1300-slider-personal-area-home-25-26-eurobet.jpg",
+        "back_to_shop_url": "/",
+        "logout_url": "https://account.asroma.com/?callbackLogoutUrl=https://store.asroma.com/account/logout&logout=1",
+        "season_ticket_enabled": true,
+        "season_ticket_title": "Sconti dedicati agli abbonati",
+        "season_ticket_percentage_1": "15%",
+        "season_ticket_percentage_2": "10%",
+        "season_ticket_text": "Il tuo abbonamento ti dà diritto al [percentage] su tutti gli acquisti fino al 30 giugno 2026.",
+        "season_ticket_link": "shopify://pages/sconto-abbonati-2025-26",
+        "season_ticket_link_text": "Scopri di più"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "personal_area_MMemfG"
+  ]
+}

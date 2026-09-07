@@ -1,0 +1,119 @@
+{%- comment -%}
+  ----------------------------------------------------------------------------------------------------------------------
+  DATA LAYER ITEM
+  ----------------------------------------------------------------------------------------------------------------------
+
+  Print the item for data layer in JSON format.
+
+  ********************************************
+  Supported variables
+  ********************************************
+
+  * product: Product object.
+  * variant: Variant object.
+  * index: index of the item in the list (optional).
+  * line_item: Line item object (only in cart template) (optional).
+  * is_small_item: Boolean to indicate if the item is a small item (optional).
+  * item_list_id: Custom list ID for data layer tracking (optional, overrides auto-detection).
+  * item_list_name: Custom list name for data layer tracking (optional, overrides auto-detection).
+  * item_customize: Boolean to indicate if the item is customizable (optional, only if not using line_item).
+  * quantity: Quantity of the item (optional, only if not using line_item).
+{%- endcomment -%}
+{%- liquid
+  # Calculate discount percentage for promotion_name (using variant prices)
+  assign promotion_name_value = ''
+  assign promotion_status_value = 'regular'
+  assign discount_value = 0
+
+  assign current_price = variant.price | default: product.price
+  assign current_compare_at_price = variant.compare_at_price | default: product.compare_at_price
+
+  if current_compare_at_price > current_price
+    assign promotion_status_value = 'promo'
+    assign discount_amount = current_compare_at_price | minus: current_price
+    assign discount_value = discount_amount | divided_by: 100.0
+    assign discount_percentage = discount_amount | times: 100.0 | divided_by: current_compare_at_price | round
+    assign promotion_name_value = discount_percentage | append: '%'
+  endif
+
+  # Use custom list_id and list_name if provided, otherwise auto-detect from template
+  if item_list_id != blank and item_list_id != 'current'
+    assign list_id = item_list_id
+  elsif item_list_id == 'current'
+    if template contains 'index'
+      assign list_id = 'HP'
+    elsif template contains 'collection'
+      assign list_id = 'PLP'
+    elsif template contains 'product'
+      assign list_id = 'PDP'
+    elsif template contains 'cart'
+      assign list_id = 'cart'
+    elsif template contains 'search'
+      assign list_id = 'search'
+    elsif template != blank
+      assign list_id = template
+    else
+      assign list_id = 'other'
+    endif
+  else
+    assign list_id = 'TBD'
+  endif
+
+  if item_list_name != blank and item_list_name != 'current'
+    assign list_name = item_list_name
+  elsif item_list_name == 'current'
+    if template contains 'index'
+      assign list_name = 'homepage'
+    elsif template contains 'collection'
+      assign list_name = collection.handle
+    elsif template contains 'product'
+      assign list_name = product.handle
+    elsif template contains 'cart'
+      assign list_name = 'cart'
+    elsif template contains 'search'
+      assign list_name = 'search_results'
+    elsif template != blank
+      assign list_name = template
+    else
+      assign list_name = 'other'
+    endif
+  else
+    assign list_name = 'TBD'
+  endif
+
+  if quantity != blank
+    assign item_quantity = quantity
+  elsif line_item != blank
+    assign item_quantity = line_item.quantity
+  endif
+
+  if item_customize != blank
+    assign item_customize = item_customize
+  elsif line_item != blank
+    if line_item.properties['_customizationProducts'] != blank
+      assign item_customize = true
+    else
+      assign item_customize = false
+    endif
+  endif
+-%}
+{  
+  "item_id": "{{ variant.sku | default: variant.id }}",
+  "item_name": "{{ product.title | escape }}",
+  "promotion_name": "{{ promotion_name_value }}",
+  "price": {{ variant.price | default: product.price | divided_by: 100.0 }},
+  "discount": {{ discount_value }}
+  {%- unless is_small_item -%},
+    "item_brand": "{{ product.vendor | escape }}",
+    "item_category": "{{ product.type | escape }}",
+    "item_category2": "{{ product.metafields.custom.category_2 | escape }}",
+    "item_category3": "{{ product.metafields.custom.category_3 | escape }}",
+    "item_variant": "{{ product.type | escape }}",
+    "item_list_id": "{{ list_id }}",
+    "item_list_name": "{{ list_name }}",
+    "promotion_status": "{{ promotion_status_value }}"
+    {%- if item_customize != nil -%},"item_customize": "{{ item_customize }}"{%- endif -%}
+    {%- if item_quantity != nil -%},"quantity": {{ item_quantity }}{%- endif -%}
+    {%- if index -%},"index": {{ index }}{%- endif -%}
+  {%- endunless -%}
+}

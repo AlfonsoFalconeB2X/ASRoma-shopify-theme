@@ -1,0 +1,284 @@
+{%- comment -%}
+----------------------------------------------------------------------------------------------------------------------
+BUY BUTTONS
+----------------------------------------------------------------------------------------------------------------------
+
+This component is used to show the buy buttons
+
+********************************************
+Supported variables
+********************************************
+
+* product: the product from which to show the buttons (if empty, a placeholder is displayed)
+* show_payment_button: if we show or not the dynamic checkout button
+* show_gift_card_recipient: for gift card products, an optional message/email to be sent to the recipient
+* form_id: if specified, define the form ID linked to this input
+{%- endcomment -%}
+
+{%- comment -%} Data Layer Object {%- endcomment -%}
+{%- if settings.enable_datalayer -%}
+  {%- capture add_to_cart_datalayer -%}
+    {
+      "event": "add_to_cart",
+      "ecommerce": {
+        "currency": "{{ cart.currency.iso_code }}",
+        "items": [
+          {%- render 'datalayer-item', product: product, variant: product.selected_or_first_available_variant, item_customize: false, quantity: 1 -%}  
+        ]
+      }
+    }
+  {%- endcapture -%}
+{%- endif -%}
+
+{%- if product != blank -%}
+  {%- liquid
+    assign variant_picker_block = section.blocks | where: 'type', 'variant_picker' | first
+    assign recipient_feature_active = false
+
+    if product.gift_card? and show_gift_card_recipient
+      assign recipient_feature_active = true
+      assign show_payment_button = false
+    endif
+  -%}
+
+  <product-form>
+    {%- form 'product', product, id: form_id -%}
+      <input type="hidden" {% if variant_picker_block != blank %}disabled{% endif %} name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+      {%- render 'custom-product-properties' -%}
+
+      {% liquid
+        assign button_disabled = false
+
+        if product.selected_or_first_available_variant == nil
+          assign button_disabled = true
+          assign button_content = 'product.general.unavailable_button' | t
+        elsif product.selected_or_first_available_variant.available == false
+          assign button_disabled = true
+          assign button_content = 'product.general.sold_out_button' | t
+        else
+          if product.template_suffix contains 'pre-order'
+            assign button_content = 'product.general.pre_order_button' | t
+          else
+            assign button_content = 'product.general.add_to_cart_button' | t
+          endif
+        endif
+      %}
+
+      <div class="v-stack gap-4">
+        {%- if recipient_feature_active -%}
+          <gift-card-recipient class="gift-card-recipient v-stack gap-3">
+            {%- assign checkbox_label = 'gift_card.recipient.checkbox' | t -%}
+
+            <div class="gift-card-recipient__fields">
+              <div class="fieldset gift-card-form">
+                {%- comment -%} Sezione Mittente 
+                {%- assign sender_section_label = 'gift_card.sender.section_label' | t -%}
+                <h3 class="gift-card-form__section-title Body Medium">{{ sender_section_label }}</h3>
+                <div class="gift-card-form__row">
+                  {%- liquid
+                    assign sender_name_label = 'gift_card.sender.name_label' | t
+                    render 'input', label: sender_name_label, name: 'properties[Sender name]', value: form.sender_name
+
+                    assign sender_email_label = 'gift_card.sender.email_label' | t
+                    render 'input', type: 'email', label: sender_email_label, name: 'properties[Sender email]', value: form.sender_email
+                  -%}
+                </div>
+                {%- endcomment -%}
+
+                {%- comment -%} Sezione Destinatario {%- endcomment -%}
+                {%- assign recipient_section_label = 'gift_card.recipient.section_label' | t -%}
+                <h3 class="gift-card-form__section-title Body Medium">{{ recipient_section_label }}</h3>
+                <div class="gift-card-form__row">
+                  {%- liquid
+                    assign recipient_name_label = 'gift_card.recipient.name_label' | t
+                    render 'input', label: recipient_name_label, name: 'properties[Recipient name]', value: form.name
+
+                    assign recipient_email_label = 'gift_card.recipient.email_label' | t
+                    render 'input', type: 'email', label: recipient_email_label, name: 'properties[Recipient email]', value: form.email, required: true, maxlength: 138
+                  -%}
+                </div>
+
+                {%- comment -%} Sezione Messaggio {%- endcomment -%}
+                {%- assign message_section_label = 'gift_card.message.section_label' | t -%}
+                <div class="grid gap-2">
+                  <h3 class="gift-card-form__section-title Body Medium">{{ message_section_label }}</h3>
+                  <p class="Small text-grey-900">{{ 'gift_card.message.input_description' | t }}</p>
+                </div>
+                <div class="gift-card-form__message">
+                  {%- liquid
+                    assign message_label = 'gift_card.message.input_label' | t
+                    render 'input', label: message_label, name: 'properties[Message]', value: form.message, multiline: 3, maxlength: 150, show_max_characters_count: false
+                  -%}
+                </div>
+
+                {%- render 'input', type: 'hidden', name: 'properties[__shopify_offset]' -%}
+              </div>
+            </div>
+          </gift-card-recipient>
+        {%- endif -%}
+        {%- if product.metafields.custom.customization_settings != blank and product.selected_or_first_available_variant != nil and product.selected_or_first_available_variant.available -%}
+            {%- render 'product-customization-button', product: product, useSharedHook: true -%}
+            <div class="hidden" id="customization-datalayer-info" {% if settings.enable_datalayer %}
+                  data-datalayer-info='{{ add_to_cart_datalayer | strip_newlines | escape }}'
+                  {%- endif -%}></div>
+            {%- render 'product-customization-add-to-cart', product: product, useSharedHook: true -%}
+        {%- endif -%}  
+
+        <buy-buttons class="buy-buttons {% if show_payment_button %}buy-buttons--has-dynamic{% endif %}" form="{{ form_id }}">
+          {%- assign atc_button_style = 'solid' -%}
+
+          {%- unless product.metafields.custom.customization_settings != blank -%}
+            {%- render 'button', content: button_content, type: 'submit', disabled: button_disabled, style: atc_button_style, stretch: true, extra_classes: 'Uppercase', data_layer: add_to_cart_datalayer | strip_newlines | escape -%}
+          {%- endunless -%}      
+
+          {%- if show_payment_button -%}
+            {{- form | payment_button -}}
+
+            <style>
+              #{{ form_id }} .shopify-payment-button {
+                {%- unless product.selected_or_first_available_variant.available -%}
+                  display: none;
+                {%- endunless -%}
+              }
+            </style>
+          {%- endif -%}
+        </buy-buttons>
+      </div>
+    {%- endform -%}
+  </product-form>
+
+  <script>
+    (() => {
+      const form = document.querySelector('#{{ form_id }}');
+      const productForm = form?.closest('product-form');
+      if (!form || !productForm) return;
+
+      let currentButton = null;
+
+      const checkValidity = () => {
+        if (!currentButton?.hasAttribute('data-original-disabled')) {
+          const isValid = form.checkValidity();
+          currentButton.disabled = !isValid;
+          currentButton.toggleAttribute('aria-disabled', !isValid);
+        }
+      };
+
+      const setupButton = () => {
+        const btn = productForm.querySelector('buy-buttons button[type="submit"]');
+        if (btn && btn !== currentButton) {
+          currentButton = btn;
+          if (btn.disabled) btn.setAttribute('data-original-disabled', 'true');
+          checkValidity();
+        }
+      };
+
+      setupButton();
+      form.addEventListener('input', checkValidity);
+      form.addEventListener('change', checkValidity);
+
+      const buyButtons = productForm.querySelector('buy-buttons');
+      if (buyButtons) {
+        new MutationObserver(setupButton).observe(buyButtons, {
+          childList: true,
+          subtree: true,
+          attributes: true,
+          attributeFilter: ['disabled']
+        });
+      }
+
+      productForm.addEventListener('variant:change', () => setTimeout(setupButton, 100));
+    })();
+  </script>
+
+  {%- comment -%} Render customization drawer if product has customization settings {%- endcomment -%}
+  {%- if product.metafields.custom.customization_settings != blank -%}
+    {%- render 'product-customization-drawer', product: product, useSharedHook: true -%}
+    
+    {%- comment -%} Script to update datalayer price when customization price changes {%- endcomment -%}
+    {%- if settings.enable_datalayer -%}
+    <script>
+      (() => {
+        const datalayerDiv = document.getElementById('customization-datalayer-info');
+        const priceContainer = document.querySelector('.product-customization-price-react');
+        
+        if (!datalayerDiv || !priceContainer) return;
+        
+        // Helper function to extract numeric value from price text (e.g., "150,00 €" -> 150.00)
+        const parsePrice = (text) => {
+          if (!text) return NaN;
+          return parseFloat(
+            text.trim()
+              .replace(/[^\d,.-]/g, '') // Remove currency symbols and spaces
+              .replace('.', '')          // Remove thousand separator (Italian format)
+              .replace(',', '.')         // Convert decimal comma to dot
+          );
+        };
+        
+        const updateDatalayerPrice = () => {
+          const priceElement = priceContainer.querySelector('.price-customization');
+          const compareAtPriceElement = priceContainer.querySelector('.compare-at-price-customization');
+          
+          if (!priceElement) return;
+          
+          const numericPrice = parsePrice(priceElement.textContent);
+          if (isNaN(numericPrice)) return;
+          
+          // Calculate discount if compare-at-price exists
+          let discountValue = 0;
+          if (compareAtPriceElement) {
+            const compareAtPrice = parsePrice(compareAtPriceElement.textContent);
+            if (!isNaN(compareAtPrice) && compareAtPrice > numericPrice) {
+              discountValue = compareAtPrice - numericPrice;
+            }
+          }
+          
+          try {
+            const datalayerAttr = datalayerDiv.getAttribute('data-datalayer-info');
+            if (!datalayerAttr) return;
+            
+            // Browser already decodes HTML entities when reading getAttribute()
+            const datalayerObj = JSON.parse(datalayerAttr);
+            
+            // Update the price and discount in the first item
+            if (datalayerObj.ecommerce?.items?.[0]) {
+              datalayerObj.ecommerce.items[0].price = numericPrice;
+              datalayerObj.ecommerce.items[0].discount = discountValue;
+            }
+            
+            // Set the updated JSON (no need to encode, browser handles it)
+            datalayerDiv.setAttribute('data-datalayer-info', JSON.stringify(datalayerObj));
+          } catch (e) {
+            console.error('Error updating datalayer price:', e);
+          }
+        };
+        
+        // Observe changes in the price container
+        const observer = new MutationObserver((mutations) => {
+          for (const mutation of mutations) {
+            if (mutation.type === 'childList' || mutation.type === 'characterData') {
+              updateDatalayerPrice();
+              break;
+            }
+          }
+        });
+        
+        observer.observe(priceContainer, {
+          childList: true,
+          subtree: true,
+          characterData: true
+        });
+        
+        // Initial update
+        updateDatalayerPrice();
+      })();
+    </script>
+    {%- endif -%}
+  {%- endif -%}
+
+{%- else -%}
+  <buy-buttons class="buy-buttons" template="{{ product.template_suffix | escape }}" form="{{ form_id }}">
+    {%- assign button_content = 'product.general.add_to_cart_button' | t -%}
+    {%- render 'button', content: button_content, type: 'submit', stretch: true -%}
+  </buy-buttons>
+{%- endif -%}

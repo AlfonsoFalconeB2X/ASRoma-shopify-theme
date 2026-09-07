@@ -1,0 +1,376 @@
+{%- if section.blocks.size > 0 -%}
+  <style>
+    #shopify-section-{{ section.id }} {
+      --product-list-items-per-row: {{ section.settings.products_per_row_mobile | times: 1.0 }};
+    }
+
+    @media screen and (min-width: 700px) {
+      #shopify-section-{{ section.id }} {
+        --product-list-items-per-row: {{ section.settings.products_per_row_desktop | times: 1.0 }};
+      }
+    }
+  </style>
+
+  <div class="section-spacing {% if section.settings.separate_section_with_border %}bordered-section{% endif %}">
+    <div class="container">
+      {%- assign wrapper_carousel_id = 'featured-collections-carousel-' | append: section.id -%}
+
+      <div class="section-stack">
+        <div class="v-stack gap-4 justify-self-{{ section.settings.content_position }} sm:gap-2.5">
+          {%- if section.settings.main_title != blank -%}
+            <p class="Headline-2 Medium text-{{ section.settings.content_position }}">{{- section.settings.main_title -}}</p>
+          {%- endif -%}
+
+          {%- if section.blocks.size > 1 -%}
+            <carousel-navigation
+              align-selected
+              class="featured-collections-navigation scroll-area bleed"
+              aria-controls="{{ wrapper_carousel_id }} justify-content-{{ section.settings.content_position }}">
+              {%- for block in section.blocks -%}
+                <button class="Headline-2 Medium" aria-current="{% if forloop.first %}true{% else %}false{% endif %}">
+                  {{- block.settings.title -}}
+                </button>
+              {%- endfor -%}
+            </carousel-navigation>
+          {%- else -%}
+            <h2 class="h2">{{ section.blocks.first.settings.title }}</h2>
+          {%- endif -%}
+        </div>
+
+        <featured-collections-carousel id="{{ wrapper_carousel_id }}" class="featured-collections-carousel">
+          {%- for block in section.blocks -%}
+            <div class="featured-collections-carousel__item {% if forloop.first %}is-selected{% endif %}" {{ block.shopify_attributes }}>
+              {%- if block.settings.link_text != blank and block.settings.link_position == 'top' -%}
+                {%- assign button_link = block.settings.link_url | default: block.settings.collection.url | default: '#' -%}
+                {%- assign icon = '' -%}
+                {%- if block.settings.show_icon -%}
+                  {%- assign icon = 'as-roma-arrow-dx' -%}
+                {%- endif -%}
+                <div class="text-{{ section.settings.content_position }}">
+                  {%- render 'button'
+                    , href: button_link
+                    , content: block.settings.link_text
+                    , variant: block.settings.link_type
+                    , style: 'link'
+                    , icon: icon -%}
+                </div>
+              {%- endif -%}
+
+              {%- comment -%} View Item List Data Layer {%- endcomment -%}
+              {%- if settings.enable_datalayer -%}
+                {%- capture view_item_list_datalayer -%}
+                  {
+                    "event": "view_item_list",
+                    "ecommerce": {
+                      "currency": "{{ cart.currency.iso_code }}",
+                      "items": [
+                        {%- for product in block.settings.collection.products limit: block.settings.products_count -%}
+                          {%- render 'datalayer-item', index: forloop.index0, product: product, variant: product.selected_or_first_available_variant, item_list_id: 'current', item_list_name: 'current' -%}  
+                          {% unless forloop.last %},{% endunless %}
+                        {%- endfor -%}
+                      ]
+                    }
+                  }
+                {%- endcapture -%}
+                {%- comment -%} View Promotion Data Layer - Only products on sale {%- endcomment -%}
+                {%- capture view_promotion_datalayer -%}
+                  {
+                    "event": "view_promotion",
+                    "ecommerce": {
+                      "items": [
+                        {%- assign promo_index = 0 -%}
+                        {%- for product in block.settings.collection.products limit: block.settings.products_count -%}
+                          {%- assign variant = product.selected_or_first_available_variant -%}
+                          {%- if variant.compare_at_price > variant.price -%}
+                            {%- assign promo_index = promo_index | plus: 1 -%}
+                            {% if promo_index > 1 %},{% endif %}
+                            {%- render 'datalayer-item', index: promo_index, product: product, variant: variant, is_small_item: true -%}
+                          {%- endif -%}
+                        {%- endfor -%}
+                      ]
+                    }
+                  }
+                {%- endcapture -%}
+              {%- endif -%}
+
+              {%- capture product_list -%}
+                {%- assign should_reveal = false -%}
+
+                {%- if settings.stagger_products_apparition and forloop.first -%}
+                  {%- assign should_reveal = true -%}
+                {%- endif -%}
+
+                {%- for product in block.settings.collection.products limit: block.settings.products_count -%}
+                  {%- render 'product-card', product: product, reveal: should_reveal, position: forloop.index, hide_product_information: section.settings.hide_product_information, block: block -%}
+                {%- else -%}
+                  {%- for i in (1..block.settings.products_count) -%}
+                    {%- render 'product-card-placeholder', reveal: should_reveal, loop_index: forloop.index0, hide_product_information: section.settings.hide_product_information -%}
+                  {%- endfor -%}
+                {%- endfor -%}
+              {%- endcapture -%}
+              {%- if section.settings.stack_products -%}
+
+                <product-list
+                  class="product-list {% if section.settings.hide_product_information %}product-list--compact{% endif %} justify-center"
+                  {% if settings.enable_datalayer %}
+                  data-datalayer-info='{{ view_item_list_datalayer | strip_newlines | escape }}'
+                  data-datalayer-event="view"
+                  {%- if promo_index > 0 -%}
+                  data-datalayer-info-promotion='{{ view_promotion_datalayer | strip_newlines | escape }}'
+                  {%- endif -%}
+                  {% endif %}>
+                  {{- product_list -}}
+                </product-list>
+              {%- else -%}
+                {%- assign product_carousel_id = 'featured-collections-product-list-carousel-' | append: block.id -%}
+
+                {%- comment -%} Hidden element for view_promotion event {%- endcomment -%}
+                {%- if settings.enable_datalayer and promo_index > 0 -%}
+                  <div
+                    class="data-layer-hidden"
+                    data-datalayer-info='{{ view_promotion_datalayer | strip_newlines | escape }}'
+                    data-datalayer-event="view"></div>
+                {%- endif -%}
+                <product-list
+                  class="floating-controls-container floating-controls-container--inside floating-controls-container--on-hover"
+                  {% if settings.enable_datalayer %}
+                  data-datalayer-info='{{ view_item_list_datalayer | strip_newlines | escape }}'
+                  data-datalayer-event="view"
+                  {% endif %}>
+                  <carousel-prev-button class="floating-controls-container__control" aria-controls="{{ product_carousel_id }}">
+                    <button
+                      type="button"
+                      class="prev-next-button prev-next-button--prev circle-button circle-button--lg hover:animate-icon-inline"
+                      disabled>
+                      <span class="sr-only">{{ 'general.accessibility.previous' | t }}</span>
+                      {%- render 'icon' with 'as-roma-carousel-arrow-sx'
+                        , direction_aware: true
+                        , height: 18
+                        , width: 22 -%}
+                    </button>
+                  </carousel-prev-button>
+
+                  <scroll-carousel
+                    id="{{ product_carousel_id }}"
+                    group-cells
+                    allow-drag
+                    class="product-list {% if section.settings.hide_product_information %}product-list--compact{% endif %} product-list--carousel scroll-area bleed md:unbleed">
+                    {{- product_list -}}
+                  </scroll-carousel>
+
+                  <carousel-next-button class="floating-controls-container__control" aria-controls="{{ product_carousel_id }}">
+                    <button type="button" class="prev-next-button prev-next-button--next circle-button circle-button--lg hover:animate-icon-inline">
+                      <span class="sr-only">{{ 'general.accessibility.next' | t }}</span>
+                      {%- render 'icon' with 'as-roma-carousel-arrow-dx'
+                        , direction_aware: true
+                        , height: 18
+                        , width: 22 -%}
+                    </button>
+                  </carousel-next-button>
+                </product-list>
+              {%- endif -%}
+
+              {%- if block.settings.link_text != blank and block.settings.link_position == 'bottom' -%}
+                {%- assign button_link = block.settings.link_url | default: block.settings.collection.url | default: '#' -%}
+
+                {%- assign icon = '' -%}
+                {%- if block.settings.show_icon -%}
+                  {%- assign icon = 'as-roma-arrow-dx' -%}
+                {%- endif -%}
+
+                <div class="text-{{ section.settings.content_position }}">
+                  {%- render 'button'
+                    , href: button_link
+                    , content: block.settings.link_text
+                    , variant: block.settings.link_type
+                    , style: 'link'
+                    , icon: icon -%}
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </featured-collections-carousel>
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+  {
+    "name": "t:sections.featured_collections.name",
+    "class": "shopify-section--featured-collections",
+    "tag": "section",
+    "disabled_on": {
+      "templates": ["password"],
+      "groups": ["header", "custom.overlay"]
+    },
+    "max_blocks": 5,
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "separate_section_with_border",
+        "label": "t:global.section.separate_section_with_border",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "hide_product_information",
+        "label": "t:global.product_list.hide_product_information",
+        "info": "t:global.product_list.hide_product_information_info"
+      },
+      {
+        "type": "header",
+        "content": "t:global.product_list.product_list_category"
+      },
+      {
+        "type": "checkbox",
+        "id": "stack_products",
+        "label": "t:global.product_list.stack_products",
+        "default": false
+      },
+      {
+        "type": "select",
+        "id": "products_per_row_mobile",
+        "label": "t:global.product_list.products_per_row_mobile",
+        "options": [
+          {
+            "value": "1",
+            "label": "1"
+          },
+          {
+            "value": "2",
+            "label": "2"
+          }
+        ],
+        "default": "2",
+        "visible_if": "{{ section.settings.stack_products }}"
+      },
+      {
+        "type": "range",
+        "id": "products_per_row_desktop",
+        "min": 2,
+        "max": 6,
+        "label": "t:global.product_list.products_per_row_desktop",
+        "info": "t:global.product_list.products_per_row_desktop_info",
+        "default": 4,
+        "visible_if": "{{ section.settings.stack_products }}"
+      },
+
+      {
+        "type": "header",
+        "content": "t:global.section.header_category"
+      },
+      {
+        "type": "select",
+        "id": "content_position",
+        "label": "Content position",
+        "options": [
+          {
+            "value": "start",
+            "label": "Left"
+          },
+          {
+            "value": "center",
+            "label": "Center"
+          },
+          {
+            "value": "end",
+            "label": "Right"
+          }
+        ],
+        "default": "start"
+      },
+      {
+        "type": "inline_richtext",
+        "id": "main_title",
+        "label": "Title"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "collection",
+        "name": "t:sections.featured_collections.blocks.collection.name",
+        "settings": [
+          {
+            "type": "collection",
+            "id": "collection",
+            "label": "t:sections.featured_collections.blocks.collection.collection"
+          },
+          {
+            "type": "range",
+            "id": "products_count",
+            "min": 2,
+            "max": 50,
+            "label": "t:global.product_list.products_to_show",
+            "default": 8
+          },
+          {
+            "type": "inline_richtext",
+            "id": "title",
+            "label": "t:global.text.heading",
+            "info": "t:sections.featured_collections.blocks.collection.title_info"
+          },
+          {
+            "type": "url",
+            "id": "link_url",
+            "label": "t:global.text.link_url",
+            "info": "t:sections.featured_collections.blocks.collection.default_link_url"
+          },
+          {
+            "type": "text",
+            "id": "link_text",
+            "label": "t:global.text.link_text"
+          },
+          {
+            "type": "select",
+            "id": "link_type",
+            "label": "link type",
+            "options": [
+              {
+                "value": "primary",
+                "label": "primary"
+              },
+              {
+                "value": "secondary",
+                "label": "secondary"
+              }
+            ],
+            "default": "primary"
+          },
+          {
+            "type": "select",
+            "id": "link_position",
+            "label": "link position",
+            "options": [
+              {
+                "value": "top",
+                "label": "top"
+              },
+              {
+                "value": "bottom",
+                "label": "bottom"
+              }
+            ],
+            "default": "top"
+          },
+          {
+            "type": "checkbox",
+            "id": "show_icon",
+            "label": "Link Show icon",
+            "default": true
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "t:sections.featured_collections.presets.featured_collections.name",
+        "blocks": [
+          {
+            "type": "collection"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

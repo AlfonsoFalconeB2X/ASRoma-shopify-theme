@@ -1,0 +1,99 @@
+{%- assign color_scheme_hash = section.settings.color_scheme.settings.background_gradient | default: section.settings.color_scheme.settings.background | md5 -%}
+
+<div class="section-spacing color-scheme color-scheme--{{ section.settings.color_scheme.id }} color-scheme--bg-{{ color_scheme_hash }}">
+  <div class="container container--xs">
+    <div class="empty-state">
+      <div class="v-stack gap-2">
+        <h1 class="Headline-1">{{ section.settings.heading }}</h1>
+        <div class="v-stack items-center gap-6">
+          <span class="Headline-5">{{ section.settings.subheading }}</span>
+
+          {%- assign button_content = '404.general.continue_shopping' | t -%}
+
+          {%- if section.settings.button_text != blank -%}
+            {%- render 'button'
+              , href: section.settings.link
+              , content: section.settings.button_text
+              , style: section.settings.button_style
+              , text_style: "Uppercase Small ExtraBold"
+              , variant: section.settings.button_variant -%}
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "t:sections.main_not_found.name",
+    "class": "shopify-section--404",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "color_scheme",
+        "id": "color_scheme",
+        "label": "t:global.colors.scheme",
+        "default": "scheme-1"
+      },
+      {
+        "type": "inline_richtext",
+        "id": "heading",
+        "label": "t:global.text.heading",
+        "default": "404: PAGINA NON ESISTENTE"
+      },
+      {
+        "type": "inline_richtext",
+        "id": "subheading",
+        "label": "t:global.text.subheading",
+        "default": "Non riusciamo a trovare quello che stai cercando. Torna alla Homepage."
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "t:global.text.text"
+      },
+      {
+        "type": "url",
+        "id": "link",
+        "label": "t:sections.main_not_found.button_link"
+      },
+      {
+        "type": "select",
+        "id": "button_style",
+        "label": "t:global.text.style",
+        "options": [
+          {
+            "value": "outline",
+            "label": "t:global.text.link_style_options.outline"
+          },
+          {
+            "value": "solid",
+            "label": "t:global.text.link_style_options.solid"
+          },
+          {
+            "value": "link",
+            "label": "t:global.text.link_style_options.link"
+          }
+        ],
+        "default": "solid"
+      },
+      {
+        "type": "select",
+        "id": "button_variant",
+        "label": "t:global.text.button_variant",
+        "options": [
+          {
+            "value": "primary",
+            "label": "t:global.text.button_variant_options.primary"
+          },
+          {
+            "value": "secondary",
+            "label": "t:global.text.button_variant_options.secondary"
+          }
+        ],
+        "default": "primary"
+      }
+    ]
+  }
+{% endschema %}

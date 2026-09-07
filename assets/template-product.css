@@ -1,0 +1,170 @@
+/* font size */
+/* clearfix */
+/* animations */
+/* aspect ratio */
+/* Shopify integration */
+/* Uncomment and fill instructions needed for styleguide setup */
+/* Default */
+/* AS Roma */
+/* Gradients */
+/* Grays */
+.gift-card-form {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding-bottom: 2.5rem;
+  --fieldset-gap: 1rem;
+}
+.gift-card-form__row {
+  display: grid;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 0.5rem;
+  gap: 0.625rem;
+  grid-template-columns: 1fr 1fr;
+}
+@media screen and (max-width: 999px) {
+  .gift-card-form__row {
+    margin-bottom: 1rem;
+    gap: 1rem;
+    grid-template-columns: 1fr;
+  }
+}
+.gift-card-form__row input[type=text],
+.gift-card-form__row input[type=email],
+.gift-card-form__row textarea,
+.gift-card-form__row .input-wrapper,
+.gift-card-form__row .form-control {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.gift-card-form__message {
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 1.25rem;
+}
+.gift-card-form__message input[type=text],
+.gift-card-form__message textarea,
+.gift-card-form__message .input-wrapper,
+.gift-card-form__message .form-control {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.gift-card-form input,
+.gift-card-form textarea,
+.gift-card-form select {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+.gift-card-form .input-wrapper,
+.gift-card-form .form-control,
+.gift-card-form .field {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.product-info__block-item:is([data-block-type=buy-buttons]) {
+  --product-info-gap: 1rem;
+}
+
+.product-info__block-item:is([data-block-type=variant-picker],
+[data-block-type=product-variations],
+[data-block-type=separator],
+[data-block-type=description],
+[data-block-type=text],
+[data-block-type=liquid],
+[data-block-type=share-buttons]) {
+  --product-info-gap: 1rem;
+}
+
+.product-info__block-item:is([data-block-type=vendor],
+[data-block-type=title],
+[data-block-type=sku],
+[data-block-type=price]) {
+  --product-info-gap: 1rem;
+}
+
+.product-info__block-item:is([data-block-type=price]) {
+  min-height: 1.349375rem;
+}
+@media screen and (max-width: 999px) {
+  .product-info__block-item:is([data-block-type=price]) {
+    min-height: 1.199375rem;
+  }
+}
+
+.info-message svg {
+  height: fit-content;
+}
+.info-message p {
+  font-size: 0.75rem;
+}
+
+.iWishAdd.asroma-button {
+  width: 2.75rem;
+  height: 2.75rem;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.1607843137);
+}
+
+.free-shipping-message svg {
+  height: fit-content;
+}
+.free-shipping-message p {
+  font-size: 0.75rem;
+}
+
+.product-gallery {
+  --product-gallery-gap: 0;
+}
+.product-gallery .page-bars {
+  display: flex;
+  width: 100vw;
+  gap: 0.25rem;
+}
+@media screen and (min-width: 1000px) {
+  .product-gallery .page-bars {
+    display: none;
+  }
+}
+.product-gallery .page-bars__control {
+  height: 0.1875rem;
+  flex: 1;
+  padding: 0;
+  border: 0;
+  border-radius: 0.125rem;
+  background-color: #ffedc2;
+  transition: background-color 0.2s ease;
+}
+.product-gallery .page-bars__control[aria-current=true] {
+  background-color: #ffb300;
+}
+.product-gallery__media--customization {
+  display: flex;
+  min-height: 583px;
+  align-items: center;
+  justify-content: center;
+  cursor: auto !important;
+}
+@media screen and (max-width: 999px) {
+  .product-gallery__media--customization {
+    min-height: 375px;
+  }
+}
+.product-gallery__media--customization .product-customization-preview {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.gallery-iwish-mobile {
+  position: absolute;
+  z-index: 1;
+  right: 0;
+}

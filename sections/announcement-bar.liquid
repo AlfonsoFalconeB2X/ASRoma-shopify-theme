@@ -1,0 +1,241 @@
+{%- if section.blocks.size > 0 -%}
+  <style>
+  /* stylelint-disable-line */
+  :root {
+    --announcement-bar-is-sticky: {% if section.settings.enable_sticky %}1{% else %}0{% endif %};
+
+{%- if section.index == 1 and section.settings.enable_sticky == false -%}
+  --header-scroll-tracker-offset: var(--announcement-bar-height);
+{%- endif -%}
+}
+
+{%- if section.settings.enable_sticky -%}
+  #shopify-section-{{ section.id }} {
+    position: sticky;
+    top: 0;
+    z-index: 5;
+  }
+
+  .shopify-section--header ~ #shopify-section-{{ section.id }} {
+    top: calc(var(--header-is-sticky, 0) * var(--header-height, 0px));
+    z-index: 4;
+    /* We have to lower the z-index in case the announcement bar is displayed after the header */
+  }
+{%- endif -%}
+
+#shopify-section-{{ section.id }} {
+  --announcement-bar-font-size: {{ section.settings.mobile_font_size | divided_by: 16.0 }}rem;
+}
+
+@media screen and (min-width: 999px) {
+  #shopify-section-{{ section.id }} {
+    --announcement-bar-font-size: {{ section.settings.desktop_font_size | divided_by: 16.0 }}rem;
+  }
+}
+</style>
+
+{%- liquid
+      if section.settings.show_country_selector and localization.available_countries.size > 1
+        assign show_country_selector = true
+      endif
+
+      if section.settings.show_locale_selector and localization.available_languages.size > 1
+        assign show_locale_selector = true
+      endif
+    -%}
+
+<height-observer variable="announcement-bar">
+  <div class="announcement-bar color-scheme color-scheme--{{ section.settings.color_scheme.id }}">
+    {%- assign carousel_id = 'carousel-' | append: section.id -%}
+  
+
+        {%- if show_country_selector or show_locale_selector -%}
+          <li class="localization-selectors hidden md:flex">
+            {%- if show_country_selector -%}
+              {%- render 'localization-selector'
+                , type: 'country'
+                , placement: 'bottom-end'
+                , show_country_name: section.settings.show_country_name
+                , show_country_flag: section.settings.show_country_flag
+                , id_prefix: 'header-nav' -%}
+            {%- endif -%}
+
+            {%- if show_locale_selector -%}
+              {%- render 'localization-selector'
+                , type: 'locale'
+                , placement: 'bottom-end'
+                , id_prefix: 'header-nav' -%}
+            {%- endif -%}
+          </li>
+        {%- endif -%}
+
+    <div class="announcement-bar__carousel-wrapper">
+    {%- if section.blocks.size > 1 and section.settings.show_arrow_buttons -%}
+      <carousel-prev-button aria-controls="{{ carousel_id }}" class="contents">
+        <button type="button" class="tap-area">
+          <span class="sr-only">{{ 'general.accessibility.previous' | t }}</span>
+          {%- render 'icon' with 'as-roma-arrow-sx'
+            , width: 6
+            , direction_aware: true -%}
+        </button>
+      </carousel-prev-button>
+    {%- endif -%}
+
+    <announcement-bar-carousel
+      allow-swipe
+      {% if section.settings.autoplay %}
+      autoplay="{{ section.settings.cycle_speed }}"
+      {% endif %}
+      id="{{ carousel_id }}"
+      class="announcement-bar__carousel">
+      {%- for block in section.blocks -%}
+        <p class="Medium ExtraSmall prose heading {% if forloop.first %}is-selected{% endif %}" {{ block.shopify_attributes }}>{{- block.settings.text -}}</p>
+      {%- endfor -%}
+    </announcement-bar-carousel>
+
+    {%- if section.blocks.size > 1 and section.settings.show_arrow_buttons -%}
+      <carousel-next-button aria-controls="{{ carousel_id }}" class="contents">
+        <button type="button" class="tap-area">
+          <span class="sr-only">{{ 'general.accessibility.next' | t }}</span>
+          {%- render 'icon' with 'as-roma-arrow-dx'
+            , width: 6
+            , direction_aware: true -%}
+        </button>
+      </carousel-next-button>
+    {%- endif -%}
+
+    </div>
+    <a href="{% if customer %}{{ pages['personal-area'].url | default: routes.account_url }}{% else %}/customer_authentication/login?return_to={{ "/pages/personal-area" | url_encode }}{% endif %}" class="announcement-bar__logo-my-asr">
+      {%- if section.settings.logo_my_asr -%}
+        {%- assign alt_text = section.settings.logo_my_asr.alt | default: shop.name -%}
+        <img
+          src="{{ section.settings.logo_my_asr | image_url }}"
+          alt="{{ alt_text }}"
+          width="37"
+          height="12" />
+      {%- endif -%}
+      <span class="Uppercase ExtraSmall {% if customer %}text-red{% else %}text-black{% endif %}">
+        {%- if customer -%}
+          {{ 'sections.announcement_bar.hello_first_name' | t: first_name: customer.first_name }}
+        {%- else -%}
+          {{ 'sections.announcement_bar.login' | t }}
+        {%- endif -%}
+      </span>
+    </a>
+  </div>
+</height-observer>
+
+<script>
+    document.documentElement.style.setProperty('--announcement-bar-height', `${document.getElementById('shopify-section-{{ section.id }}').clientHeight.toFixed(2)}px`);
+</script>{%- endif -%}{% schema %}
+{
+  "name": "t:sections.announcement_bar.name",
+  "class": "shopify-section--announcement-bar",
+  "max_blocks": 5,
+  "blocks": [
+    {
+      "type": "message",
+      "name": "t:sections.announcement_bar.blocks.message.name",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "t:sections.announcement_bar.blocks.message.text",
+          "default": "Announce something here"
+        }
+      ]
+    }
+  ],
+  "settings": [
+    {
+      "type": "color_scheme",
+      "id": "color_scheme",
+      "label": "t:global.colors.scheme",
+      "default": "scheme-3"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sticky",
+      "label": "t:sections.announcement_bar.enable_sticky_bar"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_arrow_buttons",
+      "label": "Show arrow buttons",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "label": "t:sections.announcement_bar.auto_rotate_between_messages",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "cycle_speed",
+      "min": 2,
+      "max": 20,
+      "step": 1,
+      "unit": "sec",
+      "label": "t:sections.announcement_bar.cycle_speed",
+      "default": 5,
+      "visible_if": "{{ section.settings.autoplay }}"
+    },
+    {
+      "type": "range",
+      "id": "desktop_font_size",
+      "min": 9,
+      "max": 15,
+      "unit": "px",
+      "label": "t:sections.announcement_bar.desktop_text_size",
+      "default": 11
+    },
+    {
+      "type": "range",
+      "id": "mobile_font_size",
+      "min": 9,
+      "max": 15,
+      "unit": "px",
+      "label": "t:sections.announcement_bar.mobile_text_size",
+      "default": 10
+    },
+    {
+      "type": "image_picker",
+      "id": "logo_my_asr",
+      "label": "t:sections.announcement_bar.logo"
+    },
+    {
+      "type": "header",
+      "content": "Localization"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_country_selector",
+      "label": "Show country selector",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_country_name",
+      "label": "Show country name",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_country_flag",
+      "label": "Show country flag",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_locale_selector",
+      "label": "Show locale selector",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Announcement Bar"
+    }
+  ]
+}{% endschema %}

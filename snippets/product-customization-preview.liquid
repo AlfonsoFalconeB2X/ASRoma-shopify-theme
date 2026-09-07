@@ -1,0 +1,54 @@
+{%- comment -%}
+  ----------------------------------------------------------------------------------------------------------------------
+  CUSTOMIZABLE DATA
+  ----------------------------------------------------------------------------------------------------------------------
+
+  ********************************************
+  Supported variables
+  ********************************************
+
+  * product: the product to which we render the customizable data
+{%- endcomment -%}
+
+
+{%- liquid
+  comment
+    Extract competition and player data
+  endcomment
+
+  capture content_for_query_string
+    echo content_for_header
+  endcapture
+
+  assign getfullurl = content_for_query_string | split: '"pageurl":"' | last | split: '"' | first | split: '.myshopify.com' | last | replace: '\/', '/' | replace: '%20', ' ' | replace: '\u0026', '&'
+
+  if getfullurl contains 'player='
+    assign player_handle = getfullurl | split: 'player=' | last | split: '&' | first
+  else
+    assign player_handle = collection.metafields.custom.player.value.system.handle
+  endif
+
+  if getfullurl contains 'competition='
+    assign competition_handle = getfullurl | split: 'competition=' | last | split: '&' | first
+  else
+    assign competition_handle = collection.metafields.custom.competition.value.system.handle
+  endif
+
+  assign player_data = shop.metaobjects.customization_player[player_handle]
+  assign competition_data = shop.metaobjects.competition[competition_handle]
+-%}
+
+<div
+  class="product-customization-preview"
+  data-product-handle="{{product.handle}}"
+  data-product-type="{{product.metafields.custom.product_type}}"
+  data-player-handle="{{player_handle}}"
+  data-competition-handle="{{competition_handle}}"
+  data-store-name="{%- if useSharedHook -%}shared{%- else -%}custom-{{product.handle}}{%- endif -%}"
+  data-watch-store-changes="true"
+  data-country="{{ localization.country.iso_code }}"
+  data-language="{{ request.locale.iso_code }}"
+  data-market="{{ localization.market.handle }}"
+  data-show-product-image="{{ showProductImage }}"
+  data-is-always-visible="{{ isAlwaysVisible }}"
+  data-product-variant="{{ product.selected_or_first_available_variant | json |  escape }}"></div>

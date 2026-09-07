@@ -1,0 +1,65 @@
+{%- comment -%}
+  ----------------------------------------------------------------------------------------------------------------------
+  PRODUCT CUSTOMIZATION DRAWER
+  ----------------------------------------------------------------------------------------------------------------------
+
+  This component renders the customization drawer content for products with customization settings.
+
+  ********************************************
+  Supported variables
+  ********************************************
+
+  * product: the product to customize
+  * useSharedHook: if true, uses the shared store (default: true)
+  * store_name: custom store name (optional)
+{%- endcomment -%}
+
+{%- liquid
+  comment
+    Extract competition and player data
+  endcomment
+
+  capture content_for_query_string
+    echo content_for_header
+  endcapture
+
+  assign getfullurl = content_for_query_string | split: '"pageurl":"' | last | split: '"' | first | split: '.myshopify.com' | last | replace: '\/', '/' | replace: '%20', ' ' | replace: '\u0026', '&'
+
+  if getfullurl contains 'player='
+    assign player_handle = getfullurl | split: 'player=' | last | split: '&' | first
+  else
+    assign player_handle = collection.metafields.custom.player.value.system.handle
+  endif
+
+  if getfullurl contains 'competition='
+    assign competition_handle = getfullurl | split: 'competition=' | last | split: '&' | first
+  else
+    assign competition_handle = collection.metafields.custom.competition.value.system.handle
+  endif
+
+  assign product_type = product.metafields.custom.product_type | default: 'jersey'
+  assign symbol = shop.currency
+-%}
+
+<x-drawer id="product-customization-drawer" class="product-customization-drawer drawer drawer--large">
+  <div
+    id="product-customization-drawer-react"
+    class="product-customization-drawer__react"
+    data-product="{{ product | json | escape }}"
+    data-store-name="{%- if useSharedHook == true or useSharedHook == 'true' -%}shared{%- elsif store_name and store_name != '' -%}{{ store_name }}{%- else -%}custom-{{ product.handle }}{%- endif -%}"
+    data-watch-store-changes="false"
+    data-country="{{ localization.country.iso_code }}"
+    data-language="{{ request.locale.iso_code }}"
+    data-locale="{{ request.locale.iso_code }}"
+    data-market="{{ localization.market.handle }}"
+    data-product-handle="{{ product.handle }}"
+    data-product-type="{{ product_type }}"
+    data-player-handle="{{ player_handle }}"
+    data-competition-handle="{{ competition_handle }}"
+    data-show-product-image="true"
+    data-is-always-visible="true"
+    data-currency="{{ symbol }}"></div>
+</x-drawer>
+
+<script type="module" src="{{ 'react-productCustomizationDrawer.min.js' | asset_url }}"></script>
+{%- render 'product-customization-preview-loader' -%}

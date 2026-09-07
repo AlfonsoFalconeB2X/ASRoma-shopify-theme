@@ -1,0 +1,30 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "context": {
+    "market": "italia"
+  },
+  "parent": "overlay-group.json",
+  "sections": {
+    "cart-drawer": {
+      "settings": {
+        "cross_sell_products": [
+          "portachiavi-logo-smaltato-as-roma",
+          "set-6-spille-as-roma-in-scatola-con-logo-lupetto",
+          "pallone-da-calcio-con-logo-as-roma-taglia-5",
+          "gagliardetto-giallorosso-verticale-as-roma",
+          "grembiule-da-cucina-elvis-lives-x-as-roma"
+        ],
+        "show_free_shipping_bar": true
+      },
+      "blocks": {}
+    }
+  }
+}

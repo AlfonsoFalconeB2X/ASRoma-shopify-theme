@@ -1,0 +1,181 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-product",
+      "blocks": {
+        "badges_PbjenX": {
+          "type": "badges",
+          "settings": {}
+        },
+        "title": {
+          "type": "title",
+          "settings": {}
+        },
+        "price": {
+          "type": "price",
+          "settings": {
+            "show_taxes_notice": false
+          }
+        },
+        "omnibus_insight_am_omnibus_price_YQnL6K": {
+          "type": "shopify://apps/omnibus-insight/blocks/am-omnibus-price/bbd11345-5020-46a7-ac9f-70443833fce9",
+          "settings": {
+            "product": "{{product}}"
+          }
+        },
+        "sku_8DwcFH": {
+          "type": "sku",
+          "settings": {}
+        },
+        "payment_terms": {
+          "type": "payment_terms",
+          "settings": {}
+        },
+        "separator": {
+          "type": "separator",
+          "settings": {}
+        },
+        "variant_picker": {
+          "type": "variant_picker",
+          "settings": {
+            "hide_sold_out_variants": false,
+            "selector_style": "block",
+            "swatch_selector_style": "swatch",
+            "variant_image_options": "",
+            "size_chart_url": "{{ product.metafields.custom.size_guide_link.value }}"
+          }
+        },
+        "info_message_HcFebC": {
+          "type": "info_message",
+          "settings": {
+            "text": "<p>{{ product.metafields.custom.product_page_info_label.value }}</p>",
+            "show_icon": true
+          }
+        },
+        "buy_buttons": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_payment_button": false,
+            "show_gift_card_recipient": true
+          }
+        },
+        "liquid_7FwUUn": {
+          "type": "liquid",
+          "name": "Liquid Paypal",
+          "settings": {
+            "liquid": "<div id=\"#paypal-pay-later-message\">\n<div class=\"paypal-pay-later-message-container\">\n</div>\n</div>"
+          }
+        },
+        "free_shipping_message_nfCBaE": {
+          "type": "free_shipping_message",
+          "settings": {
+            "text": "<p><strong>Spedizioni gratis in Italia per acquisti superiori a </strong></p>"
+          }
+        },
+        "liquid_hHPKkH": {
+          "type": "liquid",
+          "name": "Liquid - SPEDIZIONE USA",
+          "disabled": true,
+          "settings": {
+            "liquid": "{% if product.tags contains 'no-usa-ship' %}\n  <div style=\"border: 1px solid #7d1f2c; color: #7d1f2c; padding: 12px 16px; border-radius: 4px; margin: 15px 0; font-size: 14px; line-height: 1.4; text-align: center;\">\n    This product is temporarily unable to be shipped to the <strong>United States</strong> due to customs restrictions. As a result, the entire order containing it will be cancelled.\n  </div>\n{% endif %}"
+          }
+        },
+        "liquid_JTF4bU": {
+          "type": "liquid",
+          "name": "Liquid - sconto Abbonati 26/27",
+          "settings": {
+            "liquid": "<div class=\"sconto-abbonati-banner\" style=\"margin-top: 10px; text-align: center; font-size: inherit;\">{% if request.locale.iso_code == 'en' %} <a href=\"https://store.asroma.com/en/pages/season-ticket-discount-2026-27\">15% off Serie A 26/27 Plus Members</a> &mdash; log in to <a href=\"https://account.asroma.com/?context=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IlEwTkVNVFUzTXpJeVFqZzNOVU5FTmpoRlFqRkdSalk0TTBJd05FVXlPVGszUVRRMU1qVkNNZyIsImN0eF9tb2RlIjoibG9naW4ifQ.eyJpc3MiOiJodHRwczovL2lkZW50aXR5LmFzcm9tYS5jb20vb2lkYy9vcC92MS4wLzNfZ3QyOTRIOVFBRnkzS0IzbU1iVW02ZmhhSVVvZHVDN2x0ZldlV1JKbEh1eWNESmpJZ0RfRGpuQ2RqbHppVGUtNS8iLCJjdHhfZGMiOiJldTEiLCJpYXQiOjE3ODUxMzUxMjUsImV4cCI6MTc4NTEzNTcyNSwiY2xpZW50X2lkIjoibmRPeVJpS1JKbVZkb3h1NGRJbHd2S3JjIiwiY3R4X2lkIjoiMTIzNWZhMWUzMjQyNDkwYTgzNGViOTk2YzU1NWQyZjMiLCJyZWRpcmVjdF91cmwiOiJodHRwczovL3Nob3BpZnkuY29tL2F1dGhlbnRpY2F0aW9uLzkxNzI2NjEwODEyL2xvZ2luL2V4dGVybmFsL2NhbGxiYWNrIn0.WJXBbjElcGwv6EOZPs82blCgc9-F-j_WHyd-2GjkvvO-Tsw86wZY6FWvinSkGFxN0vMgoY3eICi2qvKyv62z0S7FEu-EyX2b62rmJEU_GtLM4himmiStCmD5iEoqBjlwnaQvfb7T1BcIo2vaLLWAjgy5stHOAXoLHpm7bQS8oQ7Pld3OPUvxnidDpdpVfXlp4fWwFQ1y7tZ9QpAW7C6uJFQBubcQgCuNiLWjgZ4YjiNXXJR2rjZMDOnAS5lZOad7OrCMe11A39vhKuFAjimrpesJx6ap6mc4aca7c5Yxeym2iz3f9BUapQMcestTMvCXxgX1A9JCRVPBruKTv4DC4g&amp;client_id=ndOyRiKRJmVdoxu4dIlwvKrc&amp;mode=login&amp;scope=openid+email+custom_email_verified&amp;gig_ui_locales=it-BO&amp;gig_skipConsent=true\">MYASR</a>, discount at checkout. {% else %} <a href=\"https://store.asroma.com/pages/sconto-abbonati-2026-27\">Sconto 15% Abbonati Plus Serie A 26/27</a> &mdash; accedi a <a href=\"https://account.asroma.com/?context=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IlEwTkVNVFUzTXpJeVFqZzNOVU5FTmpoRlFqRkdSalk0TTBJd05FVXlPVGszUVRRMU1qVkNNZyIsImN0eF9tb2RlIjoibG9naW4ifQ.eyJpc3MiOiJodHRwczovL2lkZW50aXR5LmFzcm9tYS5jb20vb2lkYy9vcC92MS4wLzNfZ3QyOTRIOVFBRnkzS0IzbU1iVW02ZmhhSVVvZHVDN2x0ZldlV1JKbEh1eWNESmpJZ0RfRGpuQ2RqbHppVGUtNS8iLCJjdHhfZGMiOiJldTEiLCJpYXQiOjE3ODUxMzUxMjUsImV4cCI6MTc4NTEzNTcyNSwiY2xpZW50X2lkIjoibmRPeVJpS1JKbVZkb3h1NGRJbHd2S3JjIiwiY3R4X2lkIjoiMTIzNWZhMWUzMjQyNDkwYTgzNGViOTk2YzU1NWQyZjMiLCJyZWRpcmVjdF91cmwiOiJodHRwczovL3Nob3BpZnkuY29tL2F1dGhlbnRpY2F0aW9uLzkxNzI2NjEwODEyL2xvZ2luL2V4dGVybmFsL2NhbGxiYWNrIn0.WJXBbjElcGwv6EOZPs82blCgc9-F-j_WHyd-2GjkvvO-Tsw86wZY6FWvinSkGFxN0vMgoY3eICi2qvKyv62z0S7FEu-EyX2b62rmJEU_GtLM4himmiStCmD5iEoqBjlwnaQvfb7T1BcIo2vaLLWAjgy5stHOAXoLHpm7bQS8oQ7Pld3OPUvxnidDpdpVfXlp4fWwFQ1y7tZ9QpAW7C6uJFQBubcQgCuNiLWjgZ4YjiNXXJR2rjZMDOnAS5lZOad7OrCMe11A39vhKuFAjimrpesJx6ap6mc4aca7c5Yxeym2iz3f9BUapQMcestTMvCXxgX1A9JCRVPBruKTv4DC4g&amp;client_id=ndOyRiKRJmVdoxu4dIlwvKrc&amp;mode=login&amp;scope=openid+email+custom_email_verified&amp;gig_ui_locales=it-BO&amp;gig_skipConsent=true\">MYASR</a>, sconto a carrello. {% endif %}</div>"
+          }
+        },
+        "description": {
+          "type": "description",
+          "settings": {
+            "collapse_content": true,
+            "show_below_gallery": false
+          }
+        },
+        "complementary_products": {
+          "type": "complementary_products",
+          "settings": {
+            "title": "IL MATCH PERFETTO",
+            "products": "{{ product.metafields.custom.complete_your_look.value }}",
+            "products_count": 4,
+            "show_below_gallery": false,
+            "stack_products": true,
+            "show_quick_buy": true
+          }
+        },
+        "omnibus_insight_am_omnibus_price_CkQC8R": {
+          "type": "shopify://apps/omnibus-insight/blocks/am-omnibus-price/bbd11345-5020-46a7-ac9f-70443833fce9",
+          "settings": {
+            "product": "{{product}}"
+          }
+        }
+      },
+      "block_order": [
+        "badges_PbjenX",
+        "title",
+        "price",
+        "omnibus_insight_am_omnibus_price_YQnL6K",
+        "sku_8DwcFH",
+        "payment_terms",
+        "separator",
+        "variant_picker",
+        "info_message_HcFebC",
+        "buy_buttons",
+        "liquid_7FwUUn",
+        "free_shipping_message_nfCBaE",
+        "liquid_hHPKkH",
+        "liquid_JTF4bU",
+        "description",
+        "complementary_products",
+        "omnibus_insight_am_omnibus_price_CkQC8R"
+      ],
+      "settings": {
+        "color_scheme": "",
+        "container_size": "xl",
+        "product_info_size": 50,
+        "show_sticky_add_to_cart": false,
+        "center_basic_info": false,
+        "desktop_media_layout": "grid_2x_highlighted",
+        "desktop_media_grid_gap": 30,
+        "mobile_controls": "yellow_bar",
+        "enable_media_autoplay": false,
+        "enable_video_looping": true,
+        "enable_image_zoom": true,
+        "max_image_zoom_level": 1.5
+      }
+    },
+    "related-products": {
+      "type": "related-products",
+      "name": "Prodotti correlati",
+      "settings": {
+        "color_scheme": "",
+        "separate_section_with_border": false,
+        "hide_product_information": false,
+        "stack_products": false,
+        "recommendations_count": 10,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "horizontal_spacing_factor": 1,
+        "vertical_spacing_factor": 1,
+        "subheading": "",
+        "title": "Suggeriti per te",
+        "content": ""
+      }
+    }
+  },
+  "order": [
+    "main",
+    "related-products"
+  ]
+}

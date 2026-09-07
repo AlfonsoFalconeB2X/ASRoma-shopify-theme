@@ -1,0 +1,254 @@
+<!doctype html>
+
+<html lang="{{ request.locale.iso_code }}" dir="{% render 'direction' %}">
+  <head>
+    {% if settings.google_tag_manager_id != blank %}
+      <!-- Google Tag Manager -->
+      <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+            new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','{{ settings.google_tag_manager_id }}');
+      </script>
+      <!-- End Google Tag Manager -->
+    {% endif %}
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, maximum-scale=5.0">
+
+    <title>
+      {% if page_title == blank %}
+        {{ shop.name }}
+      {% else %}
+        {{ page_title }}{% if current_page != 1 %}
+          &ndash; {{ 'general.page' | t: page: current_page }}{% endif %}
+      {% endif %}
+    </title>
+
+    {%- if page_description -%}
+      <meta name="description" content="{{ page_description | escape }}">
+    {%- endif -%}
+
+    {%- render 'meta-robots' -%}
+
+    <link rel="canonical" href="{{ canonical_url }}">
+
+    {%- if settings.favicon -%}
+      <link rel="shortcut icon" href="{{ settings.favicon | image_url: width: 96 }}">
+      <link rel="apple-touch-icon" href="{{ settings.favicon | image_url: width: 180 }}">
+    {%- endif -%}
+
+    {%- comment -%}Few prefetch to increase performance on commonly used third-parties{%- endcomment -%}
+    <link
+      rel="preconnect"
+      href="https://fonts.shopifycdn.com"
+      crossorigin>
+
+    {%- unless settings.heading_font.system? -%}
+      <link
+        rel="preload"
+        href="{{ settings.heading_font | font_url }}"
+        as="font"
+        type="font/woff2"
+        crossorigin>
+    {%- endunless -%}
+
+    {%- unless settings.text_font.system? -%}
+      <link
+        rel="preload"
+        href="{{ settings.text_font | font_url }}"
+        as="font"
+        type="font/woff2"
+        crossorigin>
+    {%- endunless -%}
+
+    {%- render 'social-meta-tags' -%}
+    {%- render 'microdata-schema' -%}
+    {%- render 'css-variables' -%}
+    {%- render 'js-variables' -%}
+
+    {%- if request.page_type == 'gift_card' -%}
+      <script src="{{ 'vendor/qrcode.js' | shopify_asset_url }}" defer></script>
+    {%- endif -%}
+
+    <script type="importmap">
+      {%- comment -%}On Safari 16.3 and lower, a polyfill is used to load importmap{%- endcomment -%}
+      {
+        "imports": {
+          "vendor": "{{ 'vendor.min.js' | asset_url }}",
+          "theme": "{{ 'theme.js' | asset_url }}",
+          "photoswipe": "{{ 'photoswipe.min.js' | asset_url }}"
+        }
+      }
+    </script>
+
+    <script type="module" src="{{ 'vendor.min.js' | asset_url }}"></script>
+    <script type="module" src="{{ 'theme.js' | asset_url }}"></script>
+    {%- render 'customization-theme-settings' -%}
+
+    {{ content_for_header }}
+
+    {%- if request.page_type == 'collection' -%}
+      <script>
+        (function removePrevPageParam() {
+          try {
+            var searchParams = new URLSearchParams(window.location.search);
+            if (searchParams.get('page') !== '2') {
+              return;
+            }
+
+            var prevLink = document.querySelector('link[rel="prev"]');
+            if (!prevLink) {
+              return;
+            }
+
+            var prevUrl = new URL(prevLink.href, window.location.origin);
+            if (prevUrl.searchParams.get('page') !== '1') {
+              return;
+            }
+
+            prevUrl.searchParams.delete('page');
+            var hrefValue = prevUrl.origin === window.location.origin
+              ? prevUrl.pathname + prevUrl.search + prevUrl.hash
+              : prevUrl.href;
+            prevLink.setAttribute('href', hrefValue);
+          } catch (error) {
+            console.warn('[theme] Could not clean prev link', error);
+          }
+        })();
+      </script>
+    {%- endif -%}
+
+    {%- render 'scripts' -%}
+    {%- render 'styles' -%}
+  </head>
+
+  {% liquid
+    assign features_class = ''
+
+    if settings.show_button_transition
+      assign features_class = features_class | append: 'features--button-transition '
+    endif
+
+    if settings.show_image_zoom_on_hover
+      assign features_class = features_class | append: 'features--zoom-image '
+    endif
+  %}
+
+  {%- if product.metafields.seo.hidden == 1 and request.design_mode != true -%}
+    <script>
+          window.location.href = '{{ routes.root_url }}';
+    </script>
+  {%- endif -%}
+
+  <body class="{{ features_class }} color-scheme color-scheme--{{ settings.default_color_scheme.id }}">
+    {% if settings.google_tag_manager_id != blank %}
+      <!-- Google Tag Manager (noscript) -->
+      <noscript>
+        <iframe
+          src="https://www.googletagmanager.com/ns.html?id={{ settings.google_tag_manager_id }}"
+          height="0"
+          width="0"
+          style="display:none;visibility:hidden"></iframe>
+      </noscript>
+      <!-- End Google Tag Manager (noscript) -->
+    {% endif %}
+
+    {%- render 'shadow-dom-templates' -%}
+
+    <loading-bar class="loading-bar" aria-hidden="true"></loading-bar>
+    <a
+      href="#main"
+      allow-hash-change
+      class="skip-to-content sr-only">{{ 'general.accessibility.skip_to_content' | t }}</a>
+
+    <span id="header-scroll-tracker" style="position: absolute; width: 1px; height: 1px; top: var(--header-scroll-tracker-offset, 10px); left: 0;">
+      {%- comment -%}
+        This allows our theme to track when the user has scrolled a given amount of pixels, without relying on a global scroll listener. This helps
+        to improve performance and reduce reflows.
+      {%- endcomment -%}
+    </span>
+
+    {%- if request.page_type != 'password' -%}
+      {%- sections 'header-group' -%}
+      {%- sections 'overlay-group' -%}
+    {%- endif -%}
+
+    {%- comment -%} Data Layer Object {%- endcomment -%}
+    {%- if settings.enable_datalayer -%}
+      {%- liquid
+        assign user_type_value = 'prospect'
+        if customer
+          if customer.orders_count > 0
+            assign user_type_value = 'customer'
+          endif
+        endif
+
+        assign hashed_email_value = ''
+        if customer.email
+          assign hashed_email_value = customer.email | sha256
+        endif
+
+        assign season_pass_holder_value = 'no'
+        if customer.tags contains 'has_season_pass_holder'
+          assign season_pass_holder_value = 'yes'
+        endif
+
+        if template contains 'index'
+          assign pagetype = 'homepage'
+        elsif template contains 'collection'
+          assign pagetype = 'PLP'
+        elsif template contains 'product'
+          assign pagetype = 'PDP'
+        elsif template contains 'cart'
+          assign pagetype = 'cart'
+        elsif template contains 'search'
+          assign pagetype = 'search_results'
+        elsif template != blank
+          assign pagetype = template
+        else
+          assign pagetype = 'other'
+        endif
+      -%}
+
+      {%- capture pageview_datalayer -%}
+        {
+          "event": "pageview",
+          "pagetype": "{{ pagetype }}",
+          "c_language": "{{ request.locale.iso_code | upcase }}",
+          "c_country": "{{ localization.country.iso_code }}",
+          "login_status": "{% if customer %}loggedin{% else %}non_loggedin{% endif %}",
+          "user_type": "{{ user_type_value }}",
+          "user_value": {{ customer.total_spent | default: 0 |  divided_by: 100 }},
+          "c_userid": "{% if customer %}{{ customer.id }}{% endif %}",
+          "hashed_email": "{{ hashed_email_value }}",
+          "email": "{% if customer %}{{ customer.email }}{% else %}null{% endif %}",
+          "phone": "{% if customer.phone %}{{ customer.phone }}{% else %}null{% endif %}",
+          "season_pass_holder": "{{ season_pass_holder_value }}",
+          "nl_subscriber": "{% if customer.accepts_marketing %}yes{% else %}no{% endif %}"
+        }
+      {%- endcapture -%}
+    {%- endif -%}
+
+    <main
+      id="main"
+      class="anchor"
+      {% if settings.enable_datalayer %}
+      data-datalayer-info='{{ pageview_datalayer | strip_newlines | escape }}'
+      data-datalayer-event="view"
+      {% endif %}>
+      {{ content_for_layout }}
+
+      {%- comment -%}
+        IMPLEMENTATION NOTE: For best semantics, having the footer group outside the main would be slightly better, but
+        moving it inside the main allows to have all the sections (including sections inside the footer group) to be
+        consecutive, and hence having a cleaner margin collapsing management.
+      {%- endcomment -%}
+      {%- if request.page_type != 'password' -%}
+        {%- sections 'footer-group' -%}
+      {%- endif -%}
+    </main>
+  </body>
+  {% render 'iwish_v3' with 'iwishFooter' %}
+</html>

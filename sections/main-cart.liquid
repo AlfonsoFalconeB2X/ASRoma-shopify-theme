@@ -1,0 +1,547 @@
+{%- comment -%} Data Layer Object {%- endcomment -%}
+{%- if settings.enable_datalayer -%}{%- capture cart_datalayer -%}
+    {
+      "event": "view_cart",
+      "ecommerce": {
+        "value": {{ cart.total_price | divided_by: 100.0 }},
+        "currency": "{{ cart.currency.iso_code }}",
+        "items": [
+          {%- for line_item in cart.items -%}
+            {%- render 'datalayer-item', index: forloop.index0, product: line_item.product, variant: line_item.variant, line_item: line_item, item_list_id: 'cart', item_list_name: 'cart' -%}  
+            {% unless forloop.last %},{% endunless %}
+          {%- endfor -%}
+        ]
+      }
+    }
+  {%- endcapture -%}
+{%- endif -%}
+
+  <div
+  class="cart"
+  {% if settings.enable_datalayer %}
+  data-datalayer-info='{{ cart_datalayer | strip_newlines | escape }}'
+  data-datalayer-event="view"
+  {% endif %}>
+  <div class="section-spacing section-spacing--tight section-title">
+    <div class="container container--xs">
+      <h1 class="Uppercase Medium">
+        <span class="sm-max:hidden">{{ 'cart.general.your_cart' | t }}</span>
+        <span class="sm:hidden">{{ 'cart.general.title' | t }}</span>
+      </h1>
+    </div>
+  </div>
+
+  {%- if cart.empty? -%}
+    <div class="container container--xs">
+      <div class="empty-state">
+        <div class="v-stack gap-4">
+          <p>{{ 'cart.general.empty' | t }}</p>
+
+          {%- assign button_content = 'cart.general.continue_shopping' | t -%}
+          {%- render 'button'
+            , content: button_content
+            , href: settings.cart_empty_cart_link
+            , style: 'solid'
+            , variant: 'primary'
+          -%}
+        </div>
+      </div>
+    </div>
+  {%- else -%}
+
+    <form
+      action="{{ routes.cart_url }}"
+      method="POST"
+      class="cart-page">
+      <input
+        type="hidden"
+        name="attributes[products_mobile_grid_mode]"
+        value="">
+      <input
+        type="hidden"
+        name="attributes[products_desktop_grid_mode]"
+        value="">
+
+      {%- comment -%} View Cart Data Layer {%- endcomment -%}
+      {%- if settings.enable_datalayer -%}
+        {%- capture view_cart_datalayer -%}
+          {
+            "event": "view_item_list",
+            "ecommerce": {
+              "currency": "{{ cart.currency.iso_code }}",
+              "value": {{ cart.total_price | divided_by: 100.0 }},
+              "items": [
+                {%- for line_item in cart.items -%}
+                  {%- render 'datalayer-item', index: forloop.index0, product: line_item.product, variant: line_item.variant, line_item: line_item, item_list_id: 'cart', item_list_name: 'cart' -%}  
+                  {% unless forloop.last %},{% endunless %}
+                {%- endfor -%}
+              ]
+            }
+          }
+        {%- endcapture -%}
+        {%- comment -%} View Promotion Data Layer - Only products on sale {%- endcomment -%}
+        {%- capture view_promotion_datalayer -%}
+          {
+            "event": "view_promotion",
+            "ecommerce": {
+              "items": [
+                {%- assign promo_index = 0 -%}
+                {%- for line_item in cart.items -%}
+                  {%- assign variant = line_item.variant -%}
+                  {%- if variant.compare_at_price > variant.price -%}
+                    {%- assign promo_index = promo_index | plus: 1 -%}
+                    {% if promo_index > 1 %},{% endif %}
+                    {%- render 'datalayer-item', index: promo_index, product: line_item.product, variant: variant, is_small_item: true -%}  
+                  {%- endif -%}
+                {%- endfor -%}
+              ]
+            }
+          }
+        {%- endcapture -%}
+        {%- comment -%} Hidden element for view_cart event {%- endcomment -%}
+        <div
+          class="data-layer-hidden"
+          data-datalayer-info='{{ view_cart_datalayer | strip_newlines | escape }}'
+          data-datalayer-event="view"
+          {%- if promo_index > 0 -%}
+          data-datalayer-info-promotion='{{ view_promotion_datalayer | strip_newlines | escape }}'
+          {%- endif -%}></div>
+      {%- endif -%}
+
+      <div class="container container--xl h-stack align-start gap-10 md:gap-3 cart__main-container">
+        <div class="cart__list">
+          <p class="md-max:hidden text-grey-700 Uppercase">{{ 'cart.general.items_added' | t: count: cart.item_count }}</p>
+          <div class="section-stack">
+
+            <div class="v-stack gap-6">
+              {%- comment -%}
+                ----------------------------------------------------------------------------------------------------------------
+                ORDER SUMMARY
+                ----------------------------------------------------------------------------------------------------------------
+              {%- endcomment -%}
+              <table class="order-summary table--reduce-border">
+                <tbody class="order-summary__body">
+                  {%- assign sorted_cart_items = cart.items | sort: 'properties._Gifted' | reverse -%}
+                  {%- assign gift_items = '' | split: '' -%}
+                  {%- assign processed_groups = '' | split: '' -%}
+
+                  {%- for line_item in cart.items -%}
+                    {%- assign is_gift = false -%}
+                    {%- assign group_id = null -%}
+                    {%- assign is_main_product = false -%}
+
+                    {%- for property in line_item.properties -%}
+                      {%- if property.first == '_Gifted' and property.last == 'true' -%}
+                        {%- assign is_gift = true -%}
+                      {%- elsif property.first == '_groupId' -%}
+                        {%- assign group_id = property.last -%}
+                      {%- elsif property.first == '_mainProduct' and property.last == 'true' -%}
+                        {%- assign is_main_product = true -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+
+                    {%- if is_gift -%}
+                      {%- assign current_item = line_item | sort -%}
+                      {%- assign gift_items = gift_items | concat: current_item -%}
+                      {%- elsif group_id and is_main_product -%}
+                      {%- comment -%} Check if this group has already been processed {%- endcomment -%}
+                      {%- unless processed_groups contains group_id -%}
+                        {%- assign processed_groups = processed_groups | append: group_id | append: ',' | split: ',' -%}
+
+                        {%- comment -%} Render main product as separate row {%- endcomment -%}
+                        <tr class="{% if is_gift %}line-gift{% endif %}">
+                          <td class="line-item__grouped-row-main">
+                            {%- render 'line-item'
+                              , line_item: line_item
+                              , show_quantity_selector: true
+                              , group_id: group_id
+                              , index: forloop.index0 -%}
+                          </td>
+
+                          <td class="text-center line-item__grouped-row-main">
+                            <div class="v-stack gap-2">
+                              <line-item-quantity class="v-stack justify-items-center gap-2">
+                                
+                                {%- unless is_main_product -%}
+                                  {%- render 'quantity-selector'
+                                    , line_item: line_item
+                                    , size: 'sm'
+                                    , index: forloop.index0 -%}
+                                {%- endunless -%}
+
+                                {%- if group_id -%}
+                                  <a
+                                    href="#"
+                                    class="link text-xs md:hidden remove-group-link"
+                                    data-group-id="{{ group_id }}"
+                                    aria-label="{{ 'cart.order.remove_with_title' | t: title: line_item.title | escape }}">
+                                    {{- 'cart.order.remove' | t -}}
+                                  </a>
+                                {%- else -%}
+                                  <a
+                                    href="{{ line_item.url_to_remove }}"
+                                    class="link text-xs md:hidden"
+                                    aria-label="{{ 'cart.order.remove_with_title' | t: title: line_item.title | escape }}">
+                                    {{- 'cart.order.remove' | t -}}
+                                  </a>
+                                {%- endif -%}
+                              </line-item-quantity>
+                            </div>
+                          </td>
+
+                          <td class="text-end Body line-item__grouped-row-main">
+                            {%- if is_gift -%}
+                              <span class="text-subdued">{{ 'cart.general.gift' | t | default: 'Regalo' }}</span>
+                            {%- else -%}
+                              {%- render 'price-list'
+                                , line_item: line_item
+                                , context: 'cart' -%}
+                            {%- endif -%}
+                          </td>
+                        </tr>
+
+                        {%- comment -%} Render each grouped item as separate row {%- endcomment -%}
+                        {%- for cart_item in cart.items -%}
+                          {%- assign cart_item_group_id = null -%}
+                          {%- assign cart_item_is_main = false -%}
+
+                          {%- for prop in cart_item.properties -%}
+                            {%- if prop.first == '_groupId' -%}
+                              {%- assign cart_item_group_id = prop.last -%}
+                            {%- elsif prop.first == '_mainProduct' and prop.last == 'true' -%}
+                              {%- assign cart_item_is_main = true -%}
+                            {%- endif -%}
+                          {%- endfor -%}
+
+                          {%- if cart_item_group_id == group_id and cart_item_is_main == false -%}
+                            <tr class="line-item-grouped">
+                              <td class="line-item__grouped-row">
+                                {%- render 'line-item'
+                                  , line_item: cart_item
+                                  , show_quantity_selector: false
+                                  , cart_grouped_line: true
+                                  , index: forloop.index0 -%}
+                              </td>
+
+                              <td class="text-center line-item__grouped-row">
+                              {%- comment -%} No quantity selector for grouped items {%- endcomment -%}
+                              </td>
+
+                              <td class="text-end Body line-item__grouped-row">
+                                {%- if cart_item.final_price > 0 -%}
+                                  {%- render 'price-list'
+                                    , line_item: cart_item
+                                    , context: 'cart' -%}
+                                {%- else -%}
+                                  {{ 'cart.general.free' | t }}
+                                {%- endif -%}
+                              </td>
+                            </tr>
+                          {%- endif -%}
+                        {%- endfor -%}
+                      {%- endunless -%}
+                    {%- elsif group_id == null -%}
+                      {%- comment -%} Render single items without group {%- endcomment -%}
+                      <tr class="{% if is_gift %}line-gift{% endif %}">
+                        <td>
+                          {%- render 'line-item'
+                            , line_item: line_item
+                            , show_quantity_selector: false
+                            , index: forloop.index0 -%}
+                        </td>
+
+                        <td class="text-center">
+                          <div class="v-stack gap-2">
+                            <line-item-quantity class="v-stack justify-items-center gap-2">
+                              {%- render 'quantity-selector'
+                                , line_item: line_item
+                                , size: 'sm'
+                                , index: forloop.index0 -%}
+
+                              <a
+                                href="{{ line_item.url_to_remove }}"
+                                class="link text-xs md:hidden"
+                                aria-label="{{ 'cart.order.remove_with_title' | t: title: line_item.title | escape }}">
+                                {{- 'cart.order.remove' | t -}}
+                              </a>
+                            </line-item-quantity>
+                          </div>
+                        </td>
+
+                        <td class="text-end Body">
+                          {%- if is_gift -%}
+                            <span class="text-subdued">{{ 'cart.general.gift' | t | default: 'Regalo' }}</span>
+                          {%- else -%}
+                            {%- render 'price-list'
+                              , line_item: line_item
+                              , context: 'cart' -%}
+                          {%- endif -%}
+                        </td>
+                      </tr>
+                    {%- endif -%}
+                  {%- endfor -%}
+                </tbody>
+              </table>
+
+              {%- for gift in gift_items -%}
+                <div class="gift-item">
+                  <div class="gift-item__content">
+                    {%- assign gift_index = forloop.index0 | plus: cart.items.size -%}
+                    {%- render 'line-item'
+                      , line_item: gift
+                      , show_quantity_selector: false
+                      , index: gift_index -%}
+                  </div>
+                </div>
+              {%- endfor -%}
+
+              {%- comment -%}
+                ----------------------------------------------------------------------------------------------------------------
+                CART FOOTER
+                ----------------------------------------------------------------------------------------------------------------
+              {%- endcomment -%}
+              <div class="cart-footer md:hidden">
+                {%- if section.settings.show_cart_note -%}
+                  <cart-note class="cart-note">
+                    {%- assign order_note = 'cart.general.add_order_note' | t -%}
+                    {%- assign placeholder = 'cart.general.note_placeholder' | t -%}
+                    {%- render 'input'
+                      , name: 'note'
+                      , multiline: 3
+                      , label: order_note
+                      , value: cart.note
+                      , placeholder: placeholder
+                      , show_label_as_block: true -%}
+                  </cart-note>
+                {%- endif -%}
+
+                <div class="cart-recap gap-4">
+                  {%- comment -%}Give apps a special hook to add features on the recap (such as capturing delivery dates){%- endcomment -%}
+                  {%- for block in section.blocks -%}
+                    {%- if block.type == '@app' -%}
+                      {%- render block -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+
+                  {%- if section.settings.show_order_weight -%}
+                    <div class="h-stack justify-start gap-2">
+                      <span class="text-subdued">{{ 'cart.general.weight' | t }}:</span>
+                      <span class="text-subdued">{{ cart.total_weight | weight_with_unit }}</span>
+                    </div>
+                  {%- endif -%}
+
+                  {%- if cart.items_subtotal_price != cart.total_price -%}
+                    <div class="h-stack justify-start gap-2">
+                      <span class="text-subdued">{{ 'cart.general.subtotal' | t }}:</span>
+                      <span class="text-subdued">
+                        {%- if settings.currency_code_enabled -%}
+                          {{- cart.items_subtotal_price | money_with_currency -}}
+                        {%- else -%}
+                          {{- cart.items_subtotal_price | money -}}
+                        {%- endif -%}
+                      </span>
+                    </div>
+                  {%- endif -%}
+
+                  {% for discount_application in cart.cart_level_discount_applications %}
+                    <div class="h-stack justify-start gap-2">
+                      <span class="discount-badge text-xs">{%- render 'icon' with 'discount'
+  , width: 12 -%} {{- discount_application.title -}}</span>
+                      <span class="text-subdued">-{{ discount_application.total_allocated_amount | money }}</span>
+                    </div>
+                  {% endfor %}
+
+                  <div class="h-stack justify-between Body ExtraBold">
+                    <span class="ExtraBold">{{ 'cart.general.total' | t }}</span>
+                    <span class="ExtraBold">{{- cart.total_price | money_with_currency -}}</span>
+                  </div>
+
+                  {%- if section.settings.show_shipping_text -%}
+                    {%- if cart.taxes_included and shop.shipping_policy.body != blank -%}
+                      <p class="text-subdued text-sm">{{ 'cart.general.taxes_included_and_shipping_policy_html' | t: link: shop.shipping_policy.url }}</p>
+                    {%- elsif cart.taxes_included -%}
+                      <p class="text-subdued text-sm">{{ 'cart.general.taxes_included_but_shipping_at_checkout' | t }}</p>
+                    {%- elsif shop.shipping_policy.body != blank -%}
+                      <p class="text-subdued text-sm">{{ 'cart.general.taxes_and_shipping_policy_at_checkout_html' | t: link: shop.shipping_policy.url }}</p>
+                    {%- else -%}
+                      <p class="text-subdued text-sm">{{ 'cart.general.taxes_and_shipping_at_checkout' | t }}</p>
+                    {%- endif -%}
+                  {%- endif -%}
+
+                  {%- if section.settings.show_accelerated_buttons and additional_checkout_buttons -%}
+                    <div class="additional-checkout-buttons additional-checkout-buttons--vertical">
+                      {{- content_for_additional_checkout_buttons -}}
+                    </div>
+                  {% endif %}
+
+                  <noscript>
+                    {%- assign update_button = 'cart.general.update_cart' | t -%}
+                    {%- render 'button'
+                      , type: 'submit'
+                      , content: update_button
+                      , style: 'outline' -%}
+                  </noscript>
+
+                  {%- assign checkout_button = 'cart.general.checkout' | t -%}
+                  {%- render 'button'
+                    , type: 'submit'
+                    , content: checkout_button
+                    , style: 'solid'
+                    , text_style: 'Uppercase'
+                    , variant: 'primary'
+                    , name: 'checkout' -%}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="v-stack gap-4 md:gap-3 bg-grey-100 cart__aside">
+          <div>
+            {%- if section.settings.show_free_shipping_bar -%}
+              {%- assign free_shipping_value = settings.cart_free_shipping_threshold | times: 100 | money -%}
+              <p class="Headline-4 Medium">{{ 'cart.general.free_shipping_from' | t: amount: free_shipping_value }}</p>
+
+              {%- render 'free-shipping-bar' -%}
+            {%- endif -%}
+
+            <div class="v-stack gap-4">
+              <a class="text-grey-700 Underline" href="{{ routes.root_url }}">{{ 'cart.general.continue_shopping' | t }}</a>
+
+              <div class="separator md-max:hidden"></div>
+
+              <div class="md-max:hidden v-stack gap-4">
+                <div class="h-stack justify-between Body ExtraBold">
+                  <span class="ExtraBold">{{ 'cart.general.total' | t }}</span>
+                  <span class="ExtraBold">{{- cart.total_price | money_with_currency -}}</span>
+                </div>
+
+                {%- assign checkout_button = 'cart.general.checkout' | t -%}
+                {%- render 'button'
+                  , type: 'submit'
+                  , content: checkout_button
+                  , extra_classes: 'w-full'
+                  , style: 'solid'
+                  , text_style: 'Uppercase'
+                  , variant: 'primary'
+                  , name: 'checkout' -%}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {%- comment -%}
+        ----------------------------------------------------------------------------------------------------------------
+        SHIPPING ESTIMATOR
+        ----------------------------------------------------------------------------------------------------------------
+      {%- endcomment -%}
+
+      {%- if section.settings.show_shipping_estimator and cart.requires_shipping -%}
+        {%- render 'shipping-estimator' -%}
+      {%- endif -%}
+    </form>
+
+
+  {%- endif -%}
+
+</div>
+
+<script type="module">
+  var themeSettings = {{ settings | json }};
+  var cartUrl = {{ routes.cart_url | json }};
+
+  const waitForFreeProduct = () =>
+    window.FreeProduct
+      ? Promise.resolve(window.FreeProduct)
+      : new Promise((resolve) => {
+          window.addEventListener(
+            'free-product:ready',
+            (event) => resolve(event.detail),
+            { once: true }
+          );
+        });
+
+  const initFreeProduct = async () => {
+    // Skip if disabled in theme settings
+    if (themeSettings && themeSettings.free_samples_enabled === false) {
+      window.free_samples_enabled = false;
+      return;
+    }
+
+    const freeProduct = await waitForFreeProduct();
+    freeProduct.configure({ themeSettings, cartUrl });
+
+    const onDomReady = async () => {
+      if (window.location.pathname === cartUrl) {
+        const cart = await freeProduct.fetchCart();
+        await freeProduct.sync(cart, { refreshOnNoChange: true });
+      }
+    };
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', onDomReady);
+    } else {
+      onDomReady();
+    }
+  };
+
+  // Only init when not disabled
+  if (themeSettings && themeSettings.free_samples_enabled === true) {
+    initFreeProduct().catch((error) => {
+      console.error('[FreeProduct] cart section initFreeProduct failed', error);
+    });
+  }
+</script>
+
+
+{% schema %}
+  {
+    "name": "t:sections.main_cart.name",
+    "class": "shopify-section--main-cart",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_cart_note",
+        "label": "t:sections.main_cart.show_cart_note",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_order_weight",
+        "label": "t:sections.main_cart.show_order_weight",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "show_shipping_text",
+        "label": "t:sections.main_cart.show_shipping_text",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_accelerated_buttons",
+        "label": "t:sections.main_cart.show_accelerated_buttons",
+        "info": "t:sections.main_cart.show_accelerated_buttons_info",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "show_shipping_estimator",
+        "label": "t:sections.main_cart.show_shipping_estimator",
+        "default": true
+      },
+      {
+        "type": "checkbox",
+        "id": "show_free_shipping_bar",
+        "label": "t:theme_settings.cart.show_free_shipping_bar",
+        "default": false
+      }
+    ],
+    "blocks": [
+      {
+        "type": "@app"
+      }
+    ]
+  }
+{% endschema %}

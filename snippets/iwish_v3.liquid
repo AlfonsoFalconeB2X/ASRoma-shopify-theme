@@ -1,0 +1,305 @@
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const secondaryNav = document.querySelector('.header__secondary-nav');
+    const heartAltFull = secondaryNav?.querySelector('.icon-as-roma-wishlist-full');
+    const heartAlt = secondaryNav?.querySelector('.icon-as-roma-wishlist');
+    const iwishCounter = secondaryNav?.querySelector('.iwish-counter');
+    const iwishCounterContainer = secondaryNav?.querySelector('.iwish-counter-container');
+    handleShowWishlistIcon(heartAltFull, heartAlt, iwishCounter, iwishCounterContainer);
+
+    if (!heartAltFull || !heartAlt || !iwishCounter || !iwishCounterContainer) return;
+    const observer = new MutationObserver(() => {
+      handleShowWishlistIcon(heartAltFull, heartAlt, iwishCounter, iwishCounterContainer);
+    });
+    observer.observe(secondaryNav, {
+      childList: true,
+      subtree: true
+    }); 
+    
+    function saveDatalayerBackup(container) {
+      if (container && !container.dataset.datalayerBackup && container.hasAttribute('data-datalayer-info')) {
+        container.dataset.datalayerBackup = container.getAttribute('data-datalayer-info');
+      }
+    }
+
+    function isProductInWishlist(button) {
+      const fullIcon = button.querySelector('.icon-as-roma-wishlist-full');
+      return fullIcon && !fullIcon.classList.contains('hidden');
+    }
+
+    function updateDatalayerAttributes(button) {
+      const container = button.closest('.iWishAdd-container');
+      if (!container) return;
+
+      saveDatalayerBackup(container);
+
+      if (isProductInWishlist(button)) {
+        container.removeAttribute('data-datalayer-info');
+        container.removeAttribute('data-datalayer-event');
+      } else if (container.dataset.datalayerBackup) {
+        container.setAttribute('data-datalayer-info', container.dataset.datalayerBackup);
+        container.setAttribute('data-datalayer-event', 'click');
+      }
+    }
+
+    function initializeWishlistListeners() {
+      const wishlistButtons = document.querySelectorAll('.iWishAdd');
+
+      wishlistButtons.forEach(function(button) {
+        button.removeEventListener('click', handleWishlistClick);
+        button.removeEventListener('mousedown', handleWishlistClick);
+
+        button.addEventListener('click', handleWishlistClick, true);
+        button.addEventListener('mousedown', handleWishlistClick, true);
+
+        saveDatalayerBackup(button.closest('.iWishAdd-container'));
+
+        setTimeout(function() {
+          updateDatalayerAttributes(button);
+        }, 500);
+      });
+    }
+    
+    function handleWishlistClick(e) {
+      const target = e.currentTarget;
+
+      setTimeout(function () {
+
+        const currentId = target.getAttribute("data-variant");
+
+
+        if (!currentId) return;
+
+        const allButtons = document.querySelectorAll(".iWishAdd");
+
+        allButtons.forEach(function (btn) {
+          const btnId = btn.getAttribute("data-variant");
+
+          if (btnId === currentId) {
+            if (typeof iWish !== "undefined" && typeof iWish.checkIwish === "function") {
+              let variantInput = null;
+
+              let parent = btn.parentElement;
+              while (parent && !variantInput && parent !== document.body) {
+                variantInput = parent.querySelector(`input[name="id"][value="${btnId}"]`);
+
+                if (!variantInput) {
+                  parent = parent.parentElement;
+                }
+              }
+              if (variantInput) {
+
+                iWish.checkIwish(variantInput);
+              }
+            }
+
+            // Update datalayer attributes after wishlist state changes
+            setTimeout(function() {
+              updateDatalayerAttributes(btn);
+            }, 100);
+          }
+        });
+
+      }, 300);
+    }
+    
+    initializeWishlistListeners();
+    
+    const wishlistObserver = new MutationObserver(function(mutations) {
+      mutations.forEach(function(mutation) {
+        if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+          
+          mutation.addedNodes.forEach(function(node) {
+            if (node.nodeType === 1) {
+              if (node.classList && node.classList.contains('iWishAdd')) {
+                initializeWishlistListeners();
+              } else if (node.querySelector && node.querySelector('.iWishAdd')) {
+                initializeWishlistListeners();
+              }
+            }
+          });
+        }
+      });
+    });
+    
+    wishlistObserver.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+  });
+
+  function handleShowWishlistIcon(heartAltFull, heartAlt, iwishCounter, iwishCounterContainer) {
+    const counterValue = parseInt(iwishCounter.innerHTML.trim(), 10) || 0;
+    if (counterValue === 0) {
+      if (iwishCounterContainer) iwishCounterContainer.classList.remove('is-visible');
+    } else {
+      if (iwishCounterContainer) iwishCounterContainer.classList.add('is-visible');
+    }
+  }
+</script>
+
+{% if settings.wishlist_enabled %}
+  {% if iwish_v3 == 'iwishLink' %}
+    {%- if enable_sidebar -%}
+      <a title="Wishlist">
+        {%- render 'icon' with 'as-roma-wishlist-full'
+          , class: 'header__nav-icon hidden'
+          , width: 21
+          , height: 21 -%}
+        {%- render 'icon' with 'as-roma-wishlist'
+          , class: 'header__nav-icon'
+          , width: 21
+          , height: 21 -%}
+        <span class="header__cart-dot iwish-counter-container ">
+          <span class="iwish-counter cart-item-count Exception Medium"></span>
+        </span>
+      </a>
+    {%- else -%}
+      <a
+        href="{{ routes.root_url |  append: '/apps/iwish' | replace: '//apps', '/apps' }}"
+        rel="nofollow"
+        title="Wishlist">
+        {%- render 'icon' with 'as-roma-wishlist-full'
+          , class: 'header__nav-icon hidden'
+          , width: 21
+          , height: 21 -%}
+        {%- render 'icon' with 'as-roma-wishlist'
+          , class: 'header__nav-icon'
+          , width: 21
+          , height: 21 -%}
+        <span class="header__cart-dot iwish-counter-container ">
+          <span class="iwish-counter cart-item-count Exception Medium"></span>
+        </span>
+      </a>
+    {%- endif -%}
+  {% elsif iwish_v3 == 'iwishProduct' %}
+    {%- comment -%} Data Layer Object {%- endcomment -%}
+    {%- if settings.enable_datalayer -%}
+      {%- capture wishlist_datalayer -%}
+        {
+          "event": "add_to_wishlist",
+          "ecommerce": {
+            "currency": "{{ cart.currency.iso_code }}",
+            "items": [
+              {%- assign variant = selected_variant | default: product.selected_or_first_available_variant-%}
+              {%- render 'datalayer-item', index: 0, product: product, variant: variant, item_list_id: 'current', item_list_name: 'current' -%}  
+            ]
+          }
+        }
+      {%- endcapture -%}
+    {%- endif -%}
+
+    <input
+      type="hidden"
+      name="id"
+      value="{{ product.selected_or_first_available_variant.id }}">
+    {% if show_as_button %}
+      <div
+        class="iWishAdd-container"
+        {% if settings.enable_datalayer %}
+        data-datalayer-info='{{ wishlist_datalayer | strip_newlines | escape }}'
+        data-datalayer-event="click"
+        {% endif %}>
+        <button
+          class="iWishAdd"
+          href="#"
+          data-variant="{{ selected_variant_id | default: selected_variant.id | default: product.selected_or_first_available_variant.id }}"
+          data-product="{{ product.id }}"
+          rel="nofollow"
+          data-pTitle="{{ product.title | escape }}">
+          {%- render 'icon' with 'as-roma-wishlist'
+            , class: 'header__nav-icon'
+            , width: 22
+            , height: 22 -%}
+        </button>
+      </div>
+    {% else %}
+      <div
+        class="iWishAdd-container"
+        {% if settings.enable_datalayer %}
+        data-datalayer-info='{{ wishlist_datalayer | strip_newlines | escape }}'
+        data-datalayer-event="click"
+        {% endif %}>
+        <button
+          class="iWishAdd hide-span ASRomaFont Body Medium asroma-button button--solid button-secondary"
+          href="#"
+          data-product="{{ product.id }}"
+          data-variant="{{ selected_variant_id | default: selected_variant.id | default: product.selected_or_first_available_variant.id }}"
+          rel="nofollow"
+          data-pTitle="{{ product.title | escape }}">
+          {%- render 'icon' with 'as-roma-wishlist'
+            , class: 'header__nav-icon'
+            , width: 22
+            , height: 22 -%}
+        </button>
+      </div>
+    {% endif %}
+  {% elsif iwish_v3 == 'iwishProductCard' %}
+    <input
+      type="hidden"
+      name="id"
+      value="{{ product.selected_or_first_available_variant.id }}">
+    <a
+      class="iWishAdd hide-span product-card__quick-add-button product-card__wishlist"
+      href="#"
+      data-variant="{{ selected_variant_id | default: selected_variant.id | default: product.selected_or_first_available_variant.id }}"
+      data-product="{{ product.id }}">
+      {%- render 'icon' with 'as-roma-wishlist'
+        , class: 'header__nav-icon'
+        , width: 22
+        , height: 22 -%}
+    </a>
+  {% elsif iwish_v3 == 'iwishCollection' %}
+    <a
+      class="iWishAddColl"
+      href="#"
+      data-variant="{{ product.variants.first.id }}"
+      data-product="{{ product.id }}"
+      data-pTitle="{{ product.title | escape }}"
+      rel="nofollow">
+      {%- render 'icon' with 'as-roma-wishlist'
+        , class: 'header__nav-icon'
+        , width: 22
+        , height: 22 -%}
+    </a>
+  {% elsif iwish_v3 == 'iwishFooter' %}
+    {%- capture added_icon -%}{%- render 'icon' with 'as-roma-wishlist-full'
+        , class: 'header__nav-icon text-red'
+        , width: 22
+        , height: 22 -%}
+        {%- endcapture -%}
+    {%- capture add_icon -%}
+        {%- render 'icon' with 'as-roma-wishlist'
+        , class: 'header__nav-icon text-red'
+        , width: 22
+        , height: 22 -%}{%- endcapture -%}
+    <script type="text/javascript">
+      var iwish_shop = "{{ shop.permanent_domain }}";
+      var iwish_pro_template = {% if template contains 'product' %}true{% else %}false{% endif %};
+      var iwish_cid = "{{ customer.id }}";
+      //Add to Wishlist - Product Page Text
+      var iwish_added_txt = '{{added_icon | strip_newlines }}';
+      var iwish_add_txt = '{{add_icon | strip_newlines }}';
+      //Add to Wishlist - Collection Page Text
+      var iwish_added_txt_col = '{{added_icon | strip_newlines }}';
+      var iwish_add_txt_col = '{{add_icon | strip_newlines }}';
+      //Quick View - Classes
+      //var iwish_qvButton = '.quick_view';
+      //var iwish_qvWrapper = '.reveal-modal';
+      // Add to Wishlist - Product Page Text
+      {% if template contains "product" %}
+        window.iWishData.iwish_added_txt = '{{ added_icon | strip_newlines }}';
+        window.iWishData.iwish_add_txt = '{{ add_icon | strip_newlines }}';
+      {% else %}        
+        window.iWishData.iwish_added_txt = '{{ added_icon | strip_newlines }}';
+        window.iWishData.iwish_add_txt = '{{ add_icon | strip_newlines }}';
+      {% endif %}      
+
+      // Add to Wishlist - Collection Page Text
+      window.iWishData.iwish_added_txt_col = '{{ added_icon | strip_newlines }}';
+      window.iWishData.iwish_add_txt_col = '{{ add_icon | strip_newlines }}';
+
+      window.iWishData.variant_selector = "input[name='id'][type='hidden']";
+    </script>
+  {% endif %}
+{% endif %}

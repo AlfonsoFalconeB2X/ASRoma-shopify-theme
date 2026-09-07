@@ -1,0 +1,516 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "context": {
+    "market": "italia"
+  },
+  "parent": "index.json",
+  "sections": {
+    "image_with_text_overlay_h6GfwW": {
+      "type": "image-with-text-overlay",
+      "disabled": false,
+      "settings": {
+        "image_size": "auto",
+        "image": "shopify://shop_images/2500X900-slider-allenamento-training-adidas-2026-27.jpg",
+        "mobile_image": "shopify://shop_images/1200X1600-slider-allenamento-training-adidas-2026-27.jpg",
+        "allow_transparent_header": false,
+        "reveal_on_scroll": true,
+        "remove_vertical_spacing": false,
+        "content_width": "xs",
+        "mobile_text_position": "place-self-end-center text-center",
+        "desktop_text_position": "sm:place-self-end-center sm:text-center",
+        "overlay_bg": true,
+        "style_olverlay": "gradient"
+      },
+      "blocks": {
+        "heading_ebYPgK": {
+          "type": "heading",
+          "disabled": false,
+          "settings": {
+            "text": ""
+          }
+        },
+        "button_ahgnH7": {
+          "type": "button",
+          "disabled": false,
+          "settings": {
+            "style": "outline",
+            "text": "Scopri di più",
+            "url": "shopify://collections/allenamento",
+            "button_style": "link",
+            "button_variant": "secondary"
+          }
+        }
+      },
+      "block_order": [
+        "heading_ebYPgK",
+        "button_ahgnH7"
+      ],
+      "name": "Training 26/27 Image with text overlay"
+    },
+    "featured_collections_FqbaQR": {
+      "type": "featured-collections",
+      "disabled": false,
+      "settings": {
+        "separate_section_with_border": false,
+        "hide_product_information": false,
+        "header-a4f0e04ed0b378828f42b1a69c956f1f": null,
+        "stack_products": false,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "header-419f781ddfade686e4756d7fb491e6a8": null,
+        "content_position": "start",
+        "main_title": "Novità 2026/27"
+      },
+      "blocks": {
+        "collection_ydXzy": {
+          "type": "collection",
+          "disabled": false,
+          "settings": {
+            "collection": "allenamento",
+            "products_count": 18,
+            "title": "",
+            "link_url": "shopify://collections/allenamento",
+            "link_text": "Scopri le Novità 2026/27",
+            "link_type": "primary",
+            "link_position": "bottom",
+            "show_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "collection_ydXzy"
+      ],
+      "name": "Carousel Training 26/27"
+    },
+    "featured_collections_3whDLa": {
+      "type": "featured-collections",
+      "disabled": false,
+      "settings": {
+        "separate_section_with_border": false,
+        "hide_product_information": false,
+        "header-e20b22acafea4a3498b90b7111d804d4": null,
+        "stack_products": false,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "header-e17a3410688cddd10e67a637fb02e417": null,
+        "content_position": "start",
+        "main_title": "New Era - Novità"
+      },
+      "blocks": {
+        "collection_UGgmjq": {
+          "type": "collection",
+          "disabled": false,
+          "settings": {
+            "collection": "cappellini-berretti-new-era-x-as-roma",
+            "products_count": 9,
+            "title": "",
+            "link_url": "shopify://collections/cappellini-berretti-new-era-x-as-roma",
+            "link_text": "New Era",
+            "link_type": "primary",
+            "link_position": "bottom",
+            "show_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "collection_UGgmjq"
+      ],
+      "name": "Adidas Travel 26/27"
+    },
+    "featured_collections_Jf8EpX": {
+      "type": "featured-collections",
+      "disabled": false,
+      "settings": {
+        "separate_section_with_border": false,
+        "hide_product_information": false,
+        "header-52b2ecae08b1a2114b156f326ad7fe93": null,
+        "stack_products": false,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "header-c4826727256cef60f33e24a8afd7e8a6": null,
+        "content_position": "start",
+        "main_title": "Palloni AS Roma"
+      },
+      "blocks": {
+        "collection_xaBCVU": {
+          "type": "collection",
+          "disabled": false,
+          "settings": {
+            "collection": "palloni",
+            "products_count": 15,
+            "title": "",
+            "link_url": "shopify://collections/palloni",
+            "link_text": "Scopri la collezione palloni AS Roma",
+            "link_type": "primary",
+            "link_position": "bottom",
+            "show_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "collection_xaBCVU"
+      ],
+      "name": "Carousel Palloni AS Roma"
+    },
+    "featured_collections_cYJfTj": {
+      "disabled": false,
+      "settings": {},
+      "blocks": {
+        "collection_NMUj8U": {
+          "disabled": false,
+          "settings": {}
+        }
+      }
+    },
+    "image_with_text_overlay_9r3DMW": {
+      "disabled": false,
+      "settings": {
+        "image_size": "auto",
+        "image": "shopify://shop_images/2500x900-slider-as-roma-home-kit-26-27.jpg",
+        "mobile_image": "shopify://shop_images/1200x1600-slider-as-roma-home-kit-26-27..jpg"
+      },
+      "blocks": {
+        "button_DKhWaD": {
+          "disabled": false,
+          "settings": {
+            "url": "shopify://collections/kit-gara-home"
+          }
+        }
+      },
+      "name": "HOME KIT 26/27 - Image with text overlay - NEW ERA"
+    },
+    "featured_collections_rz8tcb": {
+      "disabled": false,
+      "settings": {
+        "stack_products": false,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "main_title": "Home Kit 26/27"
+      },
+      "blocks": {
+        "collection_GTzH4q": {
+          "disabled": false,
+          "settings": {
+            "collection": "kit-gara-home",
+            "link_url": "shopify://collections/kit-gara-home",
+            "link_text": "Home Kit 26/27"
+          }
+        }
+      }
+    },
+    "image_with_text_overlay_DPXRU8": {
+      "settings": {
+        "image_size": "auto",
+        "image": "shopify://shop_images/2500x900_0973e712-1fe7-4828-9bdf-7efec88be27f.jpg",
+        "mobile_image": "shopify://shop_images/1200x1600_3b1234ef-661a-471f-ae21-bd68d3e352c3.jpg"
+      },
+      "blocks": {
+        "button_WntLCN": {
+          "settings": {
+            "url": "shopify://collections/kit-gara-home"
+          }
+        }
+      }
+    },
+    "react_product_selector_rjQCQY": {
+      "disabled": false,
+      "settings": {},
+      "blocks": {}
+    },
+    "featured_collections_FHYDTc": {
+      "disabled": false,
+      "settings": {
+        "stack_products": false,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "main_title": "Promozioni Adidas 50%"
+      },
+      "blocks": {
+        "collection_cFNyeg": {
+          "disabled": false,
+          "settings": {
+            "products_count": 10,
+            "link_url": "shopify://collections/saldi-as-roma-adidas-originals",
+            "link_text": "Scopri le promozioni Adidas"
+          }
+        }
+      }
+    },
+    "image_with_text_overlay_UWqAgN": {
+      "disabled": false,
+      "settings": {
+        "image_size": "auto",
+        "image": "shopify://shop_images/ROMA_2500x9005_441821f4-f9b6-4193-b2ae-4f3b6b93e0f4.webp",
+        "mobile_image": "shopify://shop_images/ROMA_1200x16004_d9e0be7f-a2e8-4e53-b5d1-cefec5d364d7.webp"
+      },
+      "blocks": {}
+    },
+    "image_with_text_overlay_Rd3Jwz": {
+      "disabled": false,
+      "settings": {
+        "image_size": "auto"
+      },
+      "blocks": {}
+    },
+    "featured_collections_ApeepC": {
+      "disabled": false,
+      "settings": {
+        "main_title": "La tua casa giallorossa"
+      },
+      "blocks": {
+        "collection_PemeV3": {
+          "disabled": false,
+          "settings": {
+            "collection": "accessori-casa-cucina-carousel",
+            "products_count": 19,
+            "link_url": "shopify://collections/accessori-casa-cucina-carousel",
+            "link_text": "Scopri le Novità"
+          }
+        }
+      },
+      "name": "Carousel Moka"
+    },
+    "collection_list_Hdq6iU": {
+      "settings": {
+        "separate_section_with_border": false,
+        "image_size": "lg",
+        "show_text_outside": false,
+        "space_items": true,
+        "remove_container": true,
+        "stack_collections": false,
+        "collections_per_row_desktop": 1
+      },
+      "blocks": {
+        "banner_dKG6fU": {
+          "settings": {
+            "image": "shopify://shop_images/2500x900-slider-sainth-bart-x-as-roma-summer-2026-t-shirt.webp"
+          }
+        },
+        "product_U9pQWw": {
+          "settings": {
+            "content_position": "place-self-end-start text-start"
+          }
+        },
+        "product_GNpAgE": {
+          "settings": {
+            "content_position": "place-self-end-start text-start"
+          }
+        }
+      }
+    },
+    "image_with_text_overlay_nAPepk": {
+      "disabled": false,
+      "settings": {
+        "image_size": "md"
+      },
+      "blocks": {
+        "button_wJjL9Q": {
+          "disabled": false,
+          "settings": {
+            "text": "Maglie Retro",
+            "url": "shopify://collections/maglie-retro-as-roma"
+          }
+        }
+      },
+      "block_order": [
+        "heading_y6deXL",
+        "button_wJjL9Q"
+      ]
+    },
+    "featured_collections_Wd4tnG": {
+      "disabled": false,
+      "settings": {
+        "separate_section_with_border": false,
+        "hide_product_information": false,
+        "stack_products": false,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4
+      },
+      "blocks": {
+        "collection_pXEzYY": {
+          "disabled": false,
+          "settings": {
+            "products_count": 12,
+            "link_type": "primary"
+          }
+        }
+      },
+      "block_order": [
+        "collection_pXEzYY"
+      ]
+    },
+    "image_with_text_overlay_dkChtV": {
+      "disabled": false,
+      "settings": {
+        "image_size": "auto"
+      },
+      "blocks": {}
+    },
+    "image_with_text_overlay_RbQewL": {
+      "settings": {
+        "image_size": "lg",
+        "content_width": "lg"
+      },
+      "blocks": {}
+    },
+    "featured_collections_7enzFL": {
+      "disabled": false,
+      "settings": {
+        "stack_products": false,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4
+      },
+      "blocks": {
+        "collection_de4JWT": {
+          "settings": {
+            "products_count": 15
+          }
+        }
+      }
+    },
+    "collection_list_NVDbTz": {
+      "settings": {},
+      "blocks": {
+        "banner_xLWEUy": {
+          "settings": {
+            "image": "shopify://shop_images/1500x1500-elvis-lives-tshirt-1.webp"
+          }
+        },
+        "product_cNEnGM": {
+          "settings": {
+            "image": "shopify://shop_images/1500x1500-elvis-lives-felpe-2.webp"
+          }
+        }
+      },
+      "block_order": [
+        "banner_xLWEUy",
+        "product_bGhyzK",
+        "product_cNEnGM",
+        "product_TaxE3p",
+        "product_YgqD4k"
+      ]
+    },
+    "collection_list_6AEpY3": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {
+        "banner_z3ECa8": {
+          "settings": {
+            "image": "shopify://shop_images/1500x1500-slider-copa-maglie-retro-1994-1995-maglia-bianca.jpg"
+          }
+        },
+        "product_4TUf4z": {
+          "disabled": false,
+          "settings": {}
+        },
+        "product_ng4RgM": {
+          "disabled": true,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "banner_z3ECa8",
+        "product_4TUf4z",
+        "product_6BrTQF",
+        "product_m487yx",
+        "product_nMGFGP",
+        "product_DWbYWC",
+        "product_ng4RgM"
+      ]
+    },
+    "collection_list_LEqCw4": {
+      "settings": {},
+      "blocks": {
+        "collection_bHVJHc": {
+          "disabled": false,
+          "settings": {}
+        },
+        "collection_DUJfBh": {
+          "disabled": false,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "collection_BjakaA",
+        "collection_mBTU8A",
+        "collection_6y7Fti",
+        "collection_bHVJHc",
+        "collection_QfNrUV",
+        "collection_DUJfBh",
+        "collection_C6WYpH",
+        "collection_wCBJFH",
+        "collection_xqEm4Y",
+        "collection_JDzgdX",
+        "collection_KX4H8q"
+      ]
+    },
+    "slideshow": {
+      "settings": {},
+      "blocks": {
+        "image_F63Mzh": {
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/3200x1200-slider-as-roma-home-kit-26-27.webp"
+          }
+        },
+        "image_r7gbFB": {
+          "disabled": false,
+          "settings": {
+            "gradient_overlay": "linear-gradient(180deg, rgba(NaN, NaN, NaN, 0), rgba(4, 4, 4, 0.65) 100%)"
+          }
+        },
+        "image_DKmp4B": {
+          "disabled": true,
+          "name": "Abbonamenti 26/27",
+          "settings": {}
+        },
+        "image_NrLnez": {
+          "disabled": true,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "image_jFwRbg",
+        "image_F63Mzh",
+        "image_r7gbFB",
+        "image_DKmp4B",
+        "image_NrLnez"
+      ]
+    }
+  },
+  "order": [
+    "slideshow",
+    "featured_collections_R6YEWx",
+    "featured_collections_cYJfTj",
+    "image_with_text_overlay_9r3DMW",
+    "featured_collections_rz8tcb",
+    "image_with_text_overlay_DPXRU8",
+    "react_product_selector_rjQCQY",
+    "featured_collections_FHYDTc",
+    "image_with_text_overlay_h6GfwW",
+    "featured_collections_FqbaQR",
+    "image_with_text_overlay_UWqAgN",
+    "featured_collections_3whDLa",
+    "image_with_text_overlay_Rd3Jwz",
+    "featured_collections_ApeepC",
+    "collection_list_Hdq6iU",
+    "image_with_text_overlay_nAPepk",
+    "featured_collections_Wd4tnG",
+    "image_with_text_overlay_dkChtV",
+    "featured_collections_Jf8EpX",
+    "image_with_text_overlay_RbQewL",
+    "featured_collections_7enzFL",
+    "collection_list_NVDbTz",
+    "collection_list_6AEpY3",
+    "collection_list_LEqCw4",
+    "featured_giftcard_AtRUhJ"
+  ]
+}

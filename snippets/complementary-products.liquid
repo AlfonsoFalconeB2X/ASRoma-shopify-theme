@@ -1,0 +1,302 @@
+{%- comment -%}
+  ----------------------------------------------------------------------------------------------------------------------
+  COMPLEMENTARY PRODUCTS
+  ----------------------------------------------------------------------------------------------------------------------
+
+  This snippet renders the complementary products block used on product page. Because those complementary products can
+  be added both below the gallery or on the right, this is extracted into its own snippet to reduce code duplication
+
+  ********************************************
+  Supported variables
+  ********************************************
+
+  * product: the product to which we render the complementary products
+  * block: the block containing the information to render itself
+{%- endcomment -%}
+
+
+{%- liquid
+  # Check if manual products are selected
+  assign has_manual_products = false
+  assign final_products = blank
+  assign products_count = 0
+
+  if block.settings.products != blank and block.settings.products.count > 0
+    assign has_manual_products = true
+    assign final_products = block.settings.products
+    assign products_count = block.settings.products.count
+    if products_count > block.settings.products_count
+      assign products_count = block.settings.products_count
+    endif
+  endif
+-%}
+
+{%- if has_manual_products -%}
+  {%- if final_products.count > 0 -%}
+    {%- assign visible_products_count = 0 -%}
+    {%- for product in final_products limit: products_count -%}
+      {%- if product.metafields.seo.hidden != 1 and product.available -%}
+        {%- assign visible_products_count = visible_products_count | plus: 1 -%}
+      {%- endif -%}
+    {%- endfor -%}
+    {%- if visible_products_count > 0 -%}
+      {%- comment -%} View Item List Data Layer {%- endcomment -%}
+      {%- if settings.enable_datalayer -%}
+        {%- capture view_item_list_datalayer -%}
+        {
+          "event": "view_item_list",
+          "ecommerce": {
+            "currency": "{{ cart.currency.iso_code }}",
+            "items": [
+              {%- for product in final_products limit: products_count -%}
+                {%- if product.metafields.seo.hidden == 1 or product.available == false -%}
+                  {%- continue -%}
+                {%- endif -%}
+                {%- render 'datalayer-item', index: forloop.index0, product: product, variant: product.selected_or_first_available_variant, item_list_name: 'Complementary Products', item_list_id: 'complementary_products' -%}
+                {%- unless forloop.last %},{% endunless %}
+              {%- endfor -%}
+            ]
+          }
+        }
+      {%- endcapture -%}
+        {%- comment -%} View Promotion Data Layer - Only products on sale {%- endcomment -%}
+        {%- capture view_promotion_datalayer -%}
+        {
+          "event": "view_promotion",
+          "ecommerce": {
+            "items": [
+              {%- assign promo_index = 0 -%}
+              {%- for product in final_products limit: products_count -%}
+                {%- if product.metafields.seo.hidden == 1 or product.available == false -%}
+                  {%- continue -%}
+                {%- endif -%}
+                {%- assign variant = product.selected_or_first_available_variant -%}
+                {%- if variant.compare_at_price > variant.price -%}
+                  {%- assign promo_index = promo_index | plus: 1 -%}
+                  {% if promo_index > 1 %},{% endif %}
+                  {%- render 'datalayer-item', index: promo_index, product: product, variant: variant, is_small_item: true, item_list_name: 'Complementary Products', item_list_id: 'complementary_products' -%}
+                {%- endif -%}
+              {%- endfor -%}
+            ]
+          }
+        }
+      {%- endcapture -%}
+      {%- endif -%}
+
+      <div
+        class="complementary-products"
+        {% if settings.enable_datalayer %}
+        data-datalayer-info='{{ view_item_list_datalayer | strip_newlines | escape }}'
+        data-datalayer-event="view"
+        {%- if promo_index > 0 -%}
+        data-datalayer-info-promotion='{{ view_promotion_datalayer | strip_newlines | escape }}'
+        {%- endif -%}
+        {% endif %}>
+        <div class="complementary-products__header {% if block.settings.show_below_gallery and block.settings.stack_products %}justify-center{% endif %}">
+          <p class="Headline-3 Medium">{{ block.settings.title }}</p>
+
+          {%- if block.settings.stack_products == false and visible_products_count > 1 -%}
+            <carousel-navigation aria-controls="{{ carousel_id }}" class="page-dots page-dots--narrow sm-max:hidden">
+              {%- for i in (1..visible_products_count) -%}
+                <button class="relative" aria-current="{% if forloop.first %}true{% else %}false{% endif %}">
+                  <span class="sr-only">{{ 'general.accessibility.go_to_item' | t: index: forloop.index }}</span>
+                </button>
+              {%- endfor -%}
+            </carousel-navigation>
+          {%- endif -%}
+        </div>
+
+        {%- capture complementary_products -%}
+        {%- for product in final_products limit: products_count -%}
+          {%- if product.metafields.seo.hidden == 1 or product.available == false -%}
+            {%- continue -%}
+          {%- endif -%}
+          {%- render 'product-card-horizontal', product: product, show_quick_buy: block.settings.show_quick_buy, item_list_name: 'Complementary Products', item_list_id: 'complementary_products', index: forloop.index0 -%}
+        {%- endfor -%}
+      {%- endcapture -%}
+        {%- if block.settings.stack_products -%}
+          <div class="complementary-products__product-list">
+            {{- complementary_products -}}
+          </div>
+        {%- else -%}
+          <div class="sm-max:hidden">
+            <scroll-carousel id="{{ carousel_id }}" class="complementary-products__product-list complementary-products__product-list--carousel scroll-area snap-x">
+              {{- complementary_products -}}
+            </scroll-carousel>
+          </div>
+
+          <div class="v-stack gap-5 sm:hidden">
+            {%- assign carousel_mobile_id = 'complementary-products-mobile-carousel-' | append: block.id -%}
+
+            <scroll-carousel id="{{ carousel_mobile_id }}" class="complementary-products__product-list complementary-products__product-list--carousel bleed scroll-area snap-x">
+              {%- for product in final_products limit: products_count -%}
+                {%- if product.metafields.seo.hidden == 1 or product.available == false -%}
+                  {%- continue -%}
+                {%- endif -%}
+                {%- render 'product-card'
+                  , product: product
+                  , show_quick_buy: block.settings.show_quick_buy
+                  , show_badges: false
+                  , show_vendor: false
+                  , show_rating: false
+                  , show_secondary_image: false
+                  , show_swatches: false
+                  , item_list_name: 'Complementary Products'
+                  , item_list_id: 'complementary_products'
+                  , position: forloop.index -%}
+              {%- endfor -%}
+            </scroll-carousel>
+
+            {%- if visible_products_count > 1 -%}
+              <carousel-navigation aria-controls="{{ carousel_mobile_id }}" class="page-dots">
+                {%- for i in (1..visible_products_count) -%}
+                  <button class="relative" aria-current="{% if forloop.first %}true{% else %}false{% endif %}">
+                    <span class="sr-only">{{ 'general.accessibility.go_to_item' | t: index: forloop.index }}</span>
+                  </button>
+                {%- endfor -%}
+              </carousel-navigation>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+{%- else -%}
+  {%- comment -%} Fallback to recommended products when no manual products are selected {%- endcomment -%}
+  <product-recommendations
+    class="block"
+    hidden
+    product="{{ product.id }}"
+    limit="{{ block.settings.products_count }}"
+    intent="complementary">
+    {%- if recommendations.performed and recommendations.intent == 'complementary' and recommendations.products_count > 0 -%}
+      {%- assign visible_recommendations_count = 0 -%}
+      {%- for product in recommendations.products -%}
+        {%- if product.metafields.seo.hidden != 1 and product.available -%}
+          {%- assign visible_recommendations_count = visible_recommendations_count | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if visible_recommendations_count > 0 -%}
+        {%- comment -%} View Item List Data Layer {%- endcomment -%}
+        {%- if settings.enable_datalayer -%}
+          {%- capture view_item_list_datalayer -%}
+          {
+            "event": "view_item_list",
+            "ecommerce": {
+              "currency": "{{ cart.currency.iso_code }}",
+              "items": [
+                {%- for product in recommendations.products -%}
+                  {%- if product.metafields.seo.hidden == 1 or product.available == false -%}
+                    {%- continue -%}
+                  {%- endif -%}
+                  {%- render 'datalayer-item', index: forloop.index0, product: product, variant: product.selected_or_first_available_variant, item_list_id: 'complete_your_look', item_list_name: 'Complete Your Look' -%}
+                  {%- unless forloop.last %},{% endunless %}
+                {%- endfor -%}
+              ]
+            }
+          }
+        {%- endcapture -%}
+          {%- comment -%} View Promotion Data Layer - Only products on sale {%- endcomment -%}
+          {%- capture view_promotion_datalayer -%}
+          {
+            "event": "view_promotion",
+            "ecommerce": {
+              "items": [
+                {%- assign promo_index = 0 -%}
+                {%- for product in recommendations.products -%}
+                  {%- if product.metafields.seo.hidden == 1 or product.available == false -%}
+                    {%- continue -%}
+                  {%- endif -%}
+                  {%- assign variant = product.selected_or_first_available_variant -%}
+                  {%- if variant.compare_at_price > variant.price -%}
+                    {%- assign promo_index = promo_index | plus: 1 -%}
+                    {% if promo_index > 1 %},{% endif %}
+                    {%- render 'datalayer-item', index: promo_index, product: product, variant: variant, is_small_item: true -%}
+                  {%- endif -%}
+                {%- endfor -%}
+              ]
+            }
+          }
+        {%- endcapture -%}
+        {%- endif -%}
+
+        <div
+          class="complementary-products"
+          {% if settings.enable_datalayer %}
+          data-datalayer-info='{{ view_item_list_datalayer | strip_newlines | escape }}'
+          data-datalayer-event="view"
+          {%- if promo_index > 0 -%}
+          data-datalayer-info-promotion='{{ view_promotion_datalayer | strip_newlines | escape }}'
+          {%- endif -%}
+          {% endif %}>
+          <div class="complementary-products__header {% if block.settings.show_below_gallery and block.settings.stack_products %}justify-center{% endif %}">
+            <p class="Headline-3 Medium">{{ block.settings.title }}</p>
+
+            {%- if block.settings.stack_products == false and visible_recommendations_count > 1 -%}
+              <carousel-navigation aria-controls="{{ carousel_id }}" class="page-dots page-dots--narrow sm-max:hidden">
+                {%- for i in (1..visible_recommendations_count) -%}
+                  <button class="relative" aria-current="{% if forloop.first %}true{% else %}false{% endif %}">
+                    <span class="sr-only">{{ 'general.accessibility.go_to_item' | t: index: forloop.index }}</span>
+                  </button>
+                {%- endfor -%}
+              </carousel-navigation>
+            {%- endif -%}
+          </div>
+
+          {%- capture complementary_products -%}
+          {%- for product in recommendations.products -%}
+            {%- if product.metafields.seo.hidden == 1 or product.available == false -%}
+              {%- continue -%}
+            {%- endif -%}
+            {%- render 'product-card-horizontal', product: product, show_quick_buy: block.settings.show_quick_buy, item_list_name: 'Complementary Products', item_list_id: 'complementary_products', index: forloop.index0 -%}
+          {%- endfor -%}
+        {%- endcapture -%}
+          {%- if block.settings.stack_products -%}
+            <div class="complementary-products__product-list">
+              {{- complementary_products -}}
+            </div>
+          {%- else -%}
+            <div class="sm-max:hidden">
+              <scroll-carousel id="{{ carousel_id }}" class="complementary-products__product-list complementary-products__product-list--carousel scroll-area snap-x">
+                {{- complementary_products -}}
+              </scroll-carousel>
+            </div>
+
+            <div class="v-stack gap-5 sm:hidden">
+              {%- assign carousel_mobile_id = 'complementary-products-mobile-carousel-' | append: block.id -%}
+
+              <scroll-carousel id="{{ carousel_mobile_id }}" class="complementary-products__product-list complementary-products__product-list--carousel bleed scroll-area snap-x">
+                {%- for product in recommendations.products -%}
+                  {%- if product.metafields.seo.hidden == 1 or product.available == false -%}
+                    {%- continue -%}
+                  {%- endif -%}
+                  {%- render 'product-card'
+                    , product: product
+                    , show_quick_buy: block.settings.show_quick_buy
+                    , show_badges: false
+                    , show_vendor: false
+                    , show_rating: false
+                    , show_secondary_image: false
+                    , show_swatches: false
+                    , item_list_name: 'Complementary Products'
+                    , item_list_id: 'complementary_products'
+                    , position: forloop.index -%}
+                {%- endfor -%}
+              </scroll-carousel>
+
+              {%- if visible_recommendations_count > 1 -%}
+                <carousel-navigation aria-controls="{{ carousel_mobile_id }}" class="page-dots">
+                  {%- for i in (1..visible_recommendations_count) -%}
+                    <button class="relative" aria-current="{% if forloop.first %}true{% else %}false{% endif %}">
+                      <span class="sr-only">{{ 'general.accessibility.go_to_item' | t: index: forloop.index }}</span>
+                    </button>
+                  {%- endfor -%}
+                </carousel-navigation>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  </product-recommendations>
+{%- endif -%}

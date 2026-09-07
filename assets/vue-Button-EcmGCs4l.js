@@ -1,0 +1,2 @@
+import{createElementBlock as u,openBlock as c,normalizeClass as a,renderSlot as l}from"https://unpkg.com/vue@3.5.13/dist/vue.esm-browser.js";const p=(t,o)=>{const e=t.__vccOpts||t;for(const[n,s]of o)e[n]=s;return e},_={props:{type:{type:String,default:"button"}},computed:{buttonClass(){switch(this.type){case"outline":return"button button--outline";default:return"button"}}}};function f(t,o,e,n,s,r){return c(),u("button",{class:a(r.buttonClass)},[l(t.$slots,"default")],2)}const d=p(_,[["render",f]]);export{d as B,p as _};
+//# sourceMappingURL=vue-Button-EcmGCs4l.js.map

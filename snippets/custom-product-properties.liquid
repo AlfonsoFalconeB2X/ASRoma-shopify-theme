@@ -1,0 +1,38 @@
+<input
+  type="hidden"
+  name="properties[_category_2]"
+  value="{{ product.metafields.custom.category_2 }}">
+<input
+  type="hidden"
+  name="properties[_category_3]"
+  value="{{ product.metafields.custom.category_3 }}">
+<input
+  type="hidden"
+  name="properties[_customize]"
+  value="false">
+<input
+  type="hidden"
+  name="properties[_list_id]"
+  data-list-property="list_id"
+  value="">
+<input
+  type="hidden"
+  name="properties[_list_name]"
+  data-list-property="list_name"
+  value="">
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const listInfo = window.getItemListInfo?.() || { item_list_id: 'TBD', item_list_name: 'TBD' };
+    
+    document.querySelectorAll('input[data-list-property]').forEach(function(input) {
+      const property = input.getAttribute('data-list-property');
+      
+      if (property === 'list_id') {
+        input.value = listInfo.item_list_id;
+      } else if (property === 'list_name') {
+        input.value = listInfo.item_list_name;
+      }
+    });
+  });
+</script>

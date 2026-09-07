@@ -1,0 +1,51 @@
+{%- if template contains 'product' -%}
+  {% assign css_file = 'template-product.css' %}
+{%- elsif template contains 'collection' -%}
+  {% assign css_file = 'template-collection.css' %}
+{%- elsif template contains 'search' -%}
+  {% assign css_file = 'template-search-page.css' %}
+{%- elsif template contains 'index' -%}
+  {% assign css_file = 'template-homepage.css' %}
+{%- elsif template contains 'blog' -%}
+  {% assign css_file = 'template-blog.css' %}
+{%- elsif template contains 'article' -%}
+  {% assign css_file = 'template-article.css' %}
+{%- elsif template contains 'login' -%}
+  {% assign css_file = 'template-customer-login.css' %}
+{%- elsif template contains 'register' -%}
+  {% assign css_file = 'template-customer-register.css' %}
+{%- elsif template contains '404' -%}
+  {% assign css_file = 'template-404.css' %}
+{%- elsif request.path contains 'iwish' -%}
+  {% assign css_file = 'template-wishlist.css' %}
+{%- elsif template contains 'page' -%}
+  {%- if template.suffix contains 'contact' -%}
+    {% assign css_file = 'template-contacts.css' %}
+  {%- elsif template.suffix contains 'faq' -%}
+    {% assign css_file = 'template-faq.css' %}
+  {%- elsif template contains 'personal-area' -%}
+    {% assign css_file = 'template-personal-area.css' %}
+  {%- else -%}
+    {% assign css_file = 'template-page.css' %}
+  {%- endif -%}
+{%- elsif template contains 'cart' -%}
+  {% assign css_file = 'template-cart.css' %}
+{%- elsif template contains 'addresses' -%}
+  {% assign css_file = 'template-customer-addresses.css' %}
+{%- elsif template contains 'account' -%}
+  {%- if template.suffix contains 'orders' -%}
+    {% assign css_file = 'template-customer-orders.css' %}
+  {%- else -%}
+    {% assign css_file = 'template-customer.css' %}
+  {%- endif -%}
+{%- elsif template contains 'order' -%}
+  {% assign css_file = 'template-customer-order-details.css' %}
+{%- endif -%}
+
+
+{{- 'theme.css' | asset_url | stylesheet_tag -}}
+{{- 'template-common.css' | asset_url | stylesheet_tag -}}
+
+{%- if css_file -%}
+  {{- css_file | asset_url | stylesheet_tag -}}
+{%- endif -%}

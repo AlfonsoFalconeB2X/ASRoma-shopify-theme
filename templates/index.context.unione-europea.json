@@ -1,0 +1,335 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "context": {
+    "market": "unione-europea"
+  },
+  "parent": "index.json",
+  "sections": {
+    "image_with_text_overlay_pYD97M": {
+      "type": "image-with-text-overlay",
+      "disabled": false,
+      "settings": {
+        "image_size": "sm",
+        "image": "shopify://shop_images/2500x900-slider-centrale-home-page.new-era-new_6014d493-32fa-4e93-8b15-8ec857a55b88.jpg",
+        "mobile_image": "shopify://shop_images/1100x1500-slider-new-era-spring-2026-new.jpg",
+        "allow_transparent_header": false,
+        "reveal_on_scroll": true,
+        "remove_vertical_spacing": false,
+        "content_width": "xs",
+        "mobile_text_position": "place-self-end-center text-center",
+        "desktop_text_position": "sm:place-self-end-center sm:text-center",
+        "overlay_bg": true,
+        "style_olverlay": "gradient"
+      },
+      "blocks": {
+        "heading_gnLyi4": {
+          "type": "heading",
+          "disabled": false,
+          "settings": {
+            "text": ""
+          }
+        },
+        "button_xyNHbx": {
+          "type": "button",
+          "disabled": false,
+          "settings": {
+            "style": "outline",
+            "text": "Scopri di più",
+            "url": "shopify://collections/cappellini-berretti-new-era-x-as-roma",
+            "button_style": "link",
+            "button_variant": "secondary"
+          }
+        }
+      },
+      "block_order": [
+        "heading_gnLyi4",
+        "button_xyNHbx"
+      ],
+      "name": "Image with text overlay - NEW ERA"
+    },
+    "featured_collections_cYJfTj": {
+      "disabled": false,
+      "settings": {},
+      "blocks": {
+        "collection_NMUj8U": {
+          "disabled": false,
+          "settings": {}
+        }
+      }
+    },
+    "react_product_selector_rjQCQY": {
+      "disabled": false,
+      "settings": {},
+      "blocks": {}
+    },
+    "image_with_text_overlay_DPXRU8": {
+      "settings": {
+        "image_size": "lg"
+      },
+      "blocks": {}
+    },
+    "image_with_text_overlay_9r3DMW": {
+      "settings": {},
+      "blocks": {
+        "button_DKhWaD": {
+          "disabled": true,
+          "settings": {}
+        }
+      }
+    },
+    "featured_collections_rz8tcb": {
+      "disabled": false,
+      "settings": {
+        "stack_products": false
+      },
+      "blocks": {
+        "collection_GTzH4q": {
+          "disabled": false,
+          "settings": {}
+        }
+      }
+    },
+    "collection_list_Hdq6iU": {
+      "settings": {
+        "collections_per_row_desktop": 1
+      },
+      "blocks": {
+        "banner_dKG6fU": {
+          "settings": {
+            "content_position": "place-self-end-start text-start"
+          }
+        },
+        "product_U9pQWw": {
+          "settings": {
+            "content_position": "place-self-end text-end"
+          }
+        },
+        "product_GNpAgE": {
+          "settings": {
+            "content_position": "place-self-end text-end"
+          }
+        },
+        "product_B9BVaH": {
+          "disabled": true,
+          "settings": {}
+        }
+      }
+    },
+    "image_with_text_overlay_BfnkBE": {
+      "disabled": true,
+      "settings": {
+        "image_size": "fill",
+        "image": "shopify://shop_images/2500X900-slider-saldi-luglio-2026-eng.jpg",
+        "mobile_image": "shopify://shop_images/1200X1600-slider-saldi-luglio-2026-eng.jpg"
+      },
+      "blocks": {}
+    },
+    "image_with_text_overlay_dkChtV": {
+      "disabled": false,
+      "settings": {
+        "image_size": "md"
+      },
+      "blocks": {}
+    },
+    "featured_collections_FHYDTc": {
+      "disabled": false,
+      "settings": {
+        "stack_products": false,
+        "products_per_row_desktop": 4,
+        "main_title": "Saldi Adidas 50%"
+      },
+      "blocks": {
+        "collection_cFNyeg": {
+          "disabled": false,
+          "settings": {
+            "products_count": 14
+          }
+        }
+      }
+    },
+    "collection_list_NVDbTz": {
+      "settings": {},
+      "blocks": {
+        "banner_xLWEUy": {
+          "settings": {
+            "image": "shopify://shop_images/1500x1500-elvis-lives-tshirt-1.webp"
+          }
+        },
+        "product_cNEnGM": {
+          "settings": {
+            "image": "shopify://shop_images/1500x1500-elvis-lives-felpe-2.webp"
+          }
+        },
+        "product_YgqD4k": {
+          "disabled": false,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "banner_xLWEUy",
+        "product_bGhyzK",
+        "product_cNEnGM",
+        "product_TaxE3p",
+        "product_YgqD4k"
+      ]
+    },
+    "image_with_text_overlay_nAPepk": {
+      "disabled": false,
+      "settings": {
+        "image_size": "fill"
+      },
+      "blocks": {
+        "button_wJjL9Q": {
+          "disabled": false,
+          "settings": {}
+        }
+      }
+    },
+    "featured_collections_Wd4tnG": {
+      "disabled": false,
+      "settings": {
+        "stack_products": false
+      },
+      "blocks": {
+        "collection_pXEzYY": {
+          "disabled": false,
+          "settings": {}
+        }
+      }
+    },
+    "image_with_text_overlay_RbQewL": {
+      "settings": {
+        "image_size": "lg",
+        "content_width": "lg"
+      },
+      "blocks": {}
+    },
+    "featured_collections_7enzFL": {
+      "disabled": false,
+      "settings": {
+        "stack_products": false,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4
+      },
+      "blocks": {}
+    },
+    "collection_list_6AEpY3": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {
+        "banner_z3ECa8": {
+          "settings": {
+            "image": "shopify://shop_images/1500x1500-slider-copa-maglie-retro-1994-1995-maglia-bianca.jpg"
+          }
+        },
+        "product_4TUf4z": {
+          "disabled": false,
+          "settings": {}
+        },
+        "product_m487yx": {
+          "disabled": false,
+          "settings": {
+            "product": "maglia-retro-as-roma-home-1999-2000",
+            "image": "shopify://shop_images/1500x1500-slider-copa-maglie-retro-1999-2000-rossa.jpg",
+            "button_link": "shopify://products/maglia-retro-as-roma-home-1999-2000"
+          }
+        },
+        "product_ng4RgM": {
+          "disabled": true,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "banner_z3ECa8",
+        "product_4TUf4z",
+        "product_6BrTQF",
+        "product_m487yx",
+        "product_nMGFGP",
+        "product_DWbYWC",
+        "product_ng4RgM"
+      ]
+    },
+    "collection_list_LEqCw4": {
+      "settings": {},
+      "blocks": {
+        "collection_bHVJHc": {
+          "disabled": true,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "collection_wCBJFH",
+        "collection_QfNrUV",
+        "collection_DUJfBh",
+        "collection_mBTU8A",
+        "collection_6y7Fti",
+        "collection_BjakaA",
+        "collection_C6WYpH",
+        "collection_bHVJHc",
+        "collection_xqEm4Y",
+        "collection_JDzgdX",
+        "collection_KX4H8q"
+      ]
+    },
+    "slideshow": {
+      "settings": {},
+      "blocks": {
+        "image_r7gbFB": {
+          "disabled": false,
+          "settings": {
+            "gradient_overlay": "linear-gradient(180deg, rgba(NaN, NaN, NaN, 0), rgba(4, 4, 4, 0.65) 100%)"
+          }
+        },
+        "image_F63Mzh": {
+          "disabled": true,
+          "settings": {
+            "image": "shopify://shop_images/3200x1200-slider-as-roma-home-kit-26-27.webp"
+          }
+        },
+        "image_NrLnez": {
+          "disabled": true,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "image_jFwRbg",
+        "image_r7gbFB",
+        "image_F63Mzh",
+        "image_NrLnez"
+      ]
+    }
+  },
+  "order": [
+    "slideshow",
+    "featured_collections_R6YEWx",
+    "featured_collections_cYJfTj",
+    "react_product_selector_rjQCQY",
+    "image_with_text_overlay_DPXRU8",
+    "image_with_text_overlay_9r3DMW",
+    "featured_collections_rz8tcb",
+    "image_with_text_overlay_X4pt4h",
+    "featured_collections_ApeepC",
+    "collection_list_Hdq6iU",
+    "image_with_text_overlay_BfnkBE",
+    "image_with_text_overlay_dkChtV",
+    "featured_collections_FHYDTc",
+    "featured_collections_YjUqG4",
+    "collection_list_NVDbTz",
+    "image_with_text_overlay_nAPepk",
+    "featured_collections_Wd4tnG",
+    "image_with_text_overlay_RbQewL",
+    "featured_collections_7enzFL",
+    "collection_list_6AEpY3",
+    "image_with_text_overlay_pYD97M",
+    "collection_list_LEqCw4",
+    "featured_giftcard_AtRUhJ"
+  ]
+}

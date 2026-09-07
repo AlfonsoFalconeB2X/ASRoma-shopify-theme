@@ -1,0 +1,76 @@
+/* font size */
+/* clearfix */
+/* animations */
+/* aspect ratio */
+/* Shopify integration */
+/* Uncomment and fill instructions needed for styleguide setup */
+/* Default */
+/* AS Roma */
+/* Gradients */
+/* Grays */
+.featured-giftcard {
+  display: grid;
+  align-items: center;
+  background-color: #f6f6f6;
+  gap: 4.5625rem;
+  grid-template-columns: 1fr 1fr;
+  padding-block: 5rem;
+}
+@media screen and (max-width: 999px) {
+  .featured-giftcard {
+    gap: 1.375rem;
+    grid-template-columns: 1fr;
+    padding-block: 2.5rem;
+  }
+}
+.featured-giftcard__media {
+  position: relative;
+  overflow: hidden;
+  max-width: 27.5625rem;
+  border-radius: 0.5rem;
+  justify-self: end;
+}
+@media screen and (max-width: 999px) {
+  .featured-giftcard__media {
+    max-width: 20.625rem;
+    justify-self: center;
+    margin-inline: 3.125rem;
+  }
+}
+.featured-giftcard__image {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.5rem;
+  object-fit: cover;
+}
+.featured-giftcard__content {
+  display: grid;
+  max-width: 27.5625rem;
+  padding: 2.3125rem 3.75rem;
+  border-radius: 0.5rem;
+  background-color: #fff;
+  gap: 2rem;
+}
+@media screen and (max-width: 999px) {
+  .featured-giftcard__content {
+    padding: 0.6875rem 1.3125rem;
+    gap: 1.625rem;
+    justify-self: center;
+    margin-inline: 1rem;
+  }
+}
+.featured-giftcard__product-info {
+  display: grid;
+  gap: 1rem;
+}
+.featured-giftcard__subtext {
+  display: flex;
+  margin: auto;
+  gap: 0.5rem;
+}
+@media screen and (max-width: 999px) {
+  .featured-giftcard__subtext {
+    gap: 0.9375rem;
+  }
+}

@@ -1,0 +1,33 @@
+<script type="module" src="{{ 'react-quickBuy.min.js' | asset_url }}"></script>
+
+<div
+  id="quick-buy-react"
+  class="section-spacing section-spacing--tight"
+  data-locale="{{ request.locale.iso_code }}"
+  data-country="{{ localization.country.iso_code }}"
+  data-market="{{ localization.market.handle }}"></div>
+
+{% schema %}
+  {
+    "name": "React Quick Buy",
+    "tag": "section",
+    "class": "section-react-quick-buy",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Quick Buy Settings"
+      },
+      {
+        "type": "text",
+        "id": "section_title",
+        "label": "Section Title",
+        "default": "Quick Buy"
+      }
+    ],
+    "presets": [
+      {
+        "name": "React Quick Buy"
+      }
+    ]
+  }
+{% endschema %}

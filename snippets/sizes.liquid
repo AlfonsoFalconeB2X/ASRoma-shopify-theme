@@ -1,0 +1,36 @@
+{%- liquid
+  # Custom scales to reduce image sizes when retina or retina mobile
+  assign retina_scale = 3
+  assign retina_scale_m = 2
+  # Breakpoints selection based on common devices
+  assign breakpoints = '640|768|1024|1280|1536' | split: '|' | reverse
+
+  # Recommended to use 1 or 6 sizes[0-640, 640-768,..., 1536-∞].
+  # The script tries its best to optimize if not properly set.
+  if sizes == blank
+    assign sizes = '100' | split: '|'
+  else
+    assign sizes = sizes | split: '|' | reverse
+  endif
+
+  # For each breakpoint create the sizes
+  for breakpoint in breakpoints
+    if sizes.size > forloop.index
+      assign size = sizes[forloop.index] | plus: 0
+    else
+      assign size = sizes.last | plus: 0
+    endif
+    assign double_scale = size | divided_by: 2 | times: retina_scale | times: 100 | round | divided_by: 100
+    assign triple_scale = size | divided_by: 3 | times: retina_scale | times: 100 | round | divided_by: 100
+
+    echo '(min-width: ' | append: breakpoint | append: 'px) and (max-resolution: 1dppx) ' | append: size | append: 'vw, '
+    echo '(min-width: ' | append: breakpoint | append: 'px) and (max-resolution: 2.5dppx) ' | append: double_scale | append: 'vw, '
+    echo '(min-width: ' | append: breakpoint | append: 'px) ' | append: triple_scale | append: 'vw, '
+  endfor
+
+  # Last breakpoint[0-640]
+  assign double_scale = sizes.last | divided_by: 2 | times: retina_scale_m | times: 100 | round | divided_by: 100
+  assign triple_scale = sizes.last | divided_by: 3 | times: retina_scale_m | times: 100 | round | divided_by: 100
+
+  echo '(max-resolution: 1dppx) ' | append: sizes.last | append: 'vw, (max-resolution: 2.5dppx) ' | append: double_scale | append: 'vw, ' | append: triple_scale | append: 'vw'
+-%}

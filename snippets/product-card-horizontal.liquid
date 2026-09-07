@@ -1,0 +1,198 @@
+{%- comment -%}
+  ----------------------------------------------------------------------------------------------------------------------
+  PRODUCT CARD HORIZONTAL COMPONENT
+  ----------------------------------------------------------------------------------------------------------------------
+
+  This component is used in complementary product to show a condensed view of the product
+
+  ********************************************
+  Supported variables
+  ********************************************
+
+  * product: the product to render
+  * show_quick_buy: show or not the quick buy (which open a modal if the product contains more than 1 choice)
+  * show_badge: if this product card is used in the header search (to apply specific styles)
+  * item_list_name: the name of the list (for data layer tracking)
+  * item_list_id: the ID of the list (for data layer tracking)
+  * index: the position of the product in the list (for data layer tracking)
+{%- endcomment -%}
+
+{%- liquid
+  assign promotion_name_value = ''
+  assign promotion_status_value = 'regular'
+  assign discount_value = 0
+  if product.compare_at_price > product.price
+    assign promotion_status_value = 'promo'
+    assign discount_amount = product.compare_at_price | minus: product.price
+    assign discount_value = discount_amount | divided_by: 100.0
+    assign discount_percentage = discount_amount | times: 100.0 | divided_by: product.compare_at_price | round
+    assign promotion_name_value = discount_percentage | append: '%'
+  endif
+-%}
+
+{%- if settings.enable_datalayer -%}
+  {%- capture select_item_datalayer -%}
+    {
+      "event": "select_item",
+      "ecommerce": {
+        "currency": "{{ cart.currency.iso_code }}",
+        "items": [
+          {%- render 'datalayer-item', index: index, product: product, variant: product.selected_or_first_available_variant, item_list_id: item_list_id, item_list_name: item_list_name -%}
+        ]
+      }
+    }
+  {%- endcapture -%}
+  {%- capture add_to_cart_datalayer -%}
+    {
+      "event": "add_to_cart",
+      "ecommerce": {
+        "currency": "{{ cart.currency.iso_code }}",
+        "items": [
+          {%- render 'datalayer-item', product: product, variant: product.selected_or_first_available_variant, item_customize: false, quantity: 1, item_list_id: item_list_id, item_list_name: item_list_name -%}  
+        ]
+      }
+    }
+  {%- endcapture -%}
+  {%- if promotion_status_value == 'promo' -%}
+    {%- capture select_promotion_datalayer -%}
+      {
+        "event": "select_promotion",
+        "ecommerce": {
+          "items": [
+            {%- render 'datalayer-item', product: product, variant: product.selected_or_first_available_variant, is_small_item: true -%}
+          ]
+        }
+      }
+    {%- endcapture -%}
+  {%- endif -%}
+{%- endif -%}
+
+<div class="horizontal-product-card">
+  {%- if product.featured_media -%}
+    <div class="horizontal-product-card__figure">
+      {% unless show_badge %}
+        {%- render 'product-badges'
+          , product: product
+          , vertical: true
+          , context: 'card'
+          , product_url: product.url -%}
+      {% endunless %}
+      <a
+        href="{{ product.url }}"
+        data-instant
+        {% if settings.enable_datalayer %}
+        data-datalayer-info='{{ select_item_datalayer | strip_newlines | escape }}'
+        data-datalayer-event="click"
+        {% if promotion_status_value == 'promo' %}
+        data-datalayer-info-promotion='{{ select_promotion_datalayer | strip_newlines | escape }}'
+        {% endif %}
+        {% endif %}>
+        {%- assign alt_text = product.featured_media.alt | default: product.title | default: shop.name -%}
+        {{- product.featured_media | image_url: width: product.featured_media.width | image_tag: loading: 'lazy', sizes: '300px', widths: '100,150,200,250,300', class: 'horizontal-product-card__image', alt: alt_text -}}
+      </a>
+    </div>
+  {%- endif -%}
+
+  <div class="horizontal-product-card__info">
+    <div class="v-stack gap-2 md:gap-4 justify-items-start">
+      <a
+        href="{{ product.url }}"
+        class="product-title {% if settings.product_card_text_font == 'heading' %}Body Medium{% endif %}"
+        data-instant
+        {% if settings.enable_datalayer %}
+        data-datalayer-info='{{ select_item_datalayer | strip_newlines | escape }}'
+        data-datalayer-event="click"
+        {% if promotion_status_value == 'promo' %}
+        data-datalayer-info-promotion='{{ select_promotion_datalayer | strip_newlines | escape }}'
+        {% endif %}
+        {% endif %}>{{ product.title }}</a>
+      {%- render 'price-list'
+        , product: product
+        , context: 'card' -%}
+
+
+      {%- if product.available and show_quick_buy -%}
+        {%- if product.variants.size == 1 -%}
+          {%- comment -%}With one variant, we can simply render a form for direct add{%- endcomment -%}
+          <product-form class="form-control--full-mobile">
+            {%- form 'product'
+              , product
+              , class: 'form-control--full-mobile' -%}
+              <input
+                type="hidden"
+                name="id"
+                value="{{ product.selected_or_first_available_variant.id }}">
+              <input
+                type="hidden"
+                name="quantity"
+                value="1">
+              <input
+                type="hidden"
+                name="on_success"
+                value="force_open_drawer">
+
+              {%- render 'custom-product-properties' -%}
+
+              <button
+                {% if settings.enable_datalayer %}
+                data-datalayer-info='{{ add_to_cart_datalayer | strip_newlines | escape }}'
+                data-datalayer-event="click"
+                {% endif %}
+                type="submit"
+                class="horizontal-product-card__button ASRomaFont Small ExtraBold asroma-button button--outline button-primary Uppercase form-control--small form-control--full-mobile">{{ 'product.general.add_button' | t }}</button>
+            {%- endform -%}
+          </product-form>
+        {%- else -%}
+          {%- comment -%}Show variant selector for products with multiple variants{%- endcomment -%}
+          <product-form class="form-control--full-mobile">
+            {%- form 'product'
+              , product
+              , class: 'v-stack gap-4 form-control--full-mobile' -%}
+              <input
+                type="hidden"
+                name="quantity"
+                value="1">
+              <input
+                type="hidden"
+                name="on_success"
+                value="force_open_drawer">
+
+              {%- render 'custom-product-properties' -%}
+
+              {% capture variant_options %}
+                {%- for variant in product.variants -%}
+                  {%- if variant.available -%}
+                    <option
+                      value="{{ variant.id }}"
+                      {% if variant == product.selected_or_first_available_variant %}
+                      selected{% endif %}>
+                      {{ variant.title }}
+                      {%- if variant.price != product.price -%}
+                        - {{ variant.price | money }}
+                      {%- endif -%}
+                    </option>
+                  {%- endif -%}
+                {%- endfor -%}
+              {% endcapture %}
+              {% render 'select'
+                , name: 'id'
+                , options: variant_options
+                , required: true 
+                , size: 'small'
+                , full_on_mobile: true %}
+
+              <button
+                {% if settings.enable_datalayer %}
+                data-datalayer-info='{{ add_to_cart_datalayer | strip_newlines | escape }}'
+                data-datalayer-event="click"
+                {% endif %}
+                type="submit"
+                class="horizontal-product-card__button ASRomaFont Small ExtraBold asroma-button button--outline button-primary Uppercase form-control--small form-control--full-mobile ">{{ 'product.general.add_button' | t }}</button>
+            {%- endform -%}
+          </product-form>
+        {%- endif -%}
+      {%- endif -%}
+
+    </div>
+  </div>
+</div>

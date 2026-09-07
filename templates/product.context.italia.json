@@ -1,0 +1,80 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "parent": "product.json",
+  "context": {
+    "market": "italia"
+  },
+  "sections": {
+    "main": {
+      "disabled": false,
+      "settings": {},
+      "blocks": {
+        "info_message_HcFebC": {
+          "disabled": false,
+          "settings": {}
+        },
+        "liquid_7FwUUn": {
+          "settings": {
+            "liquid": "<div id=\"#paypal-pay-later-message\" style=\"display: flex; justify-content: center; text-align: center;\">\n  <div class=\"paypal-pay-later-message-container\">\n  </div>\n</div>"
+          }
+        },
+        "free_shipping_message_nfCBaE": {
+          "disabled": false,
+          "settings": {
+            "text": "<p><strong>Spedizioni gratis in Italia per acquisti superiori a</strong></p>"
+          }
+        },
+        "liquid_hHPKkH": {
+          "name": "Liquid - ABBONATI 26/27",
+          "disabled": false,
+          "settings": {
+            "liquid": "<div class=\"sconto-abbonati-banner\" style=\"margin-top: 10px; text-align: center; font-size: inherit;\">{% if request.locale.iso_code == 'en' %} <a href=\"https://store.asroma.com/en/pages/season-ticket-discount-2026-27\">15% off Serie A 26/27 Plus Members</a> &mdash; log in to <a href=\"https://account.asroma.com/?context=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IlEwTkVNVFUzTXpJeVFqZzNOVU5FTmpoRlFqRkdSalk0TTBJd05FVXlPVGszUVRRMU1qVkNNZyIsImN0eF9tb2RlIjoibG9naW4ifQ.eyJpc3MiOiJodHRwczovL2lkZW50aXR5LmFzcm9tYS5jb20vb2lkYy9vcC92MS4wLzNfZ3QyOTRIOVFBRnkzS0IzbU1iVW02ZmhhSVVvZHVDN2x0ZldlV1JKbEh1eWNESmpJZ0RfRGpuQ2RqbHppVGUtNS8iLCJjdHhfZGMiOiJldTEiLCJpYXQiOjE3ODUxMzUxMjUsImV4cCI6MTc4NTEzNTcyNSwiY2xpZW50X2lkIjoibmRPeVJpS1JKbVZkb3h1NGRJbHd2S3JjIiwiY3R4X2lkIjoiMTIzNWZhMWUzMjQyNDkwYTgzNGViOTk2YzU1NWQyZjMiLCJyZWRpcmVjdF91cmwiOiJodHRwczovL3Nob3BpZnkuY29tL2F1dGhlbnRpY2F0aW9uLzkxNzI2NjEwODEyL2xvZ2luL2V4dGVybmFsL2NhbGxiYWNrIn0.WJXBbjElcGwv6EOZPs82blCgc9-F-j_WHyd-2GjkvvO-Tsw86wZY6FWvinSkGFxN0vMgoY3eICi2qvKyv62z0S7FEu-EyX2b62rmJEU_GtLM4himmiStCmD5iEoqBjlwnaQvfb7T1BcIo2vaLLWAjgy5stHOAXoLHpm7bQS8oQ7Pld3OPUvxnidDpdpVfXlp4fWwFQ1y7tZ9QpAW7C6uJFQBubcQgCuNiLWjgZ4YjiNXXJR2rjZMDOnAS5lZOad7OrCMe11A39vhKuFAjimrpesJx6ap6mc4aca7c5Yxeym2iz3f9BUapQMcestTMvCXxgX1A9JCRVPBruKTv4DC4g&amp;client_id=ndOyRiKRJmVdoxu4dIlwvKrc&amp;mode=login&amp;scope=openid+email+custom_email_verified&amp;gig_ui_locales=it-BO&amp;gig_skipConsent=true\">MYASR</a>, discount at checkout. {% else %} <a href=\"https://store.asroma.com/pages/sconto-abbonati-2026-27\">Sconto 15% Abbonati Plus Serie A 26/27</a> &mdash; accedi a <a href=\"https://account.asroma.com/?context=eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImtpZCI6IlEwTkVNVFUzTXpJeVFqZzNOVU5FTmpoRlFqRkdSalk0TTBJd05FVXlPVGszUVRRMU1qVkNNZyIsImN0eF9tb2RlIjoibG9naW4ifQ.eyJpc3MiOiJodHRwczovL2lkZW50aXR5LmFzcm9tYS5jb20vb2lkYy9vcC92MS4wLzNfZ3QyOTRIOVFBRnkzS0IzbU1iVW02ZmhhSVVvZHVDN2x0ZldlV1JKbEh1eWNESmpJZ0RfRGpuQ2RqbHppVGUtNS8iLCJjdHhfZGMiOiJldTEiLCJpYXQiOjE3ODUxMzUxMjUsImV4cCI6MTc4NTEzNTcyNSwiY2xpZW50X2lkIjoibmRPeVJpS1JKbVZkb3h1NGRJbHd2S3JjIiwiY3R4X2lkIjoiMTIzNWZhMWUzMjQyNDkwYTgzNGViOTk2YzU1NWQyZjMiLCJyZWRpcmVjdF91cmwiOiJodHRwczovL3Nob3BpZnkuY29tL2F1dGhlbnRpY2F0aW9uLzkxNzI2NjEwODEyL2xvZ2luL2V4dGVybmFsL2NhbGxiYWNrIn0.WJXBbjElcGwv6EOZPs82blCgc9-F-j_WHyd-2GjkvvO-Tsw86wZY6FWvinSkGFxN0vMgoY3eICi2qvKyv62z0S7FEu-EyX2b62rmJEU_GtLM4himmiStCmD5iEoqBjlwnaQvfb7T1BcIo2vaLLWAjgy5stHOAXoLHpm7bQS8oQ7Pld3OPUvxnidDpdpVfXlp4fWwFQ1y7tZ9QpAW7C6uJFQBubcQgCuNiLWjgZ4YjiNXXJR2rjZMDOnAS5lZOad7OrCMe11A39vhKuFAjimrpesJx6ap6mc4aca7c5Yxeym2iz3f9BUapQMcestTMvCXxgX1A9JCRVPBruKTv4DC4g&amp;client_id=ndOyRiKRJmVdoxu4dIlwvKrc&amp;mode=login&amp;scope=openid+email+custom_email_verified&amp;gig_ui_locales=it-BO&amp;gig_skipConsent=true\">MYASR</a>, sconto a carrello. {% endif %}</div>"
+          }
+        },
+        "liquid_EqfAM": {
+          "type": "liquid",
+          "disabled": true,
+          "name": "Liquid - Blocco no msg sconto abbonati",
+          "settings": {
+            "liquid": "{% unless product.tags contains 'no-msg-abbonati' %}\n<p style=\"text-align:center;\"><strong>Sconto Abbonati 25/26:</strong> accedi con <a href=\"https://account.asroma.com/\" target=\"_blank\">MYASR</a>, <br>scegli i tuoi prodotti e lo sconto si applica al carrello.</p>\n{% endunless %}"
+          }
+        },
+        "liquid_p9CmxC": {
+          "type": "liquid",
+          "name": "Liquid - SPEDIZIONE USA",
+          "disabled": false,
+          "settings": {
+            "liquid": "{% if product.tags contains 'no-usa-ship' %}\n  <div style=\"border: 1px solid #7d1f2c; color: #7d1f2c; padding: 12px 16px; border-radius: 4px; margin: 15px 0; font-size: 14px; line-height: 1.4; text-align: center;\">\n    {% if request.locale.iso_code == 'it' %}\n      A causa di restrizioni doganali, al momento <strong>non è possibile spedire</strong> questo prodotto negli <strong>STATI UNITI</strong>. Di conseguenza, l'intero ordine che lo contiene verrà annullato.\n    {% else %}\n      This product is temporarily <strong>unable to be shipped</strong> to the <strong>UNITED STATES</strong> due to customs restrictions. As a result, the entire order containing it will be cancelled.\n    {% endif %}\n  </div>\n{% endif %}"
+          }
+        }
+      },
+      "block_order": [
+        "badges_PbjenX",
+        "title",
+        "price",
+        "omnibus_insight_am_omnibus_price_YQnL6K",
+        "sku_8DwcFH",
+        "payment_terms",
+        "separator",
+        "variant_picker",
+        "info_message_HcFebC",
+        "buy_buttons",
+        "liquid_7FwUUn",
+        "free_shipping_message_nfCBaE",
+        "liquid_p9CmxC",
+        "liquid_hHPKkH",
+        "liquid_EqfAM",
+        "description",
+        "complementary_products"
+      ]
+    }
+  }
+}
