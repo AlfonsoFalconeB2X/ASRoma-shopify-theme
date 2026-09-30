@@ -392,7 +392,7 @@
         "image": "shopify://shop_images/2500x900_0973e712-1fe7-4828-9bdf-7efec88be27f.jpg",
         "mobile_image": "shopify://shop_images/1200x1600_3b1234ef-661a-471f-ae21-bd68d3e352c3.jpg",
         "enable_image_link": true,
-        "image_link": "",
+        "image_link": "shopify://collections/kit-gara-away",
         "allow_transparent_header": false,
         "reveal_on_scroll": true,
         "remove_vertical_spacing": false,
