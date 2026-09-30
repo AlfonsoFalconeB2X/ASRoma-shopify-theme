@@ -320,7 +320,7 @@
         "image": "shopify://shop_images/2500x900-slider-away-kit-26-27.jpg",
         "mobile_image": "shopify://shop_images/1200x1600-slider-away-kit-26-27.jpg",
         "enable_image_link": true,
-        "image_link": "",
+        "image_link": "shopify://collections/kit-gara-away",
         "allow_transparent_header": false,
         "reveal_on_scroll": true,
         "remove_vertical_spacing": false,
