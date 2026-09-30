@@ -91,7 +91,9 @@
       },
       "maximum_width": "Maximum width",
       "mobile_maximum_width": "Mobile maximum width",
-      "ratio_avoid_cropping_info": "Choose \"Original image ratio\" to avoid image cropping. [Learn more](https://help.shopify.com/en/manual/online-store/images/theme-images#best-practices-for-slideshows-and-full-widtw-images)"
+      "ratio_avoid_cropping_info": "Choose \"Original image ratio\" to avoid image cropping. [Learn more](https://help.shopify.com/en/manual/online-store/images/theme-images#best-practices-for-slideshows-and-full-widtw-images)",
+      "enable_image_link": "Make image clickable",
+      "image_link": "Image link"
     },
     "section": {
       "header_category": "Section header",
