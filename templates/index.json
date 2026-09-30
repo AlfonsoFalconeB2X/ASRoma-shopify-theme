@@ -768,7 +768,7 @@
         "image": "shopify://shop_images/2500x900-slider-seven-2026-27.jpg",
         "mobile_image": "shopify://shop_images/1200x1600-slider-seven-2026-27.jpg",
         "enable_image_link": true,
-        "image_link": "",
+        "image_link": "shopify://collections/seven-scuola",
         "allow_transparent_header": false,
         "reveal_on_scroll": true,
         "remove_vertical_spacing": false,
