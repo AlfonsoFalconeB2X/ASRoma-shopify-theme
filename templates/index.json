@@ -505,7 +505,7 @@
         "image": "shopify://shop_images/2500x900-slider-maglia-2001-02.webp",
         "mobile_image": "shopify://shop_images/1100x1500-slider-maglia-2001-2002.webp",
         "enable_image_link": true,
-        "image_link": "",
+        "image_link": "shopify://collections/maglie-retro-as-roma",
         "allow_transparent_header": false,
         "reveal_on_scroll": true,
         "remove_vertical_spacing": false,
