@@ -58,7 +58,7 @@
       {%- endif -%}
 
       {%- capture slide -%}
-        <div class="content-over-media content-over-media--{{ section.settings.media_size }}" style="--content-over-media-content-max-width: {{ block.settings.content_max_width }}px; --content-over-media-gradient-overlay: {{ block.settings.gradient_overlay }}">
+        <div class="content-over-media content-over-media--{{ slide_media_size }}" style="--content-over-media-content-max-width: {{ block.settings.content_max_width }}px; --content-over-media-gradient-overlay: {{ block.settings.gradient_overlay }}">
           {%- comment -%}---------------- MEDIA ----------------{%- endcomment -%}
           {%- if block.type == 'image' -%}
             {%- if block.settings.image != blank -%}

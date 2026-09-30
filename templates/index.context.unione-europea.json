@@ -13,50 +13,128 @@
   },
   "parent": "index.json",
   "sections": {
-    "image_with_text_overlay_pYD97M": {
-      "type": "image-with-text-overlay",
+    "featured_collections_amTK6": {
+      "type": "featured-collections",
       "disabled": false,
       "settings": {
-        "image_size": "sm",
-        "image": "shopify://shop_images/2500x900-slider-centrale-home-page.new-era-new_6014d493-32fa-4e93-8b15-8ec857a55b88.jpg",
-        "mobile_image": "shopify://shop_images/1100x1500-slider-new-era-spring-2026-new.jpg",
-        "allow_transparent_header": false,
-        "reveal_on_scroll": true,
-        "remove_vertical_spacing": false,
-        "content_width": "xs",
-        "mobile_text_position": "place-self-end-center text-center",
-        "desktop_text_position": "sm:place-self-end-center sm:text-center",
-        "overlay_bg": true,
-        "style_olverlay": "gradient"
+        "separate_section_with_border": false,
+        "hide_product_information": false,
+        "header-f463664d8c3f980f2b7451b47454507b": null,
+        "stack_products": false,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "header-b9193ab78fa8a08ae6a0290526bc82e0": null,
+        "content_position": "start",
+        "main_title": "New Era - Novità"
       },
       "blocks": {
-        "heading_gnLyi4": {
-          "type": "heading",
+        "collection_y3Lnfz": {
+          "type": "collection",
           "disabled": false,
           "settings": {
-            "text": ""
-          }
-        },
-        "button_xyNHbx": {
-          "type": "button",
-          "disabled": false,
-          "settings": {
-            "style": "outline",
-            "text": "Scopri di più",
-            "url": "shopify://collections/cappellini-berretti-new-era-x-as-roma",
-            "button_style": "link",
-            "button_variant": "secondary"
+            "collection": "cappellini-berretti-new-era-x-as-roma",
+            "products_count": 9,
+            "title": "",
+            "link_url": "shopify://collections/cappellini-berretti-new-era-x-as-roma",
+            "link_text": "New Era",
+            "link_type": "primary",
+            "link_position": "bottom",
+            "show_icon": true
           }
         }
       },
       "block_order": [
-        "heading_gnLyi4",
-        "button_xyNHbx"
+        "collection_y3Lnfz"
       ],
-      "name": "Image with text overlay - NEW ERA"
+      "name": "NEW ERA - Carousel"
+    },
+    "slideshow": {
+      "settings": {},
+      "blocks": {
+        "image_jFwRbg": {
+          "disabled": true,
+          "settings": {}
+        },
+        "image_r7gbFB": {
+          "disabled": true,
+          "settings": {
+            "gradient_overlay": "linear-gradient(180deg, rgba(NaN, NaN, NaN, 0), rgba(4, 4, 4, 0.65) 100%)"
+          }
+        },
+        "image_F63Mzh": {
+          "disabled": false,
+          "settings": {
+            "image": "shopify://shop_images/3200x1200-slider-as-roma-home-kit-26-27.webp"
+          }
+        },
+        "image_NrLnez": {
+          "disabled": true,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "image_jFwRbg",
+        "image_r7gbFB",
+        "image_F63Mzh",
+        "image_NrLnez"
+      ]
+    },
+    "image_with_text_overlay_DPXRU8": {
+      "settings": {
+        "image_size": "lg"
+      },
+      "blocks": {}
+    },
+    "react_product_selector_rjQCQY": {
+      "disabled": false,
+      "settings": {},
+      "blocks": {}
+    },
+    "image_with_text_overlay_nAPepk": {
+      "disabled": false,
+      "settings": {
+        "image_size": "fill"
+      },
+      "blocks": {
+        "button_wJjL9Q": {
+          "disabled": false,
+          "settings": {}
+        }
+      }
+    },
+    "featured_collections_Wd4tnG": {
+      "disabled": false,
+      "settings": {
+        "stack_products": false
+      },
+      "blocks": {
+        "collection_pXEzYY": {
+          "disabled": false,
+          "settings": {}
+        }
+      }
+    },
+    "image_with_text_overlay_9r3DMW": {
+      "settings": {},
+      "blocks": {
+        "button_DKhWaD": {
+          "disabled": false,
+          "settings": {}
+        }
+      }
+    },
+    "featured_collections_R6YEWx": {
+      "disabled": false,
+      "settings": {},
+      "blocks": {
+        "collection_9xDUVV": {
+          "disabled": false,
+          "settings": {}
+        }
+      }
     },
     "featured_collections_cYJfTj": {
-      "disabled": false,
+      "disabled": true,
       "settings": {},
       "blocks": {
         "collection_NMUj8U": {
@@ -65,95 +143,11 @@
         }
       }
     },
-    "react_product_selector_rjQCQY": {
-      "disabled": false,
-      "settings": {},
-      "blocks": {}
-    },
-    "image_with_text_overlay_DPXRU8": {
+    "image_with_text_overlay_UWqAgN": {
       "settings": {
-        "image_size": "lg"
+        "image_size": "auto"
       },
       "blocks": {}
-    },
-    "image_with_text_overlay_9r3DMW": {
-      "settings": {},
-      "blocks": {
-        "button_DKhWaD": {
-          "disabled": true,
-          "settings": {}
-        }
-      }
-    },
-    "featured_collections_rz8tcb": {
-      "disabled": false,
-      "settings": {
-        "stack_products": false
-      },
-      "blocks": {
-        "collection_GTzH4q": {
-          "disabled": false,
-          "settings": {}
-        }
-      }
-    },
-    "collection_list_Hdq6iU": {
-      "settings": {
-        "collections_per_row_desktop": 1
-      },
-      "blocks": {
-        "banner_dKG6fU": {
-          "settings": {
-            "content_position": "place-self-end-start text-start"
-          }
-        },
-        "product_U9pQWw": {
-          "settings": {
-            "content_position": "place-self-end text-end"
-          }
-        },
-        "product_GNpAgE": {
-          "settings": {
-            "content_position": "place-self-end text-end"
-          }
-        },
-        "product_B9BVaH": {
-          "disabled": true,
-          "settings": {}
-        }
-      }
-    },
-    "image_with_text_overlay_BfnkBE": {
-      "disabled": true,
-      "settings": {
-        "image_size": "fill",
-        "image": "shopify://shop_images/2500X900-slider-saldi-luglio-2026-eng.jpg",
-        "mobile_image": "shopify://shop_images/1200X1600-slider-saldi-luglio-2026-eng.jpg"
-      },
-      "blocks": {}
-    },
-    "image_with_text_overlay_dkChtV": {
-      "disabled": false,
-      "settings": {
-        "image_size": "md"
-      },
-      "blocks": {}
-    },
-    "featured_collections_FHYDTc": {
-      "disabled": false,
-      "settings": {
-        "stack_products": false,
-        "products_per_row_desktop": 4,
-        "main_title": "Saldi Adidas 50%"
-      },
-      "blocks": {
-        "collection_cFNyeg": {
-          "disabled": false,
-          "settings": {
-            "products_count": 14
-          }
-        }
-      }
     },
     "collection_list_NVDbTz": {
       "settings": {},
@@ -181,45 +175,45 @@
         "product_YgqD4k"
       ]
     },
-    "image_with_text_overlay_nAPepk": {
+    "image_with_text_overlay_dkChtV": {
       "disabled": false,
       "settings": {
-        "image_size": "fill"
+        "image_size": "auto"
       },
-      "blocks": {
-        "button_wJjL9Q": {
-          "disabled": false,
-          "settings": {}
-        }
-      }
-    },
-    "featured_collections_Wd4tnG": {
-      "disabled": false,
-      "settings": {
-        "stack_products": false
-      },
-      "blocks": {
-        "collection_pXEzYY": {
-          "disabled": false,
-          "settings": {}
-        }
-      }
+      "blocks": {}
     },
     "image_with_text_overlay_RbQewL": {
+      "disabled": true,
       "settings": {
         "image_size": "lg",
         "content_width": "lg"
       },
       "blocks": {}
     },
-    "featured_collections_7enzFL": {
+    "image_with_text_overlay_BfnkBE": {
+      "disabled": true,
+      "settings": {
+        "image_size": "fill",
+        "image": "shopify://shop_images/2500X900-slider-saldi-luglio-2026-eng.jpg",
+        "mobile_image": "shopify://shop_images/1200X1600-slider-saldi-luglio-2026-eng.jpg"
+      },
+      "blocks": {}
+    },
+    "featured_collections_FHYDTc": {
       "disabled": false,
       "settings": {
         "stack_products": false,
-        "products_per_row_mobile": "2",
-        "products_per_row_desktop": 4
+        "products_per_row_desktop": 4,
+        "main_title": "Saldi Adidas 50%"
       },
-      "blocks": {}
+      "blocks": {
+        "collection_cFNyeg": {
+          "disabled": false,
+          "settings": {
+            "products_count": 14
+          }
+        }
+      }
     },
     "collection_list_6AEpY3": {
       "disabled": true,
@@ -274,61 +268,33 @@
         "collection_BjakaA",
         "collection_C6WYpH",
         "collection_bHVJHc",
-        "collection_xqEm4Y",
         "collection_JDzgdX",
         "collection_KX4H8q"
-      ]
-    },
-    "slideshow": {
-      "settings": {},
-      "blocks": {
-        "image_r7gbFB": {
-          "disabled": false,
-          "settings": {
-            "gradient_overlay": "linear-gradient(180deg, rgba(NaN, NaN, NaN, 0), rgba(4, 4, 4, 0.65) 100%)"
-          }
-        },
-        "image_F63Mzh": {
-          "disabled": true,
-          "settings": {
-            "image": "shopify://shop_images/3200x1200-slider-as-roma-home-kit-26-27.webp"
-          }
-        },
-        "image_NrLnez": {
-          "disabled": true,
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "image_jFwRbg",
-        "image_r7gbFB",
-        "image_F63Mzh",
-        "image_NrLnez"
       ]
     }
   },
   "order": [
     "slideshow",
-    "featured_collections_R6YEWx",
-    "featured_collections_cYJfTj",
-    "react_product_selector_rjQCQY",
-    "image_with_text_overlay_DPXRU8",
-    "image_with_text_overlay_9r3DMW",
     "featured_collections_rz8tcb",
-    "image_with_text_overlay_X4pt4h",
-    "featured_collections_ApeepC",
-    "collection_list_Hdq6iU",
-    "image_with_text_overlay_BfnkBE",
-    "image_with_text_overlay_dkChtV",
-    "featured_collections_FHYDTc",
-    "featured_collections_YjUqG4",
-    "collection_list_NVDbTz",
+    "image_with_text_overlay_DPXRU8",
+    "react_product_selector_rjQCQY",
+    "image_with_text_overlay_9r3DMW",
+    "featured_collections_R6YEWx",
     "image_with_text_overlay_nAPepk",
     "featured_collections_Wd4tnG",
+    "featured_collections_cYJfTj",
+    "image_with_text_overlay_UWqAgN",
+    "featured_collections_amTK6",
+    "image_with_text_overlay_X4pt4h",
+    "featured_collections_ApeepC",
+    "featured_collections_ecqrJR",
+    "collection_list_NVDbTz",
+    "image_with_text_overlay_dkChtV",
     "image_with_text_overlay_RbQewL",
-    "featured_collections_7enzFL",
+    "image_with_text_overlay_BfnkBE",
+    "featured_collections_YjUqG4",
+    "featured_collections_FHYDTc",
     "collection_list_6AEpY3",
-    "image_with_text_overlay_pYD97M",
     "collection_list_LEqCw4",
     "featured_giftcard_AtRUhJ"
   ]

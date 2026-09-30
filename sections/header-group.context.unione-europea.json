@@ -1,1 +1,61 @@
-{"context":{"market":"unione-europea"},"parent":"header-group.json","sections":{"announcement_bar_McT9Bq":{"disabled":false,"settings":{"cycle_speed":5},"blocks":{"message_F8NQaN":{"disabled":true,"settings":{}},"message_9J6Yac":{"disabled":true,"settings":{}},"message_AdDKyR":{"disabled":true,"settings":{}},"message_PqTtHr":{"disabled":true,"settings":{}},"message_8EJgTK":{"disabled":false,"settings":{}}},"block_order":["message_8EJgTK","message_F8NQaN","message_9J6Yac","message_AdDKyR","message_PqTtHr"]},"header":{"settings":{"menu":"main-menu-saldi"},"blocks":{},"block_order":["mega_menu_VgkKrT","mega_menu_nf8ycj","mega_menu_dYamtm","mega_menu_q6GrUa","mega_menu_jTmmqY","mega_menu_848699","mega_menu_dC8ThN","mega_menu_qibbKF"]}}}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "context": {
+    "market": "unione-europea"
+  },
+  "parent": "header-group.json",
+  "sections": {
+    "header": {
+      "settings": {
+        "menu": "main-menu-saldi"
+      },
+      "blocks": {},
+      "block_order": [
+        "mega_menu_VgkKrT",
+        "mega_menu_nf8ycj",
+        "mega_menu_dYamtm",
+        "mega_menu_q6GrUa",
+        "mega_menu_jTmmqY",
+        "mega_menu_848699",
+        "mega_menu_dC8ThN",
+        "mega_menu_qibbKF"
+      ]
+    },
+    "announcement_bar_McT9Bq": {
+      "disabled": false,
+      "settings": {
+        "cycle_speed": 5
+      },
+      "blocks": {
+        "message_F8NQaN": {
+          "disabled": false,
+          "settings": {
+            "text": "<a href=\"https://store.asroma.com/collections/kit-gara-third\" title=\"https://store.asroma.com/collections/kit-gara-third\">Third Kit 26/27🔥</a>"
+          }
+        },
+        "message_9J6Yac": {
+          "disabled": false,
+          "settings": {}
+        },
+        "message_PqTtHr": {
+          "disabled": false,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "message_Pjfzef",
+        "message_F8NQaN",
+        "message_9J6Yac",
+        "message_PqTtHr"
+      ]
+    }
+  }
+}

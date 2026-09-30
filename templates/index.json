@@ -17,6 +17,8 @@
           "name": "Third Kit 26/27",
           "disabled": true,
           "settings": {
+            "start_date": "",
+            "end_date": "",
             "image": "shopify://shop_images/2500x900-slider-third-kit-26-27.jpg",
             "mobile_image": "shopify://shop_images/1200x1600-slider-third-kit-26-27--slider-third-kit-26-27.jpg",
             "subheading": "",
@@ -36,14 +38,15 @@
             "background_opacity": 50,
             "text_color": "#ffffff",
             "border_color": "",
-            "gradient_overlay": "linear-gradient(180deg, rgba(54, 54, 54, 0.2), rgba(4, 4, 4, 0.65) 100%)"
+            "gradient_overlay": "linear-gradient(180deg, rgba(NaN, NaN, NaN, 0), rgba(4, 4, 4, 0.65) 100%)"
           }
         },
         "image_F63Mzh": {
           "type": "image",
           "name": "Home Kit 26/27",
-          "disabled": true,
           "settings": {
+            "start_date": "",
+            "end_date": "",
             "image": "shopify://shop_images/3200x1200-slider-as-roma-home-kit-26-27.webp",
             "mobile_image": "shopify://shop_images/1200x1600-slider-as-roma-home-kit-26-27..jpg",
             "subheading": "",
@@ -69,7 +72,10 @@
         "image_r7gbFB": {
           "type": "image",
           "name": "Away Kit 26/27",
+          "disabled": true,
           "settings": {
+            "start_date": "",
+            "end_date": "",
             "image": "shopify://shop_images/2500x900-slider-away-kit-26-27.jpg",
             "mobile_image": "shopify://shop_images/1200x1600-slider-away-kit-26-27.jpg",
             "subheading": "",
@@ -97,6 +103,8 @@
           "name": "Abbonamenti 26/27",
           "disabled": true,
           "settings": {
+            "start_date": "",
+            "end_date": "",
             "image": "shopify://shop_images/2500x900-slider-campagna-abbonamenti-26-27.jpg",
             "mobile_image": "shopify://shop_images/1200x1600-slider-campagna-abbonamenti-26-27.jpg",
             "subheading": "",
@@ -122,7 +130,10 @@
         "image_NrLnez": {
           "type": "image",
           "name": "Allenamento 26/27",
+          "disabled": true,
           "settings": {
+            "start_date": "",
+            "end_date": "",
             "image": "shopify://shop_images/2500X900-slider-allenamento-training-adidas-2026-27.jpg",
             "mobile_image": "shopify://shop_images/1200X1600-slider-allenamento-training-adidas-2026-27.jpg",
             "subheading": "",
@@ -171,10 +182,9 @@
       "blocks": {
         "collection_GTzH4q": {
           "type": "collection",
-          "disabled": true,
           "settings": {
             "collection": "kit-gara-home",
-            "products_count": 14,
+            "products_count": 18,
             "title": "",
             "link_url": "shopify://collections/kit-gara-home",
             "link_text": "Scopri Home Kit 26/27",
@@ -187,7 +197,6 @@
       "block_order": [
         "collection_GTzH4q"
       ],
-      "disabled": true,
       "name": "Carousel Home Kit 26/27",
       "settings": {
         "separate_section_with_border": false,
@@ -197,6 +206,53 @@
         "products_per_row_desktop": 4,
         "content_position": "start",
         "main_title": "Home Kit 26/27"
+      }
+    },
+    "react_product_selector_rjQCQY": {
+      "type": "react-product-selector",
+      "disabled": true,
+      "name": "React Quick Buy",
+      "settings": {
+        "section_title": "Quick Buy"
+      }
+    },
+    "image_with_text_overlay_9r3DMW": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading_XQpxPm": {
+          "type": "heading",
+          "settings": {
+            "text": ""
+          }
+        },
+        "button_DKhWaD": {
+          "type": "button",
+          "settings": {
+            "style": "outline",
+            "text": "Scopri di più",
+            "url": "shopify://collections/kit-gara-third",
+            "button_style": "link",
+            "button_variant": "secondary"
+          }
+        }
+      },
+      "block_order": [
+        "heading_XQpxPm",
+        "button_DKhWaD"
+      ],
+      "name": "THIRD KIT 26/27 - Image with text overlaY",
+      "settings": {
+        "image_size": "auto",
+        "image": "shopify://shop_images/2500x900-slider-third-kit-26-27.jpg",
+        "mobile_image": "shopify://shop_images/1200x1600-slider-third-kit-26-27--slider-third-kit-26-27.jpg",
+        "allow_transparent_header": false,
+        "reveal_on_scroll": true,
+        "remove_vertical_spacing": false,
+        "content_width": "xs",
+        "mobile_text_position": "place-self-end-center text-center",
+        "desktop_text_position": "sm:place-self-end-center sm:text-center",
+        "overlay_bg": true,
+        "style_olverlay": "gradient"
       }
     },
     "featured_collections_R6YEWx": {
@@ -232,35 +288,35 @@
         "main_title": "Third Kit 26/27"
       }
     },
-    "image_with_text_overlay_DPXRU8": {
+    "image_with_text_overlay_789TTQ": {
       "type": "image-with-text-overlay",
       "blocks": {
-        "heading_zfhdLq": {
+        "heading_YBgVB8": {
           "type": "heading",
           "settings": {
             "text": ""
           }
         },
-        "button_WntLCN": {
+        "button_b9YAwK": {
           "type": "button",
           "settings": {
             "style": "outline",
-            "text": "Personalizza la tua Maglia con la patch della Champions League",
-            "url": "shopify://products/maglia-match-as-roma-home-authentic-2026-27",
+            "text": "Scopri di più",
+            "url": "shopify://collections/kit-gara-away",
             "button_style": "link",
             "button_variant": "secondary"
           }
         }
       },
       "block_order": [
-        "heading_zfhdLq",
-        "button_WntLCN"
+        "heading_YBgVB8",
+        "button_b9YAwK"
       ],
-      "name": "PATCH CHAMPIONS - Image with text overlay",
+      "name": "AWAY KIT 26/27 - Image with text overlaY",
       "settings": {
-        "image_size": "sm",
-        "image": "shopify://shop_images/2500x900-slider-patch-champions-league.jpg",
-        "mobile_image": "shopify://shop_images/1100x1500-slider-patch-champions-league.webp",
+        "image_size": "auto",
+        "image": "shopify://shop_images/2500x900-slider-away-kit-26-27.jpg",
+        "mobile_image": "shopify://shop_images/1200x1600-slider-away-kit-26-27.jpg",
         "allow_transparent_header": false,
         "reveal_on_scroll": true,
         "remove_vertical_spacing": false,
@@ -276,7 +332,6 @@
       "blocks": {
         "collection_NMUj8U": {
           "type": "collection",
-          "disabled": true,
           "settings": {
             "collection": "kit-gara-away",
             "products_count": 9,
@@ -292,7 +347,6 @@
       "block_order": [
         "collection_NMUj8U"
       ],
-      "disabled": true,
       "name": "Carousel Away Kit 26/27",
       "settings": {
         "separate_section_with_border": false,
@@ -301,39 +355,38 @@
         "products_per_row_mobile": "2",
         "products_per_row_desktop": 4,
         "content_position": "start",
-        "main_title": "Away Kit 26/27"
+        "main_title": "Home Kit 26/27"
       }
     },
-    "image_with_text_overlay_9r3DMW": {
+    "image_with_text_overlay_DPXRU8": {
       "type": "image-with-text-overlay",
       "blocks": {
-        "heading_XQpxPm": {
+        "heading_zfhdLq": {
           "type": "heading",
           "settings": {
             "text": ""
           }
         },
-        "button_DKhWaD": {
+        "button_WntLCN": {
           "type": "button",
           "settings": {
             "style": "outline",
-            "text": "Scopri di più",
-            "url": "shopify://collections/kit-gara-home",
+            "text": "Personalizza la tua Maglia con la patch della Champions League",
+            "url": "shopify://collections/kit-gara-away",
             "button_style": "link",
             "button_variant": "secondary"
           }
         }
       },
       "block_order": [
-        "heading_XQpxPm",
-        "button_DKhWaD"
+        "heading_zfhdLq",
+        "button_WntLCN"
       ],
-      "disabled": true,
-      "name": "HOME KIT 25/26 - Image with text overlay - NEW ERA",
+      "name": "PATCH CHAMPIONS - Image with text overlay",
       "settings": {
         "image_size": "sm",
-        "image": "shopify://shop_images/2500x900-slider-as-roma-home-kit-26-27.jpg",
-        "mobile_image": "shopify://shop_images/1200x1600-slider-as-roma-home-kit-26-27..jpg",
+        "image": "shopify://shop_images/2500x900_0973e712-1fe7-4828-9bdf-7efec88be27f.jpg",
+        "mobile_image": "shopify://shop_images/1200x1600_3b1234ef-661a-471f-ae21-bd68d3e352c3.jpg",
         "allow_transparent_header": false,
         "reveal_on_scroll": true,
         "remove_vertical_spacing": false,
@@ -342,79 +395,6 @@
         "desktop_text_position": "sm:place-self-end-center sm:text-center",
         "overlay_bg": true,
         "style_olverlay": "gradient"
-      }
-    },
-    "image_with_text_overlay_nAPepk": {
-      "type": "image-with-text-overlay",
-      "blocks": {
-        "heading_y6deXL": {
-          "type": "heading",
-          "settings": {
-            "text": ""
-          }
-        },
-        "button_wJjL9Q": {
-          "type": "button",
-          "settings": {
-            "style": "outline",
-            "text": "Maglie Retro",
-            "url": "shopify://collections/maglie-retro-as-roma",
-            "button_style": "link",
-            "button_variant": "secondary"
-          }
-        }
-      },
-      "block_order": [
-        "heading_y6deXL",
-        "button_wJjL9Q"
-      ],
-      "disabled": true,
-      "name": "Maglia 2001-02 - Image with text overlay",
-      "settings": {
-        "image_size": "sm",
-        "image": "shopify://shop_images/2500x900-slider-maglia-2001-02.webp",
-        "mobile_image": "shopify://shop_images/1100x1500-slider-maglia-2001-2002.webp",
-        "allow_transparent_header": false,
-        "reveal_on_scroll": true,
-        "remove_vertical_spacing": false,
-        "content_width": "xs",
-        "mobile_text_position": "place-self-end-center text-center",
-        "desktop_text_position": "sm:place-self-end-center sm:text-center",
-        "overlay_bg": true,
-        "style_olverlay": "gradient"
-      }
-    },
-    "featured_collections_FHYDTc": {
-      "type": "featured-collections",
-      "blocks": {
-        "collection_cFNyeg": {
-          "type": "collection",
-          "disabled": true,
-          "settings": {
-            "collection": "carousel-saldi-adidas-50-off",
-            "products_count": 14,
-            "title": "",
-            "link_url": "shopify://collections/carousel-saldi-adidas-50-off",
-            "link_text": "Scopri i saldi Adidas",
-            "link_type": "primary",
-            "link_position": "bottom",
-            "show_icon": true
-          }
-        }
-      },
-      "block_order": [
-        "collection_cFNyeg"
-      ],
-      "disabled": true,
-      "name": "Carousel SALDI",
-      "settings": {
-        "separate_section_with_border": false,
-        "hide_product_information": false,
-        "stack_products": false,
-        "products_per_row_mobile": "1",
-        "products_per_row_desktop": 6,
-        "content_position": "start",
-        "main_title": "Saldi Adidas 50% OFF"
       }
     },
     "image_with_text_overlay_X4pt4h": {
@@ -487,6 +467,78 @@
         "main_title": "Training 2026/27"
       }
     },
+    "image_with_text_overlay_nAPepk": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading_y6deXL": {
+          "type": "heading",
+          "settings": {
+            "text": ""
+          }
+        },
+        "button_wJjL9Q": {
+          "type": "button",
+          "settings": {
+            "style": "outline",
+            "text": "Maglie Retro",
+            "url": "shopify://collections/maglie-retro-as-roma",
+            "button_style": "link",
+            "button_variant": "secondary"
+          }
+        }
+      },
+      "block_order": [
+        "heading_y6deXL",
+        "button_wJjL9Q"
+      ],
+      "name": "Maglia 2001-02 - Image with text overlay",
+      "settings": {
+        "image_size": "sm",
+        "image": "shopify://shop_images/2500x900-slider-maglia-2001-02.webp",
+        "mobile_image": "shopify://shop_images/1100x1500-slider-maglia-2001-2002.webp",
+        "allow_transparent_header": false,
+        "reveal_on_scroll": true,
+        "remove_vertical_spacing": false,
+        "content_width": "xs",
+        "mobile_text_position": "place-self-end-center text-center",
+        "desktop_text_position": "sm:place-self-end-center sm:text-center",
+        "overlay_bg": true,
+        "style_olverlay": "gradient"
+      }
+    },
+    "featured_collections_FHYDTc": {
+      "type": "featured-collections",
+      "blocks": {
+        "collection_cFNyeg": {
+          "type": "collection",
+          "disabled": true,
+          "settings": {
+            "collection": "carousel-saldi-adidas-50-off",
+            "products_count": 14,
+            "title": "",
+            "link_url": "shopify://collections/carousel-saldi-adidas-50-off",
+            "link_text": "Scopri i saldi Adidas",
+            "link_type": "primary",
+            "link_position": "bottom",
+            "show_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "collection_cFNyeg"
+      ],
+      "disabled": true,
+      "name": "Carousel SALDI",
+      "settings": {
+        "separate_section_with_border": false,
+        "hide_product_information": false,
+        "stack_products": false,
+        "products_per_row_mobile": "1",
+        "products_per_row_desktop": 6,
+        "content_position": "start",
+        "main_title": "Saldi Adidas 50% OFF"
+      }
+    },
     "featured_collections_YjUqG4": {
       "type": "featured-collections",
       "blocks": {
@@ -519,14 +571,6 @@
         "main_title": "Elvis Lives x AS Roma"
       }
     },
-    "react_product_selector_rjQCQY": {
-      "type": "react-product-selector",
-      "disabled": true,
-      "name": "React Quick Buy",
-      "settings": {
-        "section_title": "Quick Buy"
-      }
-    },
     "image_with_text_overlay_UWqAgN": {
       "type": "image-with-text-overlay",
       "blocks": {
@@ -554,8 +598,8 @@
       "name": "Image with text overlay - NEW ERA",
       "settings": {
         "image_size": "sm",
-        "image": "shopify://shop_images/2500x900-slider-centrale-home-page.new-era-bucket.jpg",
-        "mobile_image": "shopify://shop_images/1100x1500-slider-new-era-spring-2026-new.jpg",
+        "image": "shopify://shop_images/ROMA_2500x9003_3e5cb576-8ac6-4f73-8cdf-8fc619673ce3.webp",
+        "mobile_image": "shopify://shop_images/ROMA_1200x16003_4ac71bbd-0ec2-43f0-b283-7f7af61da5b7.webp",
         "allow_transparent_header": false,
         "reveal_on_scroll": true,
         "remove_vertical_spacing": false,
@@ -682,125 +726,6 @@
         "content": ""
       }
     },
-    "collection_list_Hdq6iU": {
-      "type": "collection-list",
-      "blocks": {
-        "banner_dKG6fU": {
-          "type": "banner",
-          "settings": {
-            "image": "shopify://shop_images/2500x900-slider-sainth-bart-x-as-roma-summer-2026.webp",
-            "expand_banner": false,
-            "content_position": "place-self-end-start text-start",
-            "subheading": "",
-            "title": "Saint Barth",
-            "button_position": "start",
-            "button_text": "SCOPRI",
-            "button_link": "shopify://collections/carousel-mare-e-piscina",
-            "button_style": "solid",
-            "button_variant": "primary",
-            "use_button_icon": false,
-            "overlay_position": "top"
-          }
-        },
-        "product_U9pQWw": {
-          "type": "product",
-          "name": "product - Asciugamani",
-          "settings": {
-            "product": "",
-            "image": "shopify://shop_images/1500x1500-slider-teli-mare-promoline.webp",
-            "expand_product": false,
-            "content_position": "place-self-end-start text-start",
-            "subheading": "",
-            "title": "Teli Mare",
-            "button_position": "end",
-            "button_text": "",
-            "button_link": "shopify://collections/summer-essential-2",
-            "button_style": "solid",
-            "button_variant": "primary",
-            "add_icon_to_button": true,
-            "overlay_position": "top"
-          }
-        },
-        "product_GNpAgE": {
-          "type": "product",
-          "settings": {
-            "product": "",
-            "image": "shopify://shop_images/1500x1500-slider-ciabatte.jpg",
-            "expand_product": false,
-            "content_position": "place-self-end-start text-start",
-            "subheading": "",
-            "title": "Ciabatte",
-            "button_position": "end",
-            "button_text": "",
-            "button_link": "shopify://collections/summer-essential-as-roma",
-            "button_style": "solid",
-            "button_variant": "primary",
-            "add_icon_to_button": true,
-            "overlay_position": "top"
-          }
-        },
-        "product_tekECb": {
-          "type": "product",
-          "name": "product Casco",
-          "settings": {
-            "product": "",
-            "image": "shopify://shop_images/slider_casco-as-roma_1500x1500_0f696730-9e34-42fa-88b9-b1d5e2cf1d3c.jpg",
-            "expand_product": false,
-            "content_position": "place-self-end-start text-start",
-            "subheading": "",
-            "title": "Casco AS Roma",
-            "button_position": "end",
-            "button_text": "",
-            "button_link": "shopify://products/casco-moto-as-roma-con-visiera-duraleu",
-            "button_style": "solid",
-            "button_variant": "primary",
-            "add_icon_to_button": true,
-            "overlay_position": "top"
-          }
-        },
-        "product_B9BVaH": {
-          "type": "product",
-          "name": "product - GIN",
-          "settings": {
-            "product": "",
-            "image": "shopify://shop_images/AETERNAGIN.jpg",
-            "expand_product": false,
-            "content_position": "place-self-end-start text-start",
-            "subheading": "",
-            "title": "Aeterna Gin",
-            "button_position": "end",
-            "button_text": "",
-            "button_link": "shopify://products/aeterna-gin-70-cl-as-roma",
-            "button_style": "solid",
-            "button_variant": "primary",
-            "add_icon_to_button": true,
-            "overlay_position": "top"
-          }
-        }
-      },
-      "block_order": [
-        "banner_dKG6fU",
-        "product_U9pQWw",
-        "product_GNpAgE",
-        "product_tekECb",
-        "product_B9BVaH"
-      ],
-      "name": "Collection - MARE",
-      "settings": {
-        "separate_section_with_border": false,
-        "image_size": "lg",
-        "show_text_outside": false,
-        "space_items": true,
-        "remove_container": true,
-        "stack_collections": false,
-        "collections_per_row_desktop": 2,
-        "stack_collections_mobile": false,
-        "collections_per_row_mobile": "1",
-        "subheading": "",
-        "title": "",
-        "content": ""
-      }
-    },
     "image_with_text_overlay_RbQewL": {
       "type": "image-with-text-overlay",
       "blocks": {
@@ -814,7 +739,7 @@
           "type": "button",
           "settings": {
             "style": "outline",
-            "text": "Scopri il Back To School Seven",
+            "text": "Scopri il Back To School AS Roma",
             "url": "shopify://collections/seven-scuola",
             "button_style": "link",
             "button_variant": "secondary"
@@ -866,7 +791,7 @@
       ],
       "name": "Image with text overlay - AD ASTRA",
       "settings": {
-        "image_size": "sm",
+        "image_size": "auto",
         "image": "shopify://shop_images/2500x900-slider-tshirt-celebrativa-25-26-ad-astra.webp",
         "mobile_image": "shopify://shop_images/1200x1600-slider-tshirt-celebrativa-25-26-ad-astra.webp",
         "allow_transparent_header": false,
@@ -958,17 +883,17 @@
         "style_olverlay": "gradient"
       }
     },
-    "featured_collections_7enzFL": {
+    "featured_collections_ecqrJR": {
       "type": "featured-collections",
       "blocks": {
-        "collection_de4JWT": {
+        "collection_KiMBWe": {
           "type": "collection",
           "settings": {
-            "collection": "seven-scuola",
+            "collection": "accessori-casa-cucina",
             "products_count": 15,
             "title": "",
-            "link_url": "shopify://collections/seven-scuola",
-            "link_text": "Scopri la collezione Seven per la scuola",
+            "link_url": "shopify://collections/accessori-casa-cucina-carousel",
+            "link_text": "La tua casa Giallorossa",
             "link_type": "primary",
             "link_position": "bottom",
             "show_icon": true
@@ -976,10 +901,9 @@
         }
       },
       "block_order": [
-        "collection_de4JWT"
+        "collection_KiMBWe"
       ],
-      "disabled": true,
-      "name": "Carousel Seven Scuola",
+      "name": "Carousel La tua casa Giallorossa",
       "settings": {
         "separate_section_with_border": false,
         "hide_product_information": false,
@@ -987,7 +911,7 @@
         "products_per_row_mobile": "1",
         "products_per_row_desktop": 6,
         "content_position": "start",
-        "main_title": "Seven Scuola"
+        "main_title": "La tua casa Giallorossa"
       }
     },
     "featured_collections_Wd4tnG": {
@@ -1293,8 +1217,28 @@
             "overlay_position": "top"
           }
         },
+        "collection_TNTgYJ": {
+          "type": "collection",
+          "disabled": true,
+          "settings": {
+            "collection": "abbigliamento-uomo-felpe",
+            "image": "shopify://shop_images/1500x1500-elvis-lives-felpe.webp",
+            "expand_collection": false,
+            "content_position": "place-self-end-center text-center",
+            "subheading": "",
+            "title": "Felpe",
+            "button_position": "center",
+            "button_text": "SCOPRI DI PIÙ",
+            "button_link": "shopify://collections/abbigliamento-uomo-felpe",
+            "button_style": "solid",
+            "button_variant": "primary",
+            "add_icon_to_button": false,
+            "overlay_position": "top"
+          }
+        },
         "collection_mBTU8A": {
           "type": "collection",
+          "disabled": true,
           "settings": {
             "collection": "",
             "image": "shopify://shop_images/slider_casco-as-roma_1500x1500_0f696730-9e34-42fa-88b9-b1d5e2cf1d3c.jpg",
@@ -1365,25 +1309,6 @@
             "overlay_position": "top"
           }
         },
-        "collection_xqEm4Y": {
-          "type": "collection",
-          "disabled": true,
-          "settings": {
-            "collection": "collection-uomo-saint-barth",
-            "image": "shopify://shop_images/1500x1500-slider-saint-bart-boxer.webp",
-            "expand_collection": false,
-            "content_position": "place-self-end-center text-center",
-            "subheading": "",
-            "title": "Saint Barth",
-            "button_position": "center",
-            "button_text": "SCOPRI DI PIÙ",
-            "button_link": "shopify://collections/collection-uomo-saint-barth",
-            "button_style": "solid",
-            "button_variant": "primary",
-            "add_icon_to_button": false,
-            "overlay_position": "top"
-          }
-        },
         "collection_JDzgdX": {
           "type": "collection",
           "disabled": true,
@@ -1428,11 +1353,11 @@
         "collection_bHVJHc",
         "collection_DUJfBh",
         "collection_QfNrUV",
+        "collection_TNTgYJ",
         "collection_mBTU8A",
         "collection_BjakaA",
         "collection_6y7Fti",
         "collection_C6WYpH",
-        "collection_xqEm4Y",
         "collection_JDzgdX",
         "collection_KX4H8q"
       ],
@@ -1471,24 +1396,24 @@
   "order": [
     "slideshow",
     "featured_collections_rz8tcb",
-    "featured_collections_R6YEWx",
-    "image_with_text_overlay_DPXRU8",
-    "featured_collections_cYJfTj",
+    "react_product_selector_rjQCQY",
     "image_with_text_overlay_9r3DMW",
-    "image_with_text_overlay_nAPepk",
-    "featured_collections_FHYDTc",
+    "featured_collections_R6YEWx",
+    "image_with_text_overlay_789TTQ",
+    "featured_collections_cYJfTj",
+    "image_with_text_overlay_DPXRU8",
     "image_with_text_overlay_X4pt4h",
     "featured_collections_ApeepC",
+    "image_with_text_overlay_nAPepk",
+    "featured_collections_FHYDTc",
     "featured_collections_YjUqG4",
-    "react_product_selector_rjQCQY",
     "image_with_text_overlay_UWqAgN",
     "collection_list_NVDbTz",
-    "collection_list_Hdq6iU",
     "image_with_text_overlay_RbQewL",
     "image_with_text_overlay_dkChtV",
     "image_with_text_overlay_Rd3Jwz",
     "image_with_text_overlay_BfnkBE",
-    "featured_collections_7enzFL",
+    "featured_collections_ecqrJR",
     "featured_collections_Wd4tnG",
     "image_with_text_overlay_kmgPhM",
     "collection_list_6AEpY3",

@@ -1,1 +1,299 @@
-{"type":"header","name":"Header group","sections":{"announcement_bar_McT9Bq":{"type":"announcement-bar","blocks":{"message_F8NQaN":{"type":"message","settings":{"text":"<a href=\"https:\/\/store.asroma.com\/collections\/kit-gara-home\" title=\"https:\/\/store.asroma.com\/collections\/kit-gara-home\">New In Home Kit 26\/27<\/a> 🔥"}},"message_8EJgTK":{"type":"message","disabled":true,"settings":{"text":"<a href=\"\/collections\/kit-gara-away\" title=\"Kit Gara Away\">New In Away Kit 26\/27<\/a> 🔥"}},"message_9J6Yac":{"type":"message","disabled":true,"settings":{"text":"<a href=\"https:\/\/store.asroma.com\/collections\/adidas-dna\" title=\"https:\/\/store.asroma.com\/collections\/adidas-dna\">Adidas DNA 26\/27<\/a>"}},"message_AdDKyR":{"type":"message","disabled":true,"settings":{"text":"<a href=\"https:\/\/store.asroma.com\/pages\/sconto-abbonati-2026-27\" title=\"https:\/\/store.asroma.com\/pages\/sconto-abbonati-2026-27\">Sconto Abbonati 26\/27 <\/a>📣"}},"message_PqTtHr":{"type":"message","disabled":true,"settings":{"text":"<a href=\"https:\/\/store.asroma.com\/collections\/allenamento\" title=\"https:\/\/store.asroma.com\/collections\/allenamento\">Adidas Training 26\/27<\/a>🚀"}}},"block_order":["message_F8NQaN","message_8EJgTK","message_9J6Yac","message_AdDKyR","message_PqTtHr"],"name":"Announcement Bar","settings":{"color_scheme":"scheme-3","enable_sticky":false,"show_arrow_buttons":false,"autoplay":true,"cycle_speed":6,"desktop_font_size":11,"mobile_font_size":10,"logo_my_asr":"shopify:\/\/shop_images\/logo-my-asr.png","show_country_selector":true,"show_country_name":true,"show_country_flag":false,"show_locale_selector":true}},"header":{"type":"header","blocks":{"mega_menu_VgkKrT":{"type":"mega_menu","settings":{"menu_item":"Kit Gara 26\/27","content_position":"start","collections_header_image_height":160,"show_collections_header_image_on_mobile":false,"images_position":"right","image_1":"shopify:\/\/shop_images\/300x300-slider-as-roma-home-kit-26-27..jpg","image_1_heading":"","image_1_text":"VEDI TUTTO","image_1_link":"shopify:\/\/collections\/kit-gara-home","image_2_heading":"","image_2_text":"","image_2_link":""}},"mega_menu_TXeTWr":{"type":"mega_menu","settings":{"menu_item":"Kit Home 26\/27","content_position":"start","collections_header_image_height":160,"show_collections_header_image_on_mobile":false,"images_position":"right","image_1_heading":"","image_1_text":"","image_1_link":"","image_2_heading":"","image_2_text":"","image_2_link":""}},"mega_menu_nf8ycj":{"type":"mega_menu","settings":{"menu_item":"Allenamento 26\/27","content_position":"start","collections_header_image_height":160,"show_collections_header_image_on_mobile":false,"images_position":"right","image_1":"shopify:\/\/shop_images\/300X300-slider-allenamento-training-adidas-2026-27.jpg","image_1_heading":"","image_1_text":"VEDI TUTTO","image_1_link":"shopify:\/\/collections\/allenamento","image_2_heading":"","image_2_text":"","image_2_link":""}},"mega_menu_dYamtm":{"type":"mega_menu","settings":{"menu_item":"Abbigliamento","content_position":"start","collections_header_image_height":160,"show_collections_header_image_on_mobile":false,"images_position":"right","image_1":"shopify:\/\/shop_images\/1280x1280-adidas-originals-all-items.jpg","image_1_heading":"","image_1_text":"VEDI TUTTO","image_1_link":"shopify:\/\/collections\/abbigliamento-adulto-e-bambino","image_2_heading":"","image_2_text":"","image_2_link":""}},"mega_menu_q6GrUa":{"type":"mega_menu","settings":{"menu_item":"Apparel","content_position":"start","collections_header_image_height":160,"show_collections_header_image_on_mobile":false,"images_position":"right","image_1_heading":"","image_1_text":"","image_1_link":"","image_2_heading":"","image_2_text":"","image_2_link":""}},"mega_menu_jTmmqY":{"type":"mega_menu","settings":{"menu_item":"Collection","content_position":"start","collections_header_image_height":80,"show_collections_header_image_on_mobile":true,"images_position":"right","image_1":"shopify:\/\/shop_images\/sr9a5527.jpg","image_1_heading":"","image_1_text":"VEDI TUTTO","image_1_link":"shopify:\/\/collections\/collection","image_2_heading":"","image_2_text":"","image_2_link":""}},"mega_menu_848699":{"type":"mega_menu","settings":{"menu_item":"Accessori","content_position":"start","collections_header_image_height":80,"show_collections_header_image_on_mobile":true,"images_position":"right","image_1":"shopify:\/\/shop_images\/1280x1280-banner-new-era-2026.jpg","image_1_heading":"","image_1_text":"VEDI TUTTO","image_1_link":"shopify:\/\/collections\/accessori","image_2_heading":"","image_2_text":"","image_2_link":""}},"mega_menu_dC8ThN":{"type":"mega_menu","settings":{"menu_item":"shop by logo","content_position":"center","collections_header_image_height":80,"show_collections_header_image_on_mobile":true,"images_position":"right","image_1_heading":"","image_1_text":"","image_1_link":"","image_2_heading":"","image_2_text":"","image_2_link":""}},"mega_menu_qibbKF":{"type":"mega_menu","settings":{"menu_item":"Promozioni","content_position":"start","collections_header_image_height":160,"show_collections_header_image_on_mobile":false,"images_position":"right","image_1_heading":"","image_1_text":"","image_1_link":"","image_2_heading":"","image_2_text":"","image_2_link":""}},"mega_menu_gtPjg9":{"type":"mega_menu","name":"Saldi","settings":{"menu_item":"Promozioni","content_position":"start","collections_header_image_height":160,"show_collections_header_image_on_mobile":false,"images_position":"right","image_1_heading":"","image_1_text":"","image_1_link":"shopify:\/\/collections\/saldi-as-roma","image_2_heading":"","image_2_text":"","image_2_link":""}}},"block_order":["mega_menu_VgkKrT","mega_menu_TXeTWr","mega_menu_nf8ycj","mega_menu_dYamtm","mega_menu_q6GrUa","mega_menu_jTmmqY","mega_menu_848699","mega_menu_dC8ThN","mega_menu_qibbKF","mega_menu_gtPjg9"],"settings":{"color_scheme":"scheme-1","enable_sticky":true,"hide_on_scroll":false,"show_separation_border":true,"reduce_padding":false,"enable_sidebar":false,"logo":"{{shop.brand.logo}}","logo_max_width":117,"logo_mobile_max_width":109,"menu":"main-menu-saldi","sidebar_menu":"","menu_open_trigger":"hover","menu_text_font":"heading","enable_search":true,"sidebar_color_scheme":"schema-2","sidebar_text_font":"heading","sidebar_show_dividers":false,"sidebar_open_second_level_menus":false,"layout":"logo_left_navigation_inline","show_icons":true,"show_customer_account":false,"show_country_selector":true,"show_country_name":true,"show_country_flag":false,"mobile_footer_logo":"shopify:\/\/shop_images\/Screenshot_2025-09-29_at_11.57.05.png","show_locale_selector":true,"transparent_header_text_color":"#ffffff"}},"breadcrumbs_4XhqQK":{"type":"breadcrumbs","name":"Breadcrumbs","settings":{"menu":"main-menu","content_width":"full"}}},"order":["announcement_bar_McT9Bq","header","breadcrumbs_4XhqQK"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "type": "header",
+  "name": "Header group",
+  "sections": {
+    "announcement_bar_McT9Bq": {
+      "type": "announcement-bar",
+      "blocks": {
+        "message_Pjfzef": {
+          "type": "message",
+          "settings": {
+            "text": "<a href=\"/collections/saldi-as-roma\" title=\"Saldi AS Roma\">Adidas Promozioni</a> 📣"
+          }
+        },
+        "message_F8NQaN": {
+          "type": "message",
+          "disabled": true,
+          "settings": {
+            "text": "<a href=\"https://store.asroma.com/collections/kit-gara-third\" title=\"https://store.asroma.com/collections/kit-gara-third\">Third Kit 26/27🔥</a>"
+          }
+        },
+        "message_9J6Yac": {
+          "type": "message",
+          "settings": {
+            "text": "<a href=\"https://store.asroma.com/collections/adidas-dna\" title=\"https://store.asroma.com/collections/adidas-dna\">Adidas DNA 26/27 </a>⭐"
+          }
+        },
+        "message_AdDKyR": {
+          "type": "message",
+          "disabled": true,
+          "settings": {
+            "text": "<a href=\"https://store.asroma.com/pages/sconto-abbonati-2026-27\" title=\"https://store.asroma.com/pages/sconto-abbonati-2026-27\">Sconto Abbonati 26/27 </a>📣"
+          }
+        },
+        "message_PqTtHr": {
+          "type": "message",
+          "settings": {
+            "text": "<a href=\"/collections/kit-gara-away\" title=\"Kit Gara Away\">Away Kit 2026/27</a> 🔥"
+          }
+        }
+      },
+      "block_order": [
+        "message_Pjfzef",
+        "message_F8NQaN",
+        "message_9J6Yac",
+        "message_AdDKyR",
+        "message_PqTtHr"
+      ],
+      "name": "Announcement Bar",
+      "settings": {
+        "color_scheme": "scheme-3",
+        "enable_sticky": false,
+        "show_arrow_buttons": false,
+        "autoplay": true,
+        "cycle_speed": 6,
+        "desktop_font_size": 11,
+        "mobile_font_size": 10,
+        "logo_my_asr": "shopify://shop_images/logo-my-asr.png",
+        "show_country_selector": true,
+        "show_country_name": true,
+        "show_country_flag": false,
+        "show_locale_selector": true
+      }
+    },
+    "header": {
+      "type": "header",
+      "blocks": {
+        "mega_menu_VgkKrT": {
+          "type": "mega_menu",
+          "settings": {
+            "menu_item": "Kit Gara 26/27",
+            "content_position": "start",
+            "collections_header_image_height": 160,
+            "show_collections_header_image_on_mobile": false,
+            "images_position": "right",
+            "image_1": "shopify://shop_images/300x300-slider-as-roma-home-kit-26-27..jpg",
+            "image_1_heading": "",
+            "image_1_text": "VEDI TUTTO",
+            "image_1_link": "shopify://collections/kit-gara-home",
+            "image_2_heading": "",
+            "image_2_text": "",
+            "image_2_link": ""
+          }
+        },
+        "mega_menu_TXeTWr": {
+          "type": "mega_menu",
+          "settings": {
+            "menu_item": "Kit Home 26/27",
+            "content_position": "start",
+            "collections_header_image_height": 160,
+            "show_collections_header_image_on_mobile": false,
+            "images_position": "right",
+            "image_1_heading": "",
+            "image_1_text": "",
+            "image_1_link": "",
+            "image_2_heading": "",
+            "image_2_text": "",
+            "image_2_link": ""
+          }
+        },
+        "mega_menu_nf8ycj": {
+          "type": "mega_menu",
+          "settings": {
+            "menu_item": "Allenamento 26/27",
+            "content_position": "start",
+            "collections_header_image_height": 160,
+            "show_collections_header_image_on_mobile": false,
+            "images_position": "right",
+            "image_1": "shopify://shop_images/300X300-slider-allenamento-training-adidas-2026-27.jpg",
+            "image_1_heading": "",
+            "image_1_text": "VEDI TUTTO",
+            "image_1_link": "shopify://collections/allenamento",
+            "image_2_heading": "",
+            "image_2_text": "",
+            "image_2_link": ""
+          }
+        },
+        "mega_menu_dYamtm": {
+          "type": "mega_menu",
+          "settings": {
+            "menu_item": "Abbigliamento",
+            "content_position": "start",
+            "collections_header_image_height": 160,
+            "show_collections_header_image_on_mobile": false,
+            "images_position": "right",
+            "image_1": "shopify://shop_images/1280x1280-adidas-originals-all-items.jpg",
+            "image_1_heading": "",
+            "image_1_text": "VEDI TUTTO",
+            "image_1_link": "shopify://collections/abbigliamento-adulto-e-bambino",
+            "image_2_heading": "",
+            "image_2_text": "",
+            "image_2_link": ""
+          }
+        },
+        "mega_menu_q6GrUa": {
+          "type": "mega_menu",
+          "settings": {
+            "menu_item": "Apparel",
+            "content_position": "start",
+            "collections_header_image_height": 160,
+            "show_collections_header_image_on_mobile": false,
+            "images_position": "right",
+            "image_1_heading": "",
+            "image_1_text": "",
+            "image_1_link": "",
+            "image_2_heading": "",
+            "image_2_text": "",
+            "image_2_link": ""
+          }
+        },
+        "mega_menu_jTmmqY": {
+          "type": "mega_menu",
+          "settings": {
+            "menu_item": "Collection",
+            "content_position": "start",
+            "collections_header_image_height": 80,
+            "show_collections_header_image_on_mobile": true,
+            "images_position": "right",
+            "image_1": "shopify://shop_images/sr9a5527.jpg",
+            "image_1_heading": "",
+            "image_1_text": "VEDI TUTTO",
+            "image_1_link": "shopify://collections/collection",
+            "image_2_heading": "",
+            "image_2_text": "",
+            "image_2_link": ""
+          }
+        },
+        "mega_menu_848699": {
+          "type": "mega_menu",
+          "settings": {
+            "menu_item": "Accessori",
+            "content_position": "start",
+            "collections_header_image_height": 80,
+            "show_collections_header_image_on_mobile": true,
+            "images_position": "right",
+            "image_1": "shopify://shop_images/330x330-slider-new-era-2627.webp",
+            "image_1_heading": "",
+            "image_1_text": "VEDI TUTTO",
+            "image_1_link": "shopify://collections/accessori",
+            "image_2_heading": "",
+            "image_2_text": "",
+            "image_2_link": ""
+          }
+        },
+        "mega_menu_dC8ThN": {
+          "type": "mega_menu",
+          "settings": {
+            "menu_item": "shop by logo",
+            "content_position": "center",
+            "collections_header_image_height": 80,
+            "show_collections_header_image_on_mobile": true,
+            "images_position": "right",
+            "image_1_heading": "",
+            "image_1_text": "",
+            "image_1_link": "",
+            "image_2_heading": "",
+            "image_2_text": "",
+            "image_2_link": ""
+          }
+        },
+        "mega_menu_qibbKF": {
+          "type": "mega_menu",
+          "settings": {
+            "menu_item": "Promozioni",
+            "content_position": "start",
+            "collections_header_image_height": 160,
+            "show_collections_header_image_on_mobile": false,
+            "images_position": "right",
+            "image_1_heading": "",
+            "image_1_text": "",
+            "image_1_link": "",
+            "image_2_heading": "",
+            "image_2_text": "",
+            "image_2_link": ""
+          }
+        },
+        "mega_menu_gtPjg9": {
+          "type": "mega_menu",
+          "name": "Saldi",
+          "settings": {
+            "menu_item": "Promozioni",
+            "content_position": "start",
+            "collections_header_image_height": 160,
+            "show_collections_header_image_on_mobile": false,
+            "images_position": "right",
+            "image_1_heading": "",
+            "image_1_text": "",
+            "image_1_link": "shopify://collections/saldi-as-roma",
+            "image_2_heading": "",
+            "image_2_text": "",
+            "image_2_link": ""
+          }
+        }
+      },
+      "block_order": [
+        "mega_menu_VgkKrT",
+        "mega_menu_TXeTWr",
+        "mega_menu_nf8ycj",
+        "mega_menu_dYamtm",
+        "mega_menu_q6GrUa",
+        "mega_menu_jTmmqY",
+        "mega_menu_848699",
+        "mega_menu_dC8ThN",
+        "mega_menu_qibbKF",
+        "mega_menu_gtPjg9"
+      ],
+      "settings": {
+        "color_scheme": "scheme-1",
+        "enable_sticky": true,
+        "hide_on_scroll": false,
+        "show_separation_border": true,
+        "reduce_padding": false,
+        "enable_sidebar": false,
+        "logo": "{{shop.brand.logo}}",
+        "logo_max_width": 117,
+        "logo_mobile_max_width": 109,
+        "menu": "main-menu-saldi",
+        "sidebar_menu": "",
+        "menu_open_trigger": "hover",
+        "menu_text_font": "heading",
+        "enable_search": true,
+        "sidebar_color_scheme": "schema-2",
+        "sidebar_text_font": "heading",
+        "sidebar_show_dividers": false,
+        "sidebar_open_second_level_menus": false,
+        "layout": "logo_left_navigation_inline",
+        "show_icons": true,
+        "show_customer_account": false,
+        "show_country_selector": true,
+        "show_country_name": true,
+        "show_country_flag": false,
+        "mobile_footer_logo": "shopify://shop_images/Screenshot_2025-09-29_at_11.57.05.png",
+        "show_locale_selector": true,
+        "transparent_header_text_color": "#ffffff"
+      }
+    },
+    "breadcrumbs_4XhqQK": {
+      "type": "breadcrumbs",
+      "name": "Breadcrumbs",
+      "settings": {
+        "menu": "main-menu",
+        "content_width": "full"
+      }
+    }
+  },
+  "order": [
+    "announcement_bar_McT9Bq",
+    "header",
+    "breadcrumbs_4XhqQK"
+  ]
+}

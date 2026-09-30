@@ -169,7 +169,7 @@ only way to do it on Shopify right now.
           -%}
 
           {%- if is_customizable_product -%}
-            <div class="product-gallery__media product-gallery__media--customization snap-center is-initial" data-media-type="image" data-media-id="customization-preview" role="group" aria-label="{{ 'general.accessibility.item_nth_of_count' | t: index: 0, count: product.media.size | plus: 1 }}" hidden>
+            <div class="product-gallery__media product-gallery__media--customization snap-center is-initial" data-media-type="customization" data-media-id="customization-preview" role="group" aria-label="{{ 'general.accessibility.item_nth_of_count' | t: index: 0, count: product.media.size | plus: 1 }}" hidden>
               {%- render 'product-customization-preview'
                 , product: product
                 , useSharedHook: true

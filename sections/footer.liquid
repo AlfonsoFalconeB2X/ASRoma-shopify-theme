@@ -74,18 +74,22 @@
                   {%- if menu != blank and menu.links.size > 0 -%}
 
                     {%- capture menu_links -%}
-                      <ul class="v-stack unstyled-list footer-menu-list" role="list">
-                        {%- for link in menu.links -%}
-                          <li>
-                            <a href="{{ link.url }}" class="text-white link-faded">{{ link.title }}</a>
-                          </li>
-                        {%- endfor -%}
+  <ul class="v-stack unstyled-list footer-menu-list" role="list">
+    {%- for link in menu.links -%}
+      <li>
+        {%- if link.url contains 'Legal_guarantee_notice' or link.url contains 'Accessibility_Statement' or link.url contains 'ACR_technical_report' -%}
+          <a href="{{ link.url }}" class="text-white link-faded" target="_blank" rel="noopener noreferrer">{{ link.title }}</a>
+        {%- else -%}
+          <a href="{{ link.url }}" class="text-white link-faded">{{ link.title }}</a>
+        {%- endif -%}
+      </li>
+    {%- endfor -%}
 
-                        <div class="extra-link">
-                          {{ block.settings.extra_link }}
-                        </div>
-                      </ul>
-                    {%- endcapture -%}
+    <div class="extra-link">
+      {{ block.settings.extra_link }}
+    </div>
+  </ul>
+{%- endcapture -%}
 
                     <div class="hidden lg:block">
                       <div class="v-stack gap-3">
