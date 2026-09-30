@@ -2361,6 +2361,29 @@ p {
   transform: matrix(-1, 0, 0, -1, 0, 0);
 }
 
+.content-over-media > .content-over-media__link {
+  position: absolute;
+  z-index: 0;
+  max-width: none;
+  padding: 0;
+  background: none;
+  box-shadow: none;
+  grid-area: auto;
+  inset: 0;
+}
+
+.image-with-text > .image-with-text__link {
+  display: block;
+}
+@media screen and (min-width: 700px) {
+  .image-with-text:not(.image-with-text--reverse) > .image-with-text__link {
+    margin-inline-start: auto;
+  }
+  .image-with-text--reverse > .image-with-text__link {
+    order: 9999;
+  }
+}
+
 @media screen and (min-width: 1000px) {
   .shopify-section--featured-collections .container,
   .shopify-section--related-products .container,
