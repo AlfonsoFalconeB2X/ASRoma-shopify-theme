@@ -1,0 +1,29 @@
+# Shopify CLI theme environments
+# Uso: shopify theme <comando> -e <ambiente>
+#   shopify theme dev  -e development
+#   shopify theme push -e development
+#   shopify theme push -e production
+#
+# Non inserire password/token in questo file: usa la variabile d'ambiente
+# SHOPIFY_CLI_THEME_TOKEN (token dell'app Theme Access) oppure il login interattivo.
+
+[environments.development]
+store = "asromastore.myshopify.com"
+# ID del tema non pubblicato usato per lo sviluppo/staging
+theme = "189172875644"
+ignore = [
+  "config/settings_data.json",
+]
+
+[environments.production]
+store = "asromastore.myshopify.com"
+# ID del tema live (o del tema da pubblicare)
+theme = "183575052668"
+# Evita di sovrascrivere le personalizzazioni fatte dal Theme Editor
+ignore = [
+  "config/settings_data.json",
+  # "templates/*.json",
+  # "sections/*.json",
+]
+# Decommenta per consentire il push sul tema live senza conferma (es. in CI)
+# allow-live = true
