@@ -892,7 +892,7 @@
         "image": "shopify://shop_images/2500X900-slider-saldi-luglio-2026-ita.jpg",
         "mobile_image": "shopify://shop_images/1200X1600-slider-saldi-luglio-2026-ita.jpg",
         "enable_image_link": true,
-        "image_link": "",
+        "image_link": "shopify://collections/saldi-as-roma",
         "allow_transparent_header": false,
         "reveal_on_scroll": true,
         "remove_vertical_spacing": false,
