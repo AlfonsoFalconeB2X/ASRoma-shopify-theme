@@ -86,7 +86,9 @@
       },
       "maximum_width": "Largeur maximale",
       "mobile_maximum_width": "Largeur mobile maximale",
-      "ratio_avoid_cropping_info": "Choisissez \"Ratio original de l'image\" pour éviter de couper l'image. [En savoir plus](https://help.shopify.com/fr/manual/online-store/images/theme-images#part-f13b28eac99d324a)"
+      "ratio_avoid_cropping_info": "Choisissez \"Ratio original de l'image\" pour éviter de couper l'image. [En savoir plus](https://help.shopify.com/fr/manual/online-store/images/theme-images#part-f13b28eac99d324a)",
+      "enable_image_link": "Rendre l'image cliquable",
+      "image_link": "Lien de l'image"
     },
     "section": {
       "header_category": "Header de section",

@@ -63,6 +63,10 @@
           </div>
         </div>
       {%- endif -%}
+
+      {%- if section.settings.enable_image_link and section.settings.image_link != blank -%}
+        <a href="{{ section.settings.image_link }}" class="content-over-media__link" aria-label="{{ alt_text | default: shop.name | strip_html | escape }}"></a>
+      {%- endif -%}
     </image-banner>
   </div>
 {%- endif -%}
@@ -127,6 +131,18 @@
       "id": "mobile_image",
       "label": "t:global.image.mobile_image",
       "info": "t:sections.image_with_text_block.mobile_image_size_recommendation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_image_link",
+      "label": "t:global.image.enable_image_link",
+      "default": false
+    },
+    {
+      "type": "url",
+      "id": "image_link",
+      "label": "t:global.image.image_link",
+      "visible_if": "{{ section.settings.enable_image_link }}"
     },
     {
       "type": "select",
