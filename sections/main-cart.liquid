@@ -118,9 +118,12 @@
                 ----------------------------------------------------------------------------------------------------------------
                 ORDER SUMMARY — lista semantica accessibile (sostituisce table.order-summary)
                 WCAG 2.4.4 (51) · WCAG 1.1.1 (56)
+
+                Each product is a card (li > article) labelled by its title (h2). Columns (info · quantity · price) are
+                aligned across cards with CSS subgrid (see template-cart.css), like the previous table.
                 ----------------------------------------------------------------------------------------------------------------
               {%- endcomment -%}
-              <ul class="cart-items order-summary table--reduce-border" role="list" aria-labelledby="cart-items-count">
+              <ul class="cart-items" role="list" aria-labelledby="cart-items-count">
                 {%- assign gift_items = '' | split: '' -%}
                 {%- assign processed_groups = '' | split: '' -%}
 
@@ -128,6 +131,8 @@
                   {%- assign is_gift = false -%}
                   {%- assign group_id = null -%}
                   {%- assign is_main_product = false -%}
+                  {%- comment -%} handleize: the line item key contains ":" which breaks querySelector('#…') {%- endcomment -%}
+                  {%- assign item_title_id = 'cart-item-title-' | append: line_item.key | handleize -%}
 
                   {%- for property in line_item.properties -%}
                     {%- if property.first == '_Gifted' and property.last == 'true' -%}
@@ -148,92 +153,65 @@
                       {%- assign processed_groups = processed_groups | append: group_id | append: ',' | split: ',' -%}
 
                       {%- comment -%}
-                        Raccoglie i grouped items di questo gruppo per passarli al line-item principale.
-                        In questo modo vengono renderizzati DENTRO la card (non come righe sorelle).
+                        Customization items of the group (Wizz Air, Eurobet…): rendered as rows INSIDE the main product
+                        card, without a link to their (technical) product page.
                       {%- endcomment -%}
-                      {%- assign current_grouped_items = '' | split: '' -%}
-                      {%- for cart_item in cart.items -%}
-                        {%- assign cart_item_group_id = null -%}
-                        {%- assign cart_item_is_main = false -%}
-                        {%- for prop in cart_item.properties -%}
-                          {%- if prop.first == '_groupId' -%}
-                            {%- assign cart_item_group_id = prop.last -%}
-                          {%- elsif prop.first == '_mainProduct' and prop.last == 'true' -%}
-                            {%- assign cart_item_is_main = true -%}
+                      {%- capture grouped_rows -%}
+                        {%- for cart_item in cart.items -%}
+                          {%- assign cart_item_group_id = null -%}
+                          {%- assign cart_item_is_main = false -%}
+                          {%- for prop in cart_item.properties -%}
+                            {%- if prop.first == '_groupId' -%}
+                              {%- assign cart_item_group_id = prop.last -%}
+                            {%- elsif prop.first == '_mainProduct' and prop.last == 'true' -%}
+                              {%- assign cart_item_is_main = true -%}
+                            {%- endif -%}
+                          {%- endfor -%}
+
+                          {%- if cart_item_group_id == group_id and cart_item_is_main == false -%}
+                            <li class="cart-item__grouped-row">
+                              <div class="cart-item__cell cart-item__info">
+                                {%- render 'line-item'
+                                  , line_item: cart_item
+                                  , show_quantity_selector: false
+                                  , cart_grouped_line: true
+                                  , index: forloop.index0 -%}
+                              </div>
+
+                              <div class="cart-item__cell cart-item__price Body">
+                                {%- if cart_item.final_price > 0 -%}
+                                  {%- render 'price-list'
+                                    , line_item: cart_item
+                                    , context: 'cart' -%}
+                                {%- else -%}
+                                  {{ 'cart.general.free' | t }}
+                                {%- endif -%}
+                              </div>
+                            </li>
                           {%- endif -%}
                         {%- endfor -%}
-                        {%- if cart_item_group_id == group_id and cart_item_is_main == false -%}
-                          {%- assign current_grouped_items = current_grouped_items | concat: cart_item -%}
-                        {%- endif -%}
-                      {%- endfor -%}
+                      {%- endcapture -%}
 
-                      {%- comment -%} Render main product as card with grouped items inside {%- endcomment -%}
-                      <li class="cart-items__item{% if is_gift %} line-gift{% endif %}">
-                        {%- assign item_title_id = 'cart-item-title-' | append: line_item.key -%}
-                        <article class="line-item__card" aria-labelledby="{{ item_title_id }}">
-                          <div class="line-item__card-main">
-                            <div class="line-item__grouped-row-main">
-                              {%- render 'line-item'
-                                , line_item: line_item
-                                , show_quantity_selector: true
-                                , group_id: group_id
-                                , grouped_items: current_grouped_items
-                                , index: forloop.index0
-                                , title_id: item_title_id -%}
-                            </div>
-
-                            <div class="text-center line-item__grouped-row-main">
-                              <div class="v-stack gap-2">
-                                <line-item-quantity class="v-stack justify-items-center gap-2">
-                                  <a
-                                    href="#"
-                                    class="link text-xs md:hidden remove-group-link"
-                                    data-group-id="{{ group_id }}"
-                                    aria-label="{{ 'cart.order.remove_with_title' | t: title: line_item.title | escape }}">
-                                    {{- 'cart.order.remove' | t -}}
-                                  </a>
-                                </line-item-quantity>
-                              </div>
-                            </div>
-
-                            <div class="text-end Body line-item__grouped-row-main">
-                              {%- if is_gift -%}
-                                <span class="text-subdued">{{ 'cart.general.gift' | t | default: 'Regalo' }}</span>
-                              {%- else -%}
-                                {%- render 'price-list'
-                                  , line_item: line_item
-                                  , context: 'cart' -%}
-                              {%- endif -%}
-                            </div>
-                          </div>
-                        </article>
-                      </li>
-                    {%- endunless -%}
-                  {%- elsif group_id == null -%}
-                    {%- comment -%} Render single items without group {%- endcomment -%}
-                    <li class="cart-items__item{% if is_gift %} line-gift{% endif %}">
-                      {%- assign item_title_id = 'cart-item-title-' | append: line_item.key -%}
-                      <article class="line-item__card" aria-labelledby="{{ item_title_id }}">
-                        <div class="line-item__card-main">
-                          <div>
+                      {%- comment -%} Main product card, with its customization items inside {%- endcomment -%}
+                      <li class="cart-items__item">
+                        <article class="cart-item" aria-labelledby="{{ item_title_id }}">
+                          <div class="cart-item__cell cart-item__info">
                             {%- render 'line-item'
                               , line_item: line_item
-                              , show_quantity_selector: false
+                              , show_quantity_selector: true
+                              , group_id: group_id
                               , index: forloop.index0
+                              , title_tag: 'h2'
                               , title_id: item_title_id -%}
                           </div>
 
-                          <div class="text-center">
+                          <div class="cart-item__cell cart-item__quantity">
                             <div class="v-stack gap-2">
                               <line-item-quantity class="v-stack justify-items-center gap-2">
-                                {%- render 'quantity-selector'
-                                  , line_item: line_item
-                                  , size: 'sm'
-                                  , index: forloop.index0 -%}
-
                                 <a
-                                  href="{{ line_item.url_to_remove }}"
-                                  class="link text-xs md:hidden"
+                                  href="#"
+                                  class="link text-xs md:hidden remove-group-link"
+                                  data-group-id="{{ group_id }}"
                                   aria-label="{{ 'cart.order.remove_with_title' | t: title: line_item.title | escape }}">
                                   {{- 'cart.order.remove' | t -}}
                                 </a>
@@ -241,15 +219,55 @@
                             </div>
                           </div>
 
-                          <div class="text-end Body">
-                            {%- if is_gift -%}
-                              <span class="text-subdued">{{ 'cart.general.gift' | t | default: 'Regalo' }}</span>
-                            {%- else -%}
-                              {%- render 'price-list'
-                                , line_item: line_item
-                                , context: 'cart' -%}
-                            {%- endif -%}
+                          <div class="cart-item__cell cart-item__price Body">
+                            {%- render 'price-list'
+                              , line_item: line_item
+                              , context: 'cart' -%}
                           </div>
+
+                          {%- if grouped_rows != blank -%}
+                            <ul class="cart-item__grouped" role="list" aria-label="{{ 'cart.general.customizations' | t }}">
+                              {{- grouped_rows -}}
+                            </ul>
+                          {%- endif -%}
+                        </article>
+                      </li>
+                    {%- endunless -%}
+                  {%- elsif group_id == null -%}
+                    {%- comment -%} Render single items without group {%- endcomment -%}
+                    <li class="cart-items__item">
+                      <article class="cart-item" aria-labelledby="{{ item_title_id }}">
+                        <div class="cart-item__cell cart-item__info">
+                          {%- render 'line-item'
+                            , line_item: line_item
+                            , show_quantity_selector: false
+                            , index: forloop.index0
+                            , title_tag: 'h2'
+                            , title_id: item_title_id -%}
+                        </div>
+
+                        <div class="cart-item__cell cart-item__quantity">
+                          <div class="v-stack gap-2">
+                            <line-item-quantity class="v-stack justify-items-center gap-2">
+                              {%- render 'quantity-selector'
+                                , line_item: line_item
+                                , size: 'sm'
+                                , index: forloop.index0 -%}
+
+                              <a
+                                href="{{ line_item.url_to_remove }}"
+                                class="link text-xs md:hidden"
+                                aria-label="{{ 'cart.order.remove_with_title' | t: title: line_item.title | escape }}">
+                                {{- 'cart.order.remove' | t -}}
+                              </a>
+                            </line-item-quantity>
+                          </div>
+                        </div>
+
+                        <div class="cart-item__cell cart-item__price Body">
+                          {%- render 'price-list'
+                            , line_item: line_item
+                            , context: 'cart' -%}
                         </div>
                       </article>
                     </li>
@@ -258,15 +276,18 @@
               </ul>
 
               {%- for gift in gift_items -%}
-                <div class="gift-item">
+                {%- assign gift_title_id = 'cart-item-title-' | append: gift.key | handleize -%}
+                <article class="gift-item" aria-labelledby="{{ gift_title_id }}">
                   <div class="gift-item__content">
                     {%- assign gift_index = forloop.index0 | plus: cart.items.size -%}
                     {%- render 'line-item'
                       , line_item: gift
                       , show_quantity_selector: false
-                      , index: gift_index -%}
+                      , index: gift_index
+                      , title_tag: 'h2'
+                      , title_id: gift_title_id -%}
                   </div>
-                </div>
+                </article>
               {%- endfor -%}
 
               {%- comment -%}
@@ -372,10 +393,10 @@
 
         <div class="v-stack gap-4 md:gap-3 bg-grey-100 cart__aside">
           <div>
-            {%- comment -%} WCAG 1.3.1 (52) — il box spedizione è una <section> con titolo visivamente nascosto {%- endcomment -%}
+            {%- comment -%} WCAG 1.3.1 (52) — il box spedizione è una <section> etichettata dal titolo visibile "Spedizione" {%- endcomment -%}
             {%- if section.settings.show_free_shipping_bar -%}
               <section class="cart-shipping" aria-labelledby="cart-shipping-title">
-                <h2 id="cart-shipping-title" class="sr-only">{{ 'cart.general.shipping' | t | default: 'Spedizione' }}</h2>
+                <h2 id="cart-shipping-title" class="cart-shipping__title Headline-4 Bold Uppercase">{{ 'cart.general.shipping' | t }}</h2>
                 {%- assign free_shipping_value = settings.cart_free_shipping_threshold | times: 100 | money -%}
                 <p class="Headline-4 Medium">{{ 'cart.general.free_shipping_from' | t: amount: free_shipping_value }}</p>
 
@@ -476,7 +497,7 @@
 <script>
   /**
    * Immagine prodotto cliccabile senza <a> duplicato — WCAG 2.4.4 (51)
-   * Il wrapper .line-item__media-wrapper porta data-href={{ line_item.url }}.
+   * Il wrapper .line-item__media-wrapper porta data-href con l'URL del prodotto.
    * Il click naviga alla PDP senza aggiungere un secondo link nell'ordine
    * di tabulazione (il link reale è già il titolo <a> dentro la card).
    */

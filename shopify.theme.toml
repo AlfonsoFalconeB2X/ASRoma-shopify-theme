@@ -15,7 +15,7 @@ host = "127.0.0.1"
 port = "9292"
 live-reload = "hot-reload"
 # Mantiene sincronizzate in locale le modifiche fatte dal Theme Editor
-theme-editor-sync = true
+# theme-editor-sync = true
 # Password dello storefront, se lo store è protetto (meglio passarla da CLI)
 # store-password = ""
 

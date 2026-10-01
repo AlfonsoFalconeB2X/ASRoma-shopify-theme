@@ -385,6 +385,8 @@
       "your_cart": "Il tuo carrello",
       "items_added": "{{ count }} articoli inseriti",
       "free_shipping_from": "Spedizioni gratis in Italia per acquisti superiori a {{ amount }}",
+      "shipping": "Spedizione",
+      "customizations": "Personalizzazioni",
       "gift": "Omaggio",
       "free": "Gratis"
     },
@@ -401,6 +403,7 @@
       "region_label": "Spedizione gratuita",
       "progress_label": "Avanzamento verso la spedizione gratuita",
       "current_total_label": "Il tuo totale",
+      "your_spend": "La tua spesa:",
       "threshold_label": "Spedizione gratuita da"
     },
     "shipping_estimator": {

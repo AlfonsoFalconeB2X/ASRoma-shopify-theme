@@ -1875,6 +1875,13 @@ p {
   display: flex;
   flex-direction: column;
 }
+/* product title heading (cart): keeps the look of the previous plain link */
+.line-item__title {
+  margin: 0;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+}
 @media screen and (max-width: 999px) {
   .line-item__variant-size {
     font-size: 0.625rem;
@@ -2115,6 +2122,54 @@ p {
 
 .product-title {
   text-align: left;
+}
+
+/* --------------------------------------------------------
+   PRODUCT CARD — un solo link per card (50)
+   The title link is the only link of the card; its ::after
+   covers the card so the whole card stays clickable.
+   -------------------------------------------------------- */
+.product-card__title {
+  margin: 0;
+  font: inherit;
+  letter-spacing: inherit;
+  text-transform: inherit;
+}
+.product-card__link::after {
+  content: "";
+  position: absolute;
+  z-index: 1;
+  inset: 0;
+}
+/* controls of the card stay above the card link */
+.product-card .product-card__figure > .badge-list,
+.product-card .product-card__quick-add-button {
+  z-index: 2;
+}
+.product-card__info fieldset {
+  position: relative;
+  z-index: 2;
+}
+/* focus ring on the whole card (inset, so scroll carousels don't clip it) */
+.product-card:has(.product-card__link:focus-visible) {
+  outline: 2px solid currentColor;
+  outline-offset: -2px;
+}
+.product-card .product-card__link:focus-visible {
+  outline: none;
+}
+/* secondary image: the pointer is now over the card link, so hover is detected on the card; keyboard focus does the same */
+@media screen and (pointer: fine) {
+  .product-card:is(:hover, :focus-within) .product-card__figure:has(.product-card__image--secondary) .product-card__image--primary {
+    opacity: 0;
+  }
+  .product-card:is(:hover, :focus-within) .product-card__image--secondary {
+    opacity: 1;
+  }
+}
+
+.featured-collections__title {
+  font-family: var(--text-font-family);
 }
 
 .product-card__color-bar-container {

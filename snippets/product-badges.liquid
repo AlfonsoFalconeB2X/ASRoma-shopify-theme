@@ -83,14 +83,23 @@
       {%- endif -%}
 
       {%- if product.metafields.custom.customization_settings != blank -%}
-      <a class="badge--customizable-container-{{ context }}" href="{{ product_url | default: '#' }}">
+        {%- comment -%}
+          On cards the badge is plain text: the card title is the only link to the product page (WCAG 2.4.4)
+        {%- endcomment -%}
+        {%- liquid
+          assign badge_container_tag = 'a'
+          if context == 'card'
+            assign badge_container_tag = 'div'
+          endif
+        -%}
+        <{{ badge_container_tag }} class="badge--customizable-container-{{ context }}"{% if context != 'card' %} href="{{ product_url | default: '#' }}"{% endif %}>
           <div class="badge badge--customizable">
             {%- render 'icon' with 'as-roma-customize', width: 13, height: 13 -%}
             <span class="badge--customizable-text-{{ context }} ASRomaFont ExtraSmall ExtraBold Uppercase">
             {{ 'product.general.customizable_badge' | t }}
             </span>
           </div>
-        </a>
+        </{{ badge_container_tag }}>
       {%- endif -%}
 
     {%- endcase -%}
