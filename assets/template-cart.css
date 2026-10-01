@@ -40,7 +40,8 @@
   padding: 0.625rem;
 }
 @media screen and (max-width: 999px) {
-  .cart .order-summary__body td {
+  .cart .order-summary__body td,
+  .cart .cart-items__item {
     border-bottom-width: 0.0625rem;
   }
 }
@@ -151,6 +152,73 @@
 }
 .gift-item .line-item .line-item__price {
   display: none;
+}
+
+/* --------------------------------------------------------
+   CART ITEMS LIST — struttura semantica accessibile (51)
+   Sostituisce table.order-summary con ul + article.
+   Il layout desktop a 3 colonne (info · quantità · prezzo)
+   è replicato con CSS grid su .line-item__card-main.
+   -------------------------------------------------------- */
+
+/* reset liste */
+.cart-items {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  margin-block-start: 1.5rem;
+}
+@media screen and (max-width: 999px) {
+  .cart-items {
+    margin-block-start: 0;
+  }
+}
+
+/* ogni <li> riprende il bordo che c'era su <tr> */
+.cart-items__item {
+  border-bottom: 0.0625rem solid var(--border-color, #e0e0e0);
+}
+@media screen and (max-width: 999px) {
+  .cart-items__item {
+    border-bottom-width: 0.0625rem;
+  }
+}
+
+/* <article> senza stili aggiuntivi propri */
+.line-item__card {
+  /* nessuno stile visivo extra: tutto è gestito da .line-item */
+}
+
+/* layout a 3 colonne — info | quantità | prezzo — come prima con i <td> */
+.line-item__card-main {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: start;
+  gap: 0;
+}
+.line-item__card-main > .text-center {
+  padding-right: 2.5rem;
+}
+.line-item__card-main > .text-end {
+  padding-right: 1.5625rem;
+}
+
+/* azzerare stili browser su h2/h3 usati come titolo prodotto nella card */
+.line-item__card .line-item__title,
+.line-item-info__content > a,
+.line-item-info__content > p {
+  font: inherit;
+  margin: 0;
+}
+
+/* immagine cliccabile senza <a> duplicato (51) */
+.line-item__media-wrapper[data-href] {
+  cursor: pointer;
+}
+
+/* sezione spedizione nel cart__aside (52) */
+.cart-shipping {
+  margin-block-end: 0;
 }
 
 .line-item__grouped-row {

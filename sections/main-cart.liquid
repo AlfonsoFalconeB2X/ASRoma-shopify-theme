@@ -110,66 +110,81 @@
 
       <div class="container container--xl h-stack align-start gap-10 md:gap-3 cart__main-container">
         <div class="cart__list">
-          <p class="md-max:hidden text-grey-700 Uppercase">{{ 'cart.general.items_added' | t: count: cart.item_count }}</p>
+          <p id="cart-items-count" class="md-max:hidden text-grey-700 Uppercase">{{ 'cart.general.items_added' | t: count: cart.item_count }}</p>
           <div class="section-stack">
 
             <div class="v-stack gap-6">
               {%- comment -%}
                 ----------------------------------------------------------------------------------------------------------------
-                ORDER SUMMARY
+                ORDER SUMMARY — lista semantica accessibile (sostituisce table.order-summary)
+                WCAG 2.4.4 (51) · WCAG 1.1.1 (56)
                 ----------------------------------------------------------------------------------------------------------------
               {%- endcomment -%}
-              <table class="order-summary table--reduce-border">
-                <tbody class="order-summary__body">
-                  {%- assign sorted_cart_items = cart.items | sort: 'properties._Gifted' | reverse -%}
-                  {%- assign gift_items = '' | split: '' -%}
-                  {%- assign processed_groups = '' | split: '' -%}
+              <ul class="cart-items order-summary table--reduce-border" role="list" aria-labelledby="cart-items-count">
+                {%- assign gift_items = '' | split: '' -%}
+                {%- assign processed_groups = '' | split: '' -%}
 
-                  {%- for line_item in cart.items -%}
-                    {%- assign is_gift = false -%}
-                    {%- assign group_id = null -%}
-                    {%- assign is_main_product = false -%}
+                {%- for line_item in cart.items -%}
+                  {%- assign is_gift = false -%}
+                  {%- assign group_id = null -%}
+                  {%- assign is_main_product = false -%}
 
-                    {%- for property in line_item.properties -%}
-                      {%- if property.first == '_Gifted' and property.last == 'true' -%}
-                        {%- assign is_gift = true -%}
-                      {%- elsif property.first == '_groupId' -%}
-                        {%- assign group_id = property.last -%}
-                      {%- elsif property.first == '_mainProduct' and property.last == 'true' -%}
-                        {%- assign is_main_product = true -%}
-                      {%- endif -%}
-                    {%- endfor -%}
+                  {%- for property in line_item.properties -%}
+                    {%- if property.first == '_Gifted' and property.last == 'true' -%}
+                      {%- assign is_gift = true -%}
+                    {%- elsif property.first == '_groupId' -%}
+                      {%- assign group_id = property.last -%}
+                    {%- elsif property.first == '_mainProduct' and property.last == 'true' -%}
+                      {%- assign is_main_product = true -%}
+                    {%- endif -%}
+                  {%- endfor -%}
 
-                    {%- if is_gift -%}
-                      {%- assign current_item = line_item | sort -%}
-                      {%- assign gift_items = gift_items | concat: current_item -%}
-                      {%- elsif group_id and is_main_product -%}
-                      {%- comment -%} Check if this group has already been processed {%- endcomment -%}
-                      {%- unless processed_groups contains group_id -%}
-                        {%- assign processed_groups = processed_groups | append: group_id | append: ',' | split: ',' -%}
+                  {%- if is_gift -%}
+                    {%- assign current_item = line_item | sort -%}
+                    {%- assign gift_items = gift_items | concat: current_item -%}
+                  {%- elsif group_id and is_main_product -%}
+                    {%- comment -%} Check if this group has already been processed {%- endcomment -%}
+                    {%- unless processed_groups contains group_id -%}
+                      {%- assign processed_groups = processed_groups | append: group_id | append: ',' | split: ',' -%}
 
-                        {%- comment -%} Render main product as separate row {%- endcomment -%}
-                        <tr class="{% if is_gift %}line-gift{% endif %}">
-                          <td class="line-item__grouped-row-main">
-                            {%- render 'line-item'
-                              , line_item: line_item
-                              , show_quantity_selector: true
-                              , group_id: group_id
-                              , index: forloop.index0 -%}
-                          </td>
+                      {%- comment -%}
+                        Raccoglie i grouped items di questo gruppo per passarli al line-item principale.
+                        In questo modo vengono renderizzati DENTRO la card (non come righe sorelle).
+                      {%- endcomment -%}
+                      {%- assign current_grouped_items = '' | split: '' -%}
+                      {%- for cart_item in cart.items -%}
+                        {%- assign cart_item_group_id = null -%}
+                        {%- assign cart_item_is_main = false -%}
+                        {%- for prop in cart_item.properties -%}
+                          {%- if prop.first == '_groupId' -%}
+                            {%- assign cart_item_group_id = prop.last -%}
+                          {%- elsif prop.first == '_mainProduct' and prop.last == 'true' -%}
+                            {%- assign cart_item_is_main = true -%}
+                          {%- endif -%}
+                        {%- endfor -%}
+                        {%- if cart_item_group_id == group_id and cart_item_is_main == false -%}
+                          {%- assign current_grouped_items = current_grouped_items | concat: cart_item -%}
+                        {%- endif -%}
+                      {%- endfor -%}
 
-                          <td class="text-center line-item__grouped-row-main">
-                            <div class="v-stack gap-2">
-                              <line-item-quantity class="v-stack justify-items-center gap-2">
-                                
-                                {%- unless is_main_product -%}
-                                  {%- render 'quantity-selector'
-                                    , line_item: line_item
-                                    , size: 'sm'
-                                    , index: forloop.index0 -%}
-                                {%- endunless -%}
+                      {%- comment -%} Render main product as card with grouped items inside {%- endcomment -%}
+                      <li class="cart-items__item{% if is_gift %} line-gift{% endif %}">
+                        {%- assign item_title_id = 'cart-item-title-' | append: line_item.key -%}
+                        <article class="line-item__card" aria-labelledby="{{ item_title_id }}">
+                          <div class="line-item__card-main">
+                            <div class="line-item__grouped-row-main">
+                              {%- render 'line-item'
+                                , line_item: line_item
+                                , show_quantity_selector: true
+                                , group_id: group_id
+                                , grouped_items: current_grouped_items
+                                , index: forloop.index0
+                                , title_id: item_title_id -%}
+                            </div>
 
-                                {%- if group_id -%}
+                            <div class="text-center line-item__grouped-row-main">
+                              <div class="v-stack gap-2">
+                                <line-item-quantity class="v-stack justify-items-center gap-2">
                                   <a
                                     href="#"
                                     class="link text-xs md:hidden remove-group-link"
@@ -177,19 +192,56 @@
                                     aria-label="{{ 'cart.order.remove_with_title' | t: title: line_item.title | escape }}">
                                     {{- 'cart.order.remove' | t -}}
                                   </a>
-                                {%- else -%}
-                                  <a
-                                    href="{{ line_item.url_to_remove }}"
-                                    class="link text-xs md:hidden"
-                                    aria-label="{{ 'cart.order.remove_with_title' | t: title: line_item.title | escape }}">
-                                    {{- 'cart.order.remove' | t -}}
-                                  </a>
-                                {%- endif -%}
+                                </line-item-quantity>
+                              </div>
+                            </div>
+
+                            <div class="text-end Body line-item__grouped-row-main">
+                              {%- if is_gift -%}
+                                <span class="text-subdued">{{ 'cart.general.gift' | t | default: 'Regalo' }}</span>
+                              {%- else -%}
+                                {%- render 'price-list'
+                                  , line_item: line_item
+                                  , context: 'cart' -%}
+                              {%- endif -%}
+                            </div>
+                          </div>
+                        </article>
+                      </li>
+                    {%- endunless -%}
+                  {%- elsif group_id == null -%}
+                    {%- comment -%} Render single items without group {%- endcomment -%}
+                    <li class="cart-items__item{% if is_gift %} line-gift{% endif %}">
+                      {%- assign item_title_id = 'cart-item-title-' | append: line_item.key -%}
+                      <article class="line-item__card" aria-labelledby="{{ item_title_id }}">
+                        <div class="line-item__card-main">
+                          <div>
+                            {%- render 'line-item'
+                              , line_item: line_item
+                              , show_quantity_selector: false
+                              , index: forloop.index0
+                              , title_id: item_title_id -%}
+                          </div>
+
+                          <div class="text-center">
+                            <div class="v-stack gap-2">
+                              <line-item-quantity class="v-stack justify-items-center gap-2">
+                                {%- render 'quantity-selector'
+                                  , line_item: line_item
+                                  , size: 'sm'
+                                  , index: forloop.index0 -%}
+
+                                <a
+                                  href="{{ line_item.url_to_remove }}"
+                                  class="link text-xs md:hidden"
+                                  aria-label="{{ 'cart.order.remove_with_title' | t: title: line_item.title | escape }}">
+                                  {{- 'cart.order.remove' | t -}}
+                                </a>
                               </line-item-quantity>
                             </div>
-                          </td>
+                          </div>
 
-                          <td class="text-end Body line-item__grouped-row-main">
+                          <div class="text-end Body">
                             {%- if is_gift -%}
                               <span class="text-subdued">{{ 'cart.general.gift' | t | default: 'Regalo' }}</span>
                             {%- else -%}
@@ -197,91 +249,13 @@
                                 , line_item: line_item
                                 , context: 'cart' -%}
                             {%- endif -%}
-                          </td>
-                        </tr>
-
-                        {%- comment -%} Render each grouped item as separate row {%- endcomment -%}
-                        {%- for cart_item in cart.items -%}
-                          {%- assign cart_item_group_id = null -%}
-                          {%- assign cart_item_is_main = false -%}
-
-                          {%- for prop in cart_item.properties -%}
-                            {%- if prop.first == '_groupId' -%}
-                              {%- assign cart_item_group_id = prop.last -%}
-                            {%- elsif prop.first == '_mainProduct' and prop.last == 'true' -%}
-                              {%- assign cart_item_is_main = true -%}
-                            {%- endif -%}
-                          {%- endfor -%}
-
-                          {%- if cart_item_group_id == group_id and cart_item_is_main == false -%}
-                            <tr class="line-item-grouped">
-                              <td class="line-item__grouped-row">
-                                {%- render 'line-item'
-                                  , line_item: cart_item
-                                  , show_quantity_selector: false
-                                  , cart_grouped_line: true
-                                  , index: forloop.index0 -%}
-                              </td>
-
-                              <td class="text-center line-item__grouped-row">
-                              {%- comment -%} No quantity selector for grouped items {%- endcomment -%}
-                              </td>
-
-                              <td class="text-end Body line-item__grouped-row">
-                                {%- if cart_item.final_price > 0 -%}
-                                  {%- render 'price-list'
-                                    , line_item: cart_item
-                                    , context: 'cart' -%}
-                                {%- else -%}
-                                  {{ 'cart.general.free' | t }}
-                                {%- endif -%}
-                              </td>
-                            </tr>
-                          {%- endif -%}
-                        {%- endfor -%}
-                      {%- endunless -%}
-                    {%- elsif group_id == null -%}
-                      {%- comment -%} Render single items without group {%- endcomment -%}
-                      <tr class="{% if is_gift %}line-gift{% endif %}">
-                        <td>
-                          {%- render 'line-item'
-                            , line_item: line_item
-                            , show_quantity_selector: false
-                            , index: forloop.index0 -%}
-                        </td>
-
-                        <td class="text-center">
-                          <div class="v-stack gap-2">
-                            <line-item-quantity class="v-stack justify-items-center gap-2">
-                              {%- render 'quantity-selector'
-                                , line_item: line_item
-                                , size: 'sm'
-                                , index: forloop.index0 -%}
-
-                              <a
-                                href="{{ line_item.url_to_remove }}"
-                                class="link text-xs md:hidden"
-                                aria-label="{{ 'cart.order.remove_with_title' | t: title: line_item.title | escape }}">
-                                {{- 'cart.order.remove' | t -}}
-                              </a>
-                            </line-item-quantity>
                           </div>
-                        </td>
-
-                        <td class="text-end Body">
-                          {%- if is_gift -%}
-                            <span class="text-subdued">{{ 'cart.general.gift' | t | default: 'Regalo' }}</span>
-                          {%- else -%}
-                            {%- render 'price-list'
-                              , line_item: line_item
-                              , context: 'cart' -%}
-                          {%- endif -%}
-                        </td>
-                      </tr>
-                    {%- endif -%}
-                  {%- endfor -%}
-                </tbody>
-              </table>
+                        </div>
+                      </article>
+                    </li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
 
               {%- for gift in gift_items -%}
                 <div class="gift-item">
@@ -398,11 +372,15 @@
 
         <div class="v-stack gap-4 md:gap-3 bg-grey-100 cart__aside">
           <div>
+            {%- comment -%} WCAG 1.3.1 (52) — il box spedizione è una <section> con titolo visivamente nascosto {%- endcomment -%}
             {%- if section.settings.show_free_shipping_bar -%}
-              {%- assign free_shipping_value = settings.cart_free_shipping_threshold | times: 100 | money -%}
-              <p class="Headline-4 Medium">{{ 'cart.general.free_shipping_from' | t: amount: free_shipping_value }}</p>
+              <section class="cart-shipping" aria-labelledby="cart-shipping-title">
+                <h2 id="cart-shipping-title" class="sr-only">{{ 'cart.general.shipping' | t | default: 'Spedizione' }}</h2>
+                {%- assign free_shipping_value = settings.cart_free_shipping_threshold | times: 100 | money -%}
+                <p class="Headline-4 Medium">{{ 'cart.general.free_shipping_from' | t: amount: free_shipping_value }}</p>
 
-              {%- render 'free-shipping-bar' -%}
+                {%- render 'free-shipping-bar' -%}
+              </section>
             {%- endif -%}
 
             <div class="v-stack gap-4">
@@ -493,6 +471,31 @@
   }
 </script>
 
+
+
+<script>
+  /**
+   * Immagine prodotto cliccabile senza <a> duplicato — WCAG 2.4.4 (51)
+   * Il wrapper .line-item__media-wrapper porta data-href={{ line_item.url }}.
+   * Il click naviga alla PDP senza aggiungere un secondo link nell'ordine
+   * di tabulazione (il link reale è già il titolo <a> dentro la card).
+   */
+  (function () {
+    function handleMediaClick(event) {
+      var wrapper = event.target.closest('.line-item__media-wrapper[data-href]');
+      if (!wrapper) return;
+      // Ignora se il click è già su un elemento interattivo dentro il wrapper
+      if (event.target.closest('a, button, [tabindex]')) return;
+      window.location.href = wrapper.dataset.href;
+    }
+
+    // Delega sul form del carrello per coprire anche eventuali re-render AJAX
+    var cartPage = document.querySelector('.cart-page');
+    if (cartPage) {
+      cartPage.addEventListener('click', handleMediaClick);
+    }
+  })();
+</script>
 
 {% schema %}
   {

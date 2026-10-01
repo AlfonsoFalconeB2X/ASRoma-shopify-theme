@@ -14,6 +14,7 @@
   * show_quantity_selector: if set to true, the quantity selector is displayed (useful for instance of mini-cart)
   * group_id: the group ID for grouped items removal (optional)
   * index: the index of the line item in the cart (optional, used for tracking)
+  * title_id: ID da applicare al titolo del prodotto per aria-labelledby dell'<article> (WCAG 2.4.4)
 {%- endcomment -%}
 {%- if settings.enable_datalayer -%}{%- capture remove_from_cart_datalayer -%}
     {
@@ -29,10 +30,10 @@
 {%- endif -%}
 
   <line-item class="line-item"> <div class="line-item__inner">
-    <div class="{% if cart_grouped_line %}line-item__grouped-item__media-wrapper-cart{% else %}line-item__media-wrapper{% endif %}">
+    <div class="{% if cart_grouped_line %}line-item__grouped-item__media-wrapper-cart{% else %}line-item__media-wrapper{% endif %}" {% unless cart_grouped_line %}data-href="{{ line_item.url }}"{% endunless %}>
       {%- if line_item.image != blank -%}
-        {%- assign alt_text = line_item.image.alt | default: line_item.product.title | default: line_item.title | default: shop.name -%}
-        {{- line_item.image | image_url: width: line_item.image.width | image_tag: loading: 'lazy', sizes: '(max-width: 699px) 120px', widths: '120,140,210,240,360', class: 'line-item__media', alt: alt_text -}}
+        {%- comment -%} alt="" — immagine decorativa (WCAG 1.1.1 · 56): il nome è già nel titolo/link {%- endcomment -%}
+        {{- line_item.image | image_url: width: line_item.image.width | image_tag: loading: 'lazy', sizes: '(max-width: 699px) 120px', widths: '120,140,210,240,360', class: 'line-item__media', alt: '' -}}
       {%- endif -%}
     </div>
     <div class="line-item-info">
@@ -51,9 +52,10 @@
 
         <div class="v-stack justify-items-start gap-1 line-item-info__content">
           {%- if line_item.url != blank -%}
-            <a href="{{ line_item.url }}" class="{{ text_class }}">{{ line_item.product.metafields.custom.customization_label.value | default: line_item.product.title }}</a>
+            {%- comment -%} Se title_id è passato, lo applichiamo per aria-labelledby dell'<article> genitore {%- endcomment -%}
+            <a href="{{ line_item.url }}" class="{{ text_class }}"{% if title_id %} id="{{ title_id }}"{% endif %}>{{ line_item.product.metafields.custom.customization_label.value | default: line_item.product.title }}</a>
           {%- else -%}
-            <p class="{{ text_class }}">{{ line_item.product.metafields.custom.customization_label.value | default: line_item.product.title }}</p>
+            <p class="{{ text_class }}"{% if title_id %} id="{{ title_id }}"{% endif %}>{{ line_item.product.metafields.custom.customization_label.value | default: line_item.product.title }}</p>
           {%- endif -%}
 
           {%- if line_item.properties['_customizationName'] != blank -%}
@@ -219,8 +221,8 @@
         <div class="line-item__grouped-item">
           <div class="line-item__grouped-item__media-wrapper">
             {%- if grouped_item.image != blank -%}
-              {%- assign alt_text = grouped_item.image.alt | default: grouped_item.title | default: shop.name -%}
-              {{- grouped_item.image | image_url: width: 120 | image_tag: loading: 'lazy', sizes: '120', widths: '60,120', class: 'line-item__grouped-item__media', alt: alt_text -}}
+              {%- comment -%} alt="" — immagine decorativa (WCAG 1.1.1 · 56) {%- endcomment -%}
+              {{- grouped_item.image | image_url: width: 120 | image_tag: loading: 'lazy', sizes: '120', widths: '60,120', class: 'line-item__grouped-item__media', alt: '' -}}
             {%- endif -%}
           </div>
 

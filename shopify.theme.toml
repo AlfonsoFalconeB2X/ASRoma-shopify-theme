@@ -1,11 +1,23 @@
 # Shopify CLI theme environments
 # Uso: shopify theme <comando> -e <ambiente>
-#   shopify theme dev  -e development
-#   shopify theme push -e development
-#   shopify theme push -e production
+#   shopify theme dev  -e local        -> sviluppo locale con anteprima su http://127.0.0.1:9292
+#   shopify theme push -e development  -> pubblica sul tema di sviluppo/staging
+#   shopify theme push -e production   -> pubblica sul tema di produzione
 #
 # Non inserire password/token in questo file: usa la variabile d'ambiente
 # SHOPIFY_CLI_THEME_TOKEN (token dell'app Theme Access) oppure il login interattivo.
+
+[environments.local]
+store = "asromastore.myshopify.com"
+# Nessun "theme": la CLI crea un tema di sviluppo personale (nascosto, legato
+# all'utente/macchina), così il lavoro locale non tocca i temi condivisi
+host = "127.0.0.1"
+port = "9292"
+live-reload = "hot-reload"
+# Mantiene sincronizzate in locale le modifiche fatte dal Theme Editor
+theme-editor-sync = true
+# Password dello storefront, se lo store è protetto (meglio passarla da CLI)
+# store-password = ""
 
 [environments.development]
 store = "asromastore.myshopify.com"
