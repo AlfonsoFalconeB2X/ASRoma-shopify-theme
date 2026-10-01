@@ -22,8 +22,8 @@ theme = "183575052668"
 # Evita di sovrascrivere le personalizzazioni fatte dal Theme Editor
 ignore = [
   "config/settings_data.json",
-  # "templates/*.json",
-  # "sections/*.json",
+  "templates/*.json",
+  "sections/*.json",
 ]
 # Decommenta per consentire il push sul tema live senza conferma (es. in CI)
 # allow-live = true
