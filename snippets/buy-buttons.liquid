@@ -129,7 +129,7 @@ Supported variables
           {%- assign atc_button_style = 'solid' -%}
 
           {%- unless product.metafields.custom.customization_settings != blank -%}
-            {%- render 'button', content: button_content, type: 'submit', disabled: button_disabled, style: atc_button_style, stretch: true, extra_classes: 'Uppercase', data_layer: add_to_cart_datalayer | strip_newlines | escape -%}
+            {%- render 'button', content: button_content, type: 'submit', disabled: button_disabled, style: atc_button_style, stretch: true, extra_classes: 'Uppercase', data_layer: add_to_cart_datalayer -%}
           {%- endunless -%}      
 
           {%- if show_payment_button -%}
@@ -282,3 +282,17 @@ Supported variables
     {%- render 'button', content: button_content, type: 'submit', stretch: true -%}
   </buy-buttons>
 {%- endif -%}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- render 'button', content: button_content, type: 'submit', disabled: button_disabled,
+    style: atc_button_style, stretch: true, extra_classes: 'Uppercase', data_layer:
+    add_to_cart_datalayer | strip_newlines | escape -%}"
+  to: "{%- render 'button', content: button_content, type: 'submit', disabled: button_disabled,
+    style: atc_button_style, stretch: true, extra_classes: 'Uppercase', data_layer:
+    add_to_cart_datalayer -%}"
+  position: 6504..6698
+{% endcomment %}
