@@ -17,7 +17,20 @@
         "message_Pjfzef": {
           "type": "message",
           "settings": {
-            "text": "<a href=\"/collections/saldi-as-roma\" title=\"Saldi AS Roma\">Adidas Promozioni</a> 📣"
+            "text": "<a href=\"/products/box-il-rituale-aeterna-gin-70-cl-set-2-bicchieri\" title=\"Box &quot;Il Rituale&quot; Aeterna Gin 70 cl + Set 2 bicchieri\">Novità Gin idea regalo</a> 🎁"
+          }
+        },
+        "message_68qxAL": {
+          "type": "message",
+          "settings": {
+            "text": "<a href=\"/collections/abbigliamento-neonato\" title=\"Abbigliamento - Neonato\">Novità linea neonato 🥳</a>"
+          }
+        },
+        "message_cxYN7R": {
+          "type": "message",
+          "disabled": true,
+          "settings": {
+            "text": "<a href=\"/collections/adidas-eqt-as-roma\" title=\"Collection - Uomo - Adidas EQT\">Adidas EQT New In 🔥</a>&nbsp;"
           }
         },
         "message_F8NQaN": {
@@ -25,19 +38,6 @@
           "disabled": true,
           "settings": {
             "text": "<a href=\"https://store.asroma.com/collections/kit-gara-third\" title=\"https://store.asroma.com/collections/kit-gara-third\">Third Kit 26/27🔥</a>"
-          }
-        },
-        "message_9J6Yac": {
-          "type": "message",
-          "settings": {
-            "text": "<a href=\"https://store.asroma.com/collections/adidas-dna\" title=\"https://store.asroma.com/collections/adidas-dna\">Adidas DNA 26/27 </a>⭐"
-          }
-        },
-        "message_AdDKyR": {
-          "type": "message",
-          "disabled": true,
-          "settings": {
-            "text": "<a href=\"https://store.asroma.com/pages/sconto-abbonati-2026-27\" title=\"https://store.asroma.com/pages/sconto-abbonati-2026-27\">Sconto Abbonati 26/27 </a>📣"
           }
         },
         "message_PqTtHr": {
@@ -49,9 +49,9 @@
       },
       "block_order": [
         "message_Pjfzef",
+        "message_68qxAL",
+        "message_cxYN7R",
         "message_F8NQaN",
-        "message_9J6Yac",
-        "message_AdDKyR",
         "message_PqTtHr"
       ],
       "name": "Announcement Bar",

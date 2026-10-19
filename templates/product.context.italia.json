@@ -17,6 +17,22 @@
       "disabled": false,
       "settings": {},
       "blocks": {
+        "liquid_Wfamn": {
+          "type": "liquid",
+          "name": "Liquid - Party SET Info",
+          "disabled": false,
+          "settings": {
+            "liquid": "<p>{% if product.tags contains 'PARTYSET-P01' %}</p>\n<div style=\"border: 1px solid #1e1d1e; color: #1e1d1e; padding: 12px 16px; border-radius: 4px; margin: 15px 0; font-size: 14px; line-height: 1.4; text-align: center;\">{% if request.locale.iso_code == 'it' %} Il set contiene: 1 ghirlanda di compleanno in carta - 1 tovaglia in carta kraft bianca da 80 gsm - 10 palloncini in plastica con stampa su un lato - 1 palloncino in foil dal diametro di circa 45 cm - 24 bicchieri di carta -24 piatti di carta - 24 tovaglioli di carta. {% elsif request.locale.iso_code == 'en' %} The set includes: 1 paper birthday garland; 1 white kraft paper tablecloth (80 gsm); 10 plastic balloons printed on one side; 1 foil balloon with a diameter of approximately 45 cm; 24 paper cups; 24 paper plates; 24 paper napkins.. {% endif %}</div>\n<p>{% endif %}</p>"
+          }
+        },
+        "liquid_j98AX": {
+          "type": "liquid",
+          "name": "Liquid - AETERNA GIN",
+          "disabled": false,
+          "settings": {
+            "liquid": "<p>{% if product.tags contains 'GINSET-D01' %}</p>\n<div style=\"border: 1px solid #7d1f2c; color: #7d1f2c; padding: 12px 16px; border-radius: 4px; margin: 15px 0; font-size: 14px; line-height: 1.4; text-align: center;\">{% if request.locale.iso_code == 'it' %}Questo prodotto &egrave; riservato ai maggiori di 18 anni. &Egrave; vietata la vendita a minori di 18 anni, come stabilito dalla legge. {% elsif request.locale.iso_code == 'en' %} This product is intended for adults 18 years of age or older. Sale to minors under 18 is prohibited, as required by law. {% endif %}</div>\n<p>{% endif %}</p>"
+          }
+        },
         "info_message_HcFebC": {
           "disabled": false,
           "settings": {}
@@ -62,6 +78,8 @@
         "price",
         "omnibus_insight_am_omnibus_price_YQnL6K",
         "sku_8DwcFH",
+        "liquid_Wfamn",
+        "liquid_j98AX",
         "payment_terms",
         "separator",
         "variant_picker",
