@@ -104,17 +104,7 @@
                       endif
                     -%}
                     {%- capture boolean_index -%}{% increment filter_boolean %}{%- endcapture -%}
-                    {%- render 'checkbox',
-                        name: filter_value.param_name,
-                        value: filter_value.value,
-                        checked: filter_value.active,
-                        label: label,
-                        switch: true,
-                        id_prefix: id_prefix | append: '-' | append: boolean_index,
-                        badge_label: label,
-                        badge_group: filter.label,
-                        badge_value: filter_value.value
-                    -%}
+                    {%- render 'checkbox', name: filter_value.param_name, value: filter_value.value, checked: filter_value.active, label: label, switch: true, id_prefix: id_prefix, append: boolean_index, badge_label: label, badge_group: filter.label, badge_value: filter_value.value -%}
                   {%- endfor -%}
                 </div>
               {%- endif -%}
@@ -182,4 +172,27 @@
         , stretch: true -%}
     </noscript>
   </form>
-</facets-form>
+</facets-form>{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: |-
+    {%- render 'checkbox',
+                            name: filter_value.param_name,
+                            value: filter_value.value,
+                            checked: filter_value.active,
+                            label: label,
+                            switch: true,
+                            id_prefix: id_prefix | append: '-' | append: boolean_index,
+                            badge_label: label,
+                            badge_group: filter.label,
+                            badge_value: filter_value.value
+                        -%}
+  to: "{%- render 'checkbox', name: filter_value.param_name, value: filter_value.value,
+    checked: filter_value.active, label: label, switch: true, id_prefix: id_prefix,
+    append: boolean_index, badge_label: label, badge_group: filter.label, badge_value:
+    filter_value.value -%}"
+  position: 4610..4876
+{%- endcomment -%}

@@ -122,7 +122,7 @@
                 {% endif %}
 
                 <div class="devkit__block-image__container-image {{block.settings.block_images_custom_class}} {{desktop_layout_class}} {{mobile_layout_class}}" style="padding: {{block.settings.block_images_padding}}px; display: flex; align-items: {{block.settings.block_images_items_alignment}}; justify-content: {{block.settings.block_images_justify_alignment}};">                 
-                  {%- render 'devkit-image' | image: image, default_size: default_size, tablet_size: tablet_size -%}
+                  {%- render 'devkit-image', image: image, default_size: default_size, tablet_size: tablet_size -%}
                 </div>                                        
               
             {% endif %}
@@ -133,7 +133,7 @@
       {%- when 'product' -%} 
         {% assign product_snippet = settings.product_snippet_name %}        
         <div class="devkit-product" style="padding: {{block.settings.block_product_padding}}px">
-          {%- render product_snippet | append: '', product: block.settings.product, page: page, is_devkit: true, use_horizontal: false, show_product_info: true-%}
+          {%- render product_snippet, append: '', product: block.settings.product, page: page, is_devkit: true, use_horizontal: false, show_product_info: true -%}
         </div>
 
       {%- when '@app' -%}
@@ -1090,4 +1090,20 @@
     }
   ]
 }
-{% endschema %}
+{% endschema %}{%- comment -%}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- render 'devkit-image' | image: image, default_size: default_size, tablet_size:
+    tablet_size -%}"
+  to: "{%- render 'devkit-image', image: image, default_size: default_size, tablet_size:
+    tablet_size -%}"
+  position: 7840..7937
+- from: "{%- render product_snippet | append: '', product: block.settings.product,
+    page: page, is_devkit: true, use_horizontal: false, show_product_info: true-%}"
+  to: "{%- render product_snippet, append: '', product: block.settings.product, page:
+    page, is_devkit: true, use_horizontal: false, show_product_info: true -%}"
+  position: 8305..8457
+{%- endcomment -%}
