@@ -16,11 +16,11 @@
     "cart-drawer": {
       "settings": {
         "cross_sell_products": [
-          "portachiavi-logo-smaltato-as-roma",
+          "kit-del-tifoso-as-roma",
           "set-6-spille-as-roma-in-scatola-con-logo-lupetto",
-          "gagliardetto-giallorosso-verticale-as-roma",
-          "coppia-tovagliette-da-cucina-elvis-lives-x-as-roma",
-          "telo-microfibra-pouch-beauty-as-roma"
+          "portachiavi-champions-league",
+          "tazza-in-ceramica-as-roma-logo-champions-league",
+          "sciarpa-as-roma-jaquard-a-righe-con-logo-champions-league"
         ],
         "cross_sell_stack_products": true
       },
