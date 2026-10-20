@@ -144,7 +144,7 @@
               {%- endif -%}
 
               {%- if block.settings.subheading != blank -%}
-                <p class="Headline-4">{{ block.settings.subheading }}</p>
+                <p class="{{ block.settings.subheading_size }}">{{ block.settings.subheading }}</p>
               {%- endif -%}
 
               {%- if block.settings.button_1_text != blank or block.settings.button_2_text != blank -%}
@@ -541,6 +541,34 @@
           "id": "subheading",
           "label": "t:global.text.subheading",
           "default": "Tell your story"
+        },
+        {
+          "type": "select",
+          "id": "subheading_size",
+          "label": "t:global.text.subheading_size",
+          "options": [
+            {
+              "value": "Headline-1",
+              "label": "H1"
+            },
+            {
+              "value": "Headline-2",
+              "label": "H2"
+            },
+            {
+              "value": "Headline-3",
+              "label": "H3"
+            },
+            {
+              "value": "Headline-4",
+              "label": "H4"
+            },
+            {
+              "value": "Headline-5",
+              "label": "H5"
+            },
+          ],
+          "default": "Headline-4"
         },
         {
           "type": "inline_richtext",

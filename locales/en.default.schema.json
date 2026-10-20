@@ -42,6 +42,7 @@
     },
     "text": {
       "subheading": "Subheading",
+      "subheading_size": "Subheading Size",
       "heading": "Heading",
       "heading_style": "Heading style",
       "alignment": "Text alignment",
