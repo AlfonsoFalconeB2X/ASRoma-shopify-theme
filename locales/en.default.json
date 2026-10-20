@@ -386,6 +386,8 @@
       "your_cart": "Your cart",
       "items_added": "{{ count }} items added",
       "free_shipping_from": "Free shipping in Italy for orders over {{ amount }}",
+      "shipping": "Shipping",
+      "customizations": "Customizations",
       "gift": "Gift",
       "free": "Free"
     },
@@ -402,6 +404,7 @@
       "region_label": "Free shipping",
       "progress_label": "Progress towards free shipping",
       "current_total_label": "Your total",
+      "your_spend": "Your spend:",
       "threshold_label": "Free shipping from"
     },
     "shipping_estimator": {

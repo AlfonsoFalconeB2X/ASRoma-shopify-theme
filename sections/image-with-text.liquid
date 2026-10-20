@@ -22,6 +22,7 @@
   <div class="{% unless section.settings.remove_vertical_spacing %}section-spacing{% endunless %} color-scheme color-scheme--{{ section.settings.color_scheme.id }} color-scheme--bg-{{ color_scheme_hash }} {% if section.settings.separate_section_with_border %}bordered-section{% endif %}">
     <image-with-text class="image-with-text {% if section.settings.image_position == 'end' %}image-with-text--reverse{% endif %}">
       {%- if section.settings.image != blank -%}
+        {%- capture picture -%}
         <picture>
           {%- assign sizes = '(max-width: 699px) 100vw, 50vw' -%}
 
@@ -36,6 +37,13 @@
           {%- assign alt_text = section.settings.image.alt | default: section.settings.title | default: shop.name -%}
           {{- section.settings.image | image_url: width: section.settings.image.width | image_tag: sizes: sizes, widths: '200,300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200', reveal-on-scroll: section.settings.reveal_on_scroll, alt: alt_text -}}
         </picture>
+        {%- endcapture -%}
+
+        {%- if section.settings.enable_image_link and section.settings.image_link != blank -%}
+          <a href="{{ section.settings.image_link }}" class="image-with-text__link">{{- picture -}}</a>
+        {%- else -%}
+          {{- picture -}}
+        {%- endif -%}
       {%- else -%}
         {{- 'image' | placeholder_svg_tag: 'placeholder' -}}
       {%- endif -%}
@@ -121,6 +129,18 @@
       "id": "mobile_image",
       "label": "t:global.image.mobile_image",
       "info": "t:sections.image_with_text.mobile_image_size_recommendation"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_image_link",
+      "label": "t:global.image.enable_image_link",
+      "default": false
+    },
+    {
+      "type": "url",
+      "id": "image_link",
+      "label": "t:global.image.image_link",
+      "visible_if": "{{ section.settings.enable_image_link }}"
     },
     {
       "type": "checkbox",

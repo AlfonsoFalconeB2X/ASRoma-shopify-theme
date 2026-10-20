@@ -70,10 +70,18 @@
     assign headerSearchClass = 'product-card__header-search'
     assign show_badges = false
   endif
+
+  # The title link is the only link of the card (WCAG 2.4.4): it labels the card and its ::after makes the whole card
+  # clickable. Without title (image-based grid), the media stays the link.
+  assign card_title_id = 'product-card-title-' | append: section.id | append: '-' | append: block.id | append: '-' | append: quick_buy_context | append: '-' | append: product.id | handleize
 -%}
 
 <product-card
   class="product-card {{ headerSearchClass }}"
+  {% if show_title %}
+  role="article"
+  aria-labelledby="{{ card_title_id }}"
+  {% endif %}
   {% if reveal %}
   reveal-on-scroll="true"
   {% endif %}
@@ -131,9 +139,16 @@
           {%- endcapture -%}
         {%- endif -%}
       {%- endif -%}
-      <a
-        href="{{ product.url }}{% if variantId != blank %}?variant={{ variantId }}{% endif %}"
+      {%- liquid
+        assign media_tag = 'a'
+        if show_title
+          assign media_tag = 'div'
+        endif
+      -%}
+      <{{ media_tag }}
         class="product-card__media"
+        {% unless show_title %}
+        href="{{ product.url }}{% if variantId != blank %}?variant={{ variantId }}{% endif %}"
         draggable="false"
         data-instant
         {% if settings.enable_datalayer %}
@@ -142,7 +157,8 @@
         {% if promotion_status_value == 'promo' %}
         data-datalayer-info-promotion='{{ select_promotion_datalayer | strip_newlines | escape }}'
         {% endif %}
-        {% endif %}>
+        {% endif %}
+        {% endunless %}>
         {%- capture sizes -%}
           {%- if stacked -%}
             (max-width: 699px) calc(100vw / {{ section.settings.products_per_row_mobile }}), (max-width: 999px) calc(100vw / {{ 3 | at_most: section.settings.products_per_row_desktop | default: 3 }} - 64px), calc((100vw - 96px) / {{ section.settings.products_per_row_desktop | default: 3 }} - (24px / {{ section.settings.products_per_row_desktop | default: 3 }} * {{ section.settings.products_per_row_desktop | default: 3 | minus: 1 }}))
@@ -159,7 +175,12 @@
         -%}
 
         {%- capture main_image_classes -%}product-card__image product-card__image--primary {% if settings.product_image_aspect_ratio contains 'crop' %}object-cover{% endif %} aspect-{{ settings.product_image_aspect_ratio | split: '_' | first }}{%- endcapture -%}
-        {%- assign alt_text = product.featured_media.alt | default: product.title | default: shop.name -%}
+        {%- comment -%} Decorative when the title is shown (WCAG 1.1.1): it already names the product {%- endcomment -%}
+        {%- if show_title -%}
+          {%- assign alt_text = '' -%}
+        {%- else -%}
+          {%- assign alt_text = product.featured_media.alt | default: product.title | default: shop.name -%}
+        {%- endif -%}
         {{- product.featured_media | image_url: width: product.featured_media.width | image_tag: loading: main_media_loading_strategy, sizes: sizes, widths: '200,300,400,500,600,700,800,1000,1200,1400,1600,1800', draggable: 'false', class: main_image_classes, alt: alt_text -}}
 
         {%- liquid
@@ -167,12 +188,15 @@
             assign next_media = product.media[product.featured_media.position] | default: product.media[1]
 
             if next_media != blank
-              assign secondary_alt_text = next_media.alt | default: product.title | default: shop.name
+              assign secondary_alt_text = ''
+              unless show_title
+                assign secondary_alt_text = next_media.alt | default: product.title | default: shop.name
+              endunless
               echo next_media | image_url: width: next_media.width | image_tag: class: 'product-card__image product-card__image--secondary', loading: 'lazy', fetchpriority: 'low', sizes: sizes, widths: '200,300,400,500,600,700,800,1000,1200,1400,1600,1800', draggable: 'false', alt: secondary_alt_text
             endif
           endif
         -%}
-      </a>
+      </{{ media_tag }}>
       <div class="product-card__color-bar-container">
         <div class="product-card__color-bar"></div>
       </div>
@@ -259,9 +283,11 @@
         {%- if show_title or show_prices -%}
           <div class="v-stack justify-items-left gap-2">
             {%- if show_title -%}
+              <h3 id="{{ card_title_id }}" class="product-card__title">
               <a
                 href="{{ product.url }}{% if variantId != blank %}?variant={{ variantId }}{% endif %}"
-                class="product-title {% if text_class != blank %}{{ text_class }}{% endif %} {% if settings.product_title_max_lines > 0 %}line-clamp{% endif %}"
+                class="product-title product-card__link {% if text_class != blank %}{{ text_class }}{% endif %} {% if settings.product_title_max_lines > 0 %}line-clamp{% endif %}"
+                draggable="false"
                 {% if settings.product_title_max_lines > 0 %}
                 style="--line-clamp-count: {{ settings.product_title_max_lines }}"
                 {% endif %}
@@ -277,6 +303,7 @@
                 {% if variantTitle != blank %}
                   - {{- variantTitle -}}{% endif %}
               </a>
+              </h3>
             {%- endif -%}
 
             {%- if show_prices -%}
