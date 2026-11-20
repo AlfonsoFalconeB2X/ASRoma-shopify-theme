@@ -144,7 +144,7 @@
               {%- endif -%}
 
               {%- if block.settings.subheading != blank -%}
-                <p class="{{ block.settings.subheading_size }}">{{ block.settings.subheading }}</p>
+                <p class="{{ block.settings.subheading_size }} {{ block.settings.subheading_weight }}">{{ block.settings.subheading }}</p>
               {%- endif -%}
 
               {%- if block.settings.button_1_text != blank or block.settings.button_2_text != blank -%}
@@ -569,6 +569,34 @@
             },
           ],
           "default": "Headline-4"
+        },
+        {
+          "type": "select",
+          "id": "subheading_weight",
+          "label": "t:global.text.subheading_weight",
+          "options": [
+            {
+              "value": "Light",
+              "label": "Light"
+            },
+            {
+              "value": "Regular",
+              "label": "Regular"
+            },
+            {
+              "value": "Medium",
+              "label": "Medium"
+            },
+            {
+              "value": "Bold",
+              "label": "Bold"
+            },
+            {
+              "value": "ExtraBold",
+              "label": "ExtraBold"
+            },
+          ],
+          "default": "Regular"
         },
         {
           "type": "inline_richtext",
