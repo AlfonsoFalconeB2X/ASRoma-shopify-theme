@@ -1,1 +1,188 @@
-{"context":{"market":"unione-europea"},"parent":"index.json","sections":{"slideshow":{"disabled":false,"settings":{},"blocks":{"image_J3t83i":{"disabled":false,"settings":{}},"image_jFwRbg":{"disabled":true,"settings":{}},"image_F63Mzh":{"disabled":true,"settings":{"end_date":"2026-10-06 08:56","image":"shopify:\/\/shop_images\/3200x1200-slider-as-roma-home-kit-26-27.webp"}},"image_r7gbFB":{"disabled":true,"settings":{"gradient_overlay":"linear-gradient(180deg, rgba(NaN, NaN, NaN, 0), rgba(4, 4, 4, 0.65) 100%)"}}},"block_order":["image_J3t83i","image_jFwRbg","image_y3FKaw","image_F63Mzh","image_r7gbFB"]},"image_with_text_overlay_DPXRU8":{"disabled":false,"settings":{"image_size":"lg","enable_image_link":true,"image_link":"shopify:\/\/collections\/kit-gara-away"},"blocks":{}},"react_product_selector_rjQCQY":{"disabled":false,"settings":{},"blocks":{}},"image_with_text_overlay_789TTQ":{"disabled":true,"settings":{},"blocks":{}},"featured_collections_c4HQey":{"disabled":true,"settings":{},"blocks":{}},"featured_collections_cYJfTj":{"disabled":false,"settings":{},"blocks":{"collection_NMUj8U":{"disabled":false,"settings":{}}}},"image_with_text_overlay_BYy9Q7":{"disabled":true,"settings":{},"blocks":{}},"featured_collections_MFpNjj":{"disabled":true,"settings":{},"blocks":{}},"image_with_text_overlay_Rd3Jwz":{"disabled":false,"settings":{"image_size":"auto"},"blocks":{}},"collection_list_NVDbTz":{"disabled":true,"settings":{},"blocks":{"banner_xLWEUy":{"settings":{"image":"shopify:\/\/shop_images\/1500x1500-elvis-lives-felpa-1.webp"}},"product_YgqD4k":{"disabled":false,"settings":{}}},"block_order":["banner_xLWEUy","product_bGhyzK","product_JekNMx","product_TaxE3p","product_YgqD4k"]},"featured_collections_XtrEzn":{"disabled":false,"settings":{},"blocks":{}},"collection_list_LEqCw4":{"settings":{},"blocks":{"collection_mBTU8A":{"disabled":false,"settings":{}},"collection_bHVJHc":{"disabled":true,"settings":{}}},"block_order":["collection_BjakaA","collection_6y7Fti","collection_mBTU8A","collection_QfNrUV","collection_C6WYpH","collection_bHVJHc","collection_JDzgdX","collection_KX4H8q"]},"image_with_text_overlay_xT6TV":{"settings":{},"blocks":{"button_D3UzVk":{"settings":{"url":"shopify:\/\/collections\/infant-as-roma"}}}}},"order":["slideshow","image_with_text_overlay_DPXRU8","react_product_selector_rjQCQY","image_with_text_overlay_e7VyVW","featured_collections_Y6jGhz","image_with_text_overlay_j8nrRg","featured_collections_jdaTBY","image_with_text_overlay_789TTQ","featured_collections_c4HQey","image_with_text_overlay_zCiiak","featured_collections_zw9Azr","image_with_text_overlay_yBCyrj","featured_collections_cYJfTj","image_with_text_overlay_BYy9Q7","featured_collections_MFpNjj","image_with_text_overlay_Rd3Jwz","featured_collections_ecqrJR","image_with_text_overlay_xT6TV","featured_collections_iCxrqc","collection_list_NVDbTz","image_with_text_overlay_Vp3dBY","featured_collections_XtrEzn","collection_list_LEqCw4","featured_giftcard_AtRUhJ"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "context": {
+    "market": "unione-europea"
+  },
+  "parent": "index.json",
+  "sections": {
+    "slideshow": {
+      "disabled": false,
+      "settings": {},
+      "blocks": {
+        "image_J3t83i": {
+          "disabled": false,
+          "settings": {}
+        },
+        "image_jFwRbg": {
+          "disabled": true,
+          "settings": {}
+        },
+        "image_F63Mzh": {
+          "disabled": true,
+          "settings": {
+            "end_date": "2026-10-06 08:56",
+            "image": "shopify://shop_images/3200x1200-slider-as-roma-home-kit-26-27.webp"
+          }
+        },
+        "image_r7gbFB": {
+          "disabled": true,
+          "settings": {
+            "gradient_overlay": "linear-gradient(180deg, rgba(NaN, NaN, NaN, 0), rgba(4, 4, 4, 0.65) 100%)"
+          }
+        }
+      },
+      "block_order": [
+        "image_J3t83i",
+        "image_jFwRbg",
+        "image_y3FKaw",
+        "image_F63Mzh",
+        "image_r7gbFB"
+      ]
+    },
+    "image_with_text_overlay_DPXRU8": {
+      "disabled": false,
+      "settings": {
+        "image_size": "lg",
+        "enable_image_link": true,
+        "image_link": "shopify://collections/kit-gara-away"
+      },
+      "blocks": {}
+    },
+    "react_product_selector_rjQCQY": {
+      "disabled": false,
+      "settings": {},
+      "blocks": {}
+    },
+    "image_with_text_overlay_789TTQ": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    },
+    "featured_collections_c4HQey": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    },
+    "featured_collections_cYJfTj": {
+      "disabled": false,
+      "settings": {},
+      "blocks": {
+        "collection_NMUj8U": {
+          "disabled": false,
+          "settings": {}
+        }
+      }
+    },
+    "image_with_text_overlay_BYy9Q7": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    },
+    "featured_collections_MFpNjj": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    },
+    "image_with_text_overlay_Rd3Jwz": {
+      "disabled": false,
+      "settings": {
+        "image_size": "auto"
+      },
+      "blocks": {}
+    },
+    "collection_list_NVDbTz": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {
+        "banner_xLWEUy": {
+          "settings": {
+            "image": "shopify://shop_images/1500x1500-elvis-lives-felpa-1.webp"
+          }
+        },
+        "product_YgqD4k": {
+          "disabled": false,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "banner_xLWEUy",
+        "product_bGhyzK",
+        "product_JekNMx",
+        "product_TaxE3p",
+        "product_YgqD4k"
+      ]
+    },
+    "featured_collections_XtrEzn": {
+      "disabled": false,
+      "settings": {},
+      "blocks": {}
+    },
+    "collection_list_LEqCw4": {
+      "settings": {},
+      "blocks": {
+        "collection_mBTU8A": {
+          "disabled": false,
+          "settings": {}
+        },
+        "collection_bHVJHc": {
+          "disabled": true,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "collection_BjakaA",
+        "collection_6y7Fti",
+        "collection_mBTU8A",
+        "collection_QfNrUV",
+        "collection_C6WYpH",
+        "collection_bHVJHc",
+        "collection_JDzgdX",
+        "collection_KX4H8q"
+      ]
+    },
+    "image_with_text_overlay_xT6TV": {
+      "settings": {},
+      "blocks": {
+        "button_D3UzVk": {
+          "settings": {
+            "url": "shopify://collections/infant-as-roma"
+          }
+        }
+      }
+    }
+  },
+  "order": [
+    "slideshow",
+    "image_with_text_overlay_DPXRU8",
+    "react_product_selector_rjQCQY",
+    "image_with_text_overlay_e7VyVW",
+    "featured_collections_Y6jGhz",
+    "image_with_text_overlay_j8nrRg",
+    "featured_collections_jdaTBY",
+    "image_with_text_overlay_789TTQ",
+    "featured_collections_c4HQey",
+    "image_with_text_overlay_zCiiak",
+    "featured_collections_zw9Azr",
+    "image_with_text_overlay_yBCyrj",
+    "featured_collections_cYJfTj",
+    "image_with_text_overlay_BYy9Q7",
+    "featured_collections_MFpNjj",
+    "image_with_text_overlay_Rd3Jwz",
+    "featured_collections_ecqrJR",
+    "image_with_text_overlay_xT6TV",
+    "featured_collections_iCxrqc",
+    "collection_list_NVDbTz",
+    "image_with_text_overlay_Vp3dBY",
+    "featured_collections_XtrEzn",
+    "collection_list_LEqCw4",
+    "featured_giftcard_AtRUhJ"
+  ]
+}
