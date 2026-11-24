@@ -116,7 +116,7 @@
         "other": "{{ count }} colori disponibili"
       },
       "customizable_badge": "Personalizzabile",
-      "new_badge": "Nuovo",
+      "new_badge": "New",
       "add_button": "Aggiungi",
       "product_details": "Dettagli prodotto",
       "customize_button": "Personalizza"
