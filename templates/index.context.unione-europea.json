@@ -64,12 +64,12 @@
       "blocks": {}
     },
     "image_with_text_overlay_789TTQ": {
-      "disabled": true,
+      "disabled": false,
       "settings": {},
       "blocks": {}
     },
     "featured_collections_c4HQey": {
-      "disabled": true,
+      "disabled": false,
       "settings": {},
       "blocks": {}
     },
@@ -133,7 +133,7 @@
       ]
     },
     "featured_collections_XtrEzn": {
-      "disabled": false,
+      "disabled": true,
       "settings": {},
       "blocks": {}
     },
@@ -159,13 +159,21 @@
         "collection_JDzgdX",
         "collection_KX4H8q"
       ]
+    },
+    "featured_collections_Y6jGhz": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
     }
   },
   "order": [
     "slideshow",
+    "image_with_text_overlay_yBCyrj",
+    "featured_collections_cYJfTj",
     "image_with_text_overlay_DPXRU8",
     "react_product_selector_rjQCQY",
     "image_with_text_overlay_e7VyVW",
+    "featured_collections_PVHEUF",
     "featured_collections_Y6jGhz",
     "image_with_text_overlay_j8nrRg",
     "featured_collections_jdaTBY",
@@ -173,14 +181,12 @@
     "featured_collections_c4HQey",
     "image_with_text_overlay_zCiiak",
     "featured_collections_zw9Azr",
-    "image_with_text_overlay_yBCyrj",
-    "featured_collections_cYJfTj",
     "image_with_text_overlay_BYy9Q7",
     "featured_collections_MFpNjj",
-    "image_with_text_overlay_Rd3Jwz",
-    "featured_collections_ecqrJR",
     "image_with_text_overlay_xT6TV",
     "featured_collections_iCxrqc",
+    "image_with_text_overlay_Rd3Jwz",
+    "featured_collections_ecqrJR",
     "collection_list_NVDbTz",
     "image_with_text_overlay_Vp3dBY",
     "featured_collections_XtrEzn",
