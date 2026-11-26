@@ -680,11 +680,11 @@
         "heading_RDXezU",
         "button_fbnFqe"
       ],
-      "name": "BANNER Elvis Cucina",
+      "name": "BANNER MOka",
       "settings": {
         "image_size": "auto",
-        "image": "shopify://shop_images/2500x900-slider-elvis-lives-piatti.webp",
-        "mobile_image": "shopify://shop_images/1100x1500-slider-elvis-lives-piatti.webp",
+        "image": "shopify://shop_images/2500x900-slider-moka-bialetti-ITA.webp",
+        "mobile_image": "shopify://shop_images/1200x1600-slider-moka-bialetti-ITA.webp",
         "enable_image_link": true,
         "image_link": "shopify://collections/accessori-casa-cucina-carousel",
         "allow_transparent_header": false,
