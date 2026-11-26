@@ -55,15 +55,15 @@
         "cycle_speed": 6
       },
       "blocks": {
+        "message_neBY8T": {
+          "disabled": true,
+          "settings": {}
+        },
         "message_cxYN7R": {
           "disabled": true,
           "settings": {}
         },
         "message_PqTtHr": {
-          "disabled": true,
-          "settings": {}
-        },
-        "message_neBY8T": {
           "disabled": true,
           "settings": {}
         }

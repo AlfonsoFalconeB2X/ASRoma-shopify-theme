@@ -13,33 +13,6 @@
   },
   "parent": "header-group.json",
   "sections": {
-    "announcement_bar_McT9Bq": {
-      "disabled": false,
-      "settings": {
-        "cycle_speed": 5
-      },
-      "blocks": {
-        "message_cxYN7R": {
-          "disabled": false,
-          "settings": {}
-        },
-        "message_F8NQaN": {
-          "disabled": true,
-          "settings": {
-            "text": "<a href=\"https://store.asroma.com/collections/kit-gara-third\" title=\"https://store.asroma.com/collections/kit-gara-third\">Third Kit 26/27🔥</a>"
-          }
-        },
-        "message_PqTtHr": {
-          "disabled": true,
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "message_cxYN7R",
-        "message_F8NQaN",
-        "message_PqTtHr"
-      ]
-    },
     "header": {
       "settings": {
         "menu": "main-menu-saldi"
@@ -54,6 +27,39 @@
         "mega_menu_848699",
         "mega_menu_dC8ThN",
         "mega_menu_qibbKF"
+      ]
+    },
+    "announcement_bar_McT9Bq": {
+      "disabled": false,
+      "settings": {
+        "cycle_speed": 5
+      },
+      "blocks": {
+        "message_cxYN7R": {
+          "disabled": true,
+          "settings": {}
+        },
+        "message_F8NQaN": {
+          "disabled": true,
+          "settings": {
+            "text": "<a href=\"https://store.asroma.com/collections/kit-gara-third\" title=\"https://store.asroma.com/collections/kit-gara-third\">Third Kit 26/27🔥</a>"
+          }
+        },
+        "message_PqTtHr": {
+          "disabled": true,
+          "settings": {}
+        },
+        "message_neBY8T": {
+          "disabled": true,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "message_neBY8T",
+        "message_YMzxbQ",
+        "message_cxYN7R",
+        "message_F8NQaN",
+        "message_PqTtHr"
       ]
     }
   }
