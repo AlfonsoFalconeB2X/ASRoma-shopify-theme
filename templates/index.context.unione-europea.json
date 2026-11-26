@@ -19,7 +19,9 @@
       "blocks": {
         "image_J3t83i": {
           "disabled": false,
-          "settings": {}
+          "settings": {
+            "end_date": "2026-11-26 23:58"
+          }
         },
         "image_jFwRbg": {
           "disabled": true,
@@ -98,6 +100,16 @@
       },
       "blocks": {}
     },
+    "image_with_text_overlay_xT6TV": {
+      "settings": {},
+      "blocks": {
+        "button_D3UzVk": {
+          "settings": {
+            "url": "shopify://collections/infant-as-roma"
+          }
+        }
+      }
+    },
     "collection_list_NVDbTz": {
       "disabled": true,
       "settings": {},
@@ -147,16 +159,6 @@
         "collection_JDzgdX",
         "collection_KX4H8q"
       ]
-    },
-    "image_with_text_overlay_xT6TV": {
-      "settings": {},
-      "blocks": {
-        "button_D3UzVk": {
-          "settings": {
-            "url": "shopify://collections/infant-as-roma"
-          }
-        }
-      }
     }
   },
   "order": [
