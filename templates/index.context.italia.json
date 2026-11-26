@@ -46,6 +46,14 @@
         "image_r7gbFB"
       ]
     },
+    "image_with_text_overlay_789TTQ": {
+      "disabled": false,
+      "settings": {
+        "enable_image_link": true,
+        "image_link": "shopify://collections/kit-gara-away"
+      },
+      "blocks": {}
+    },
     "featured_collections_c4HQey": {
       "disabled": false,
       "settings": {},
@@ -73,6 +81,11 @@
       "settings": {},
       "blocks": {}
     },
+    "image_with_text_overlay_e7VyVW": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    },
     "image_with_text_overlay_BYy9Q7": {
       "disabled": false,
       "settings": {
@@ -90,7 +103,7 @@
     "featured_collections_MFpNjj": {
       "disabled": false,
       "settings": {
-        "main_title": "Novità"
+        "main_title": "Inverno"
       },
       "blocks": {
         "collection_bRtXRz": {
@@ -99,14 +112,6 @@
           }
         }
       }
-    },
-    "image_with_text_overlay_789TTQ": {
-      "disabled": false,
-      "settings": {
-        "enable_image_link": true,
-        "image_link": "shopify://collections/kit-gara-away"
-      },
-      "blocks": {}
     },
     "image_with_text_overlay_zCiiak": {
       "settings": {},
@@ -217,11 +222,6 @@
         "product_TaxE3p",
         "product_YgqD4k"
       ]
-    },
-    "image_with_text_overlay_e7VyVW": {
-      "disabled": true,
-      "settings": {},
-      "blocks": {}
     }
   },
   "order": [
