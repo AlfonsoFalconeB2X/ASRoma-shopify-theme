@@ -49,6 +49,16 @@
         "image_r7gbFB"
       ]
     },
+    "featured_collections_cYJfTj": {
+      "disabled": false,
+      "settings": {},
+      "blocks": {
+        "collection_NMUj8U": {
+          "disabled": false,
+          "settings": {}
+        }
+      }
+    },
     "image_with_text_overlay_DPXRU8": {
       "disabled": false,
       "settings": {
@@ -63,6 +73,11 @@
       "settings": {},
       "blocks": {}
     },
+    "featured_collections_Y6jGhz": {
+      "disabled": true,
+      "settings": {},
+      "blocks": {}
+    },
     "image_with_text_overlay_789TTQ": {
       "disabled": false,
       "settings": {},
@@ -72,16 +87,6 @@
       "disabled": false,
       "settings": {},
       "blocks": {}
-    },
-    "featured_collections_cYJfTj": {
-      "disabled": false,
-      "settings": {},
-      "blocks": {
-        "collection_NMUj8U": {
-          "disabled": false,
-          "settings": {}
-        }
-      }
     },
     "image_with_text_overlay_BYy9Q7": {
       "disabled": true,
@@ -93,13 +98,6 @@
       "settings": {},
       "blocks": {}
     },
-    "image_with_text_overlay_Rd3Jwz": {
-      "disabled": false,
-      "settings": {
-        "image_size": "auto"
-      },
-      "blocks": {}
-    },
     "image_with_text_overlay_xT6TV": {
       "settings": {},
       "blocks": {
@@ -109,6 +107,13 @@
           }
         }
       }
+    },
+    "image_with_text_overlay_Rd3Jwz": {
+      "disabled": false,
+      "settings": {
+        "image_size": "auto"
+      },
+      "blocks": {}
     },
     "collection_list_NVDbTz": {
       "disabled": true,
@@ -133,7 +138,7 @@
       ]
     },
     "featured_collections_XtrEzn": {
-      "disabled": true,
+      "disabled": false,
       "settings": {},
       "blocks": {}
     },
@@ -159,15 +164,11 @@
         "collection_JDzgdX",
         "collection_KX4H8q"
       ]
-    },
-    "featured_collections_Y6jGhz": {
-      "disabled": true,
-      "settings": {},
-      "blocks": {}
     }
   },
   "order": [
     "slideshow",
+    "featured_collections_XtrEzn",
     "image_with_text_overlay_yBCyrj",
     "featured_collections_cYJfTj",
     "image_with_text_overlay_DPXRU8",
@@ -189,7 +190,6 @@
     "featured_collections_ecqrJR",
     "collection_list_NVDbTz",
     "image_with_text_overlay_Vp3dBY",
-    "featured_collections_XtrEzn",
     "collection_list_LEqCw4",
     "featured_giftcard_AtRUhJ"
   ]
