@@ -50,7 +50,13 @@
       "settings": {
         "menu": "main-menu-saldi"
       },
-      "blocks": {},
+      "blocks": {
+        "mega_menu_qibbKF": {
+          "settings": {
+            "menu_item": "Black Friday"
+          }
+        }
+      },
       "block_order": [
         "mega_menu_VgkKrT",
         "mega_menu_nf8ycj",
