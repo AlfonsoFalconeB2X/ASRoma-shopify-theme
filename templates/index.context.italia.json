@@ -176,7 +176,7 @@
       }
     },
     "featured_collections_XtrEzn": {
-      "disabled": false,
+      "disabled": true,
       "settings": {},
       "blocks": {}
     },
