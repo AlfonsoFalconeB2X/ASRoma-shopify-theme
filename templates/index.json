@@ -669,7 +669,7 @@
           "type": "button",
           "settings": {
             "style": "outline",
-            "text": "Scopri gli accessori per la tua casa Giallorossa",
+            "text": "",
             "url": "shopify://collections/accessori-casa-cucina-carousel",
             "button_style": "link",
             "button_variant": "secondary"
