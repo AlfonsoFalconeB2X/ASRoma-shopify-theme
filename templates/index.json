@@ -1017,6 +1017,24 @@
             "overlay_position": "top"
           }
         },
+        "collection_KX4H8q": {
+          "type": "collection",
+          "settings": {
+            "collection": "collection-uomo-pile-asr",
+            "image": "shopify://shop_images/JACK-IN-01AD-pile-as-roma-nero.jpg",
+            "expand_collection": false,
+            "content_position": "place-self-end-center text-center",
+            "subheading": "",
+            "title": "Giacca In Pile",
+            "button_position": "center",
+            "button_text": "SCOPRI DI PIÙ",
+            "button_link": "shopify://collections/collection-uomo-pile-asr",
+            "button_style": "solid",
+            "button_variant": "primary",
+            "add_icon_to_button": false,
+            "overlay_position": "top"
+          }
+        },
         "collection_bHVJHc": {
           "type": "collection",
           "settings": {
@@ -1107,37 +1125,18 @@
             "add_icon_to_button": false,
             "overlay_position": "top"
           }
-        },
-        "collection_KX4H8q": {
-          "type": "collection",
-          "disabled": true,
-          "settings": {
-            "collection": "collection-uomo-adidas-originals",
-            "image": "shopify://shop_images/adidas-originals-track-top-JZ7187.jpg",
-            "expand_collection": false,
-            "content_position": "place-self-end-center text-center",
-            "subheading": "",
-            "title": "Adidas Originals",
-            "button_position": "center",
-            "button_text": "SCOPRI DI PIÙ",
-            "button_link": "shopify://collections/collection-uomo-adidas-originals",
-            "button_style": "solid",
-            "button_variant": "primary",
-            "add_icon_to_button": false,
-            "overlay_position": "top"
-          }
         }
       },
       "block_order": [
         "collection_mBTU8A",
         "collection_BjakaA",
         "collection_TNTgYJ",
+        "collection_KX4H8q",
         "collection_bHVJHc",
         "collection_6y7Fti",
         "collection_QfNrUV",
         "collection_C6WYpH",
-        "collection_JDzgdX",
-        "collection_KX4H8q"
+        "collection_JDzgdX"
       ],
       "name": "Collection - Product List",
       "settings": {
