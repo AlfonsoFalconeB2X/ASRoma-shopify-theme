@@ -226,7 +226,7 @@
             "collection": "kit-gara-away",
             "products_count": 15,
             "title": "",
-            "link_url": "shopify://collections/kit-gara-home",
+            "link_url": "shopify://collections/kit-gara-away",
             "link_text": "Scopri Away Kit 26/27",
             "link_type": "primary",
             "link_position": "bottom",
@@ -1236,7 +1236,7 @@
         "content_width": "xs",
         "mobile_text_position": "place-self-end-center text-center",
         "desktop_text_position": "sm:place-self-end-center sm:text-center",
-        "overlay_bg": true,
+        "overlay_bg": false,
         "style_olverlay": "gradient"
       }
     }
