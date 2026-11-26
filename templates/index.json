@@ -303,7 +303,7 @@
           "settings": {
             "style": "outline",
             "text": "Personalizza la tua Maglia con la patch della Champions League",
-            "url": "shopify://collections/kit-gara-away",
+            "url": "shopify://collections/kit-gara-home",
             "button_style": "link",
             "button_variant": "secondary"
           }
