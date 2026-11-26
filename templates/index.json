@@ -1192,13 +1192,13 @@
         "heading_efzDTz",
         "button_hhGY8b"
       ],
-      "name": "BANNER Home 26/27",
+      "name": "BANNER Away 26/27",
       "settings": {
         "image_size": "auto",
-        "image": "shopify://shop_images/2500x900-slider-as-roma-home-kit-26-27.jpg",
-        "mobile_image": "shopify://shop_images/1200x1600-slider-as-roma-home-kit-26-27..jpg",
+        "image": "shopify://shop_images/2500x900-slider-away-kit-26-27.jpg",
+        "mobile_image": "shopify://shop_images/1200x1600-slider-away-kit-26-27.jpg",
         "enable_image_link": true,
-        "image_link": "shopify://collections/kit-gara-home",
+        "image_link": "shopify://collections/kit-gara-away",
         "allow_transparent_header": false,
         "reveal_on_scroll": true,
         "remove_vertical_spacing": false,
