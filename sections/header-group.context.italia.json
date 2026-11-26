@@ -13,6 +13,32 @@
   },
   "parent": "header-group.json",
   "sections": {
+    "announcement_bar_McT9Bq": {
+      "settings": {
+        "cycle_speed": 6
+      },
+      "blocks": {
+        "message_neBY8T": {
+          "disabled": false,
+          "settings": {}
+        },
+        "message_cxYN7R": {
+          "disabled": true,
+          "settings": {}
+        },
+        "message_PqTtHr": {
+          "disabled": true,
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "message_neBY8T",
+        "message_YMzxbQ",
+        "message_cxYN7R",
+        "message_PqTtHr",
+        "message_F8NQaN"
+      ]
+    },
     "header": {
       "settings": {
         "menu": "main-menu-saldi"
@@ -48,32 +74,6 @@
         "mega_menu_dC8ThN",
         "mega_menu_qibbKF",
         "mega_menu_gtPjg9"
-      ]
-    },
-    "announcement_bar_McT9Bq": {
-      "settings": {
-        "cycle_speed": 6
-      },
-      "blocks": {
-        "message_neBY8T": {
-          "disabled": true,
-          "settings": {}
-        },
-        "message_cxYN7R": {
-          "disabled": true,
-          "settings": {}
-        },
-        "message_PqTtHr": {
-          "disabled": true,
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "message_neBY8T",
-        "message_YMzxbQ",
-        "message_cxYN7R",
-        "message_PqTtHr",
-        "message_F8NQaN"
       ]
     }
   }

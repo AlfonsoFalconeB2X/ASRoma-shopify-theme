@@ -46,18 +46,32 @@
         "image_r7gbFB"
       ]
     },
-    "image_with_text_overlay_789TTQ": {
-      "disabled": false,
-      "settings": {
-        "enable_image_link": true,
-        "image_link": "shopify://collections/kit-gara-away"
-      },
-      "blocks": {}
-    },
-    "featured_collections_c4HQey": {
+    "featured_collections_XtrEzn": {
       "disabled": false,
       "settings": {},
       "blocks": {}
+    },
+    "image_with_text_overlay_yBCyrj": {
+      "disabled": false,
+      "settings": {},
+      "blocks": {}
+    },
+    "featured_collections_cYJfTj": {
+      "disabled": false,
+      "settings": {
+        "stack_products": false,
+        "products_per_row_mobile": "2",
+        "content_position": "start",
+        "main_title": "Idee Regalo Natale"
+      },
+      "blocks": {
+        "collection_NMUj8U": {
+          "disabled": false,
+          "settings": {
+            "products_count": 26
+          }
+        }
+      }
     },
     "image_with_text_overlay_DPXRU8": {
       "disabled": false,
@@ -86,6 +100,64 @@
       "settings": {},
       "blocks": {}
     },
+    "featured_collections_PVHEUF": {
+      "disabled": false,
+      "settings": {},
+      "blocks": {}
+    },
+    "image_with_text_overlay_789TTQ": {
+      "disabled": false,
+      "settings": {
+        "enable_image_link": true,
+        "image_link": "shopify://collections/kit-gara-away"
+      },
+      "blocks": {}
+    },
+    "featured_collections_c4HQey": {
+      "disabled": false,
+      "settings": {},
+      "blocks": {}
+    },
+    "image_with_text_overlay_zCiiak": {
+      "settings": {},
+      "blocks": {
+        "button_TNXfKK": {
+          "settings": {
+            "text": ""
+          }
+        }
+      }
+    },
+    "image_with_text_overlay_xT6TV": {
+      "settings": {},
+      "blocks": {
+        "button_D3UzVk": {
+          "settings": {
+            "text": "Scopri la Infant Collection",
+            "url": "shopify://collections/infant-as-roma"
+          }
+        }
+      }
+    },
+    "featured_collections_iCxrqc": {
+      "settings": {},
+      "blocks": {
+        "collection_wBAg4q": {
+          "settings": {
+            "link_text": "Scopri la Infant Collection"
+          }
+        }
+      }
+    },
+    "image_with_text_overlay_Rd3Jwz": {
+      "disabled": false,
+      "settings": {
+        "image_size": "auto",
+        "enable_image_link": true,
+        "image_link": "shopify://collections/accessori-casa-cucina-carousel"
+      },
+      "blocks": {}
+    },
     "image_with_text_overlay_BYy9Q7": {
       "disabled": false,
       "settings": {
@@ -112,73 +184,6 @@
           }
         }
       }
-    },
-    "image_with_text_overlay_zCiiak": {
-      "settings": {},
-      "blocks": {
-        "button_TNXfKK": {
-          "settings": {
-            "text": ""
-          }
-        }
-      }
-    },
-    "image_with_text_overlay_yBCyrj": {
-      "disabled": false,
-      "settings": {},
-      "blocks": {}
-    },
-    "featured_collections_cYJfTj": {
-      "disabled": false,
-      "settings": {
-        "stack_products": false,
-        "products_per_row_mobile": "2",
-        "content_position": "start",
-        "main_title": "Idee Regalo Natale"
-      },
-      "blocks": {
-        "collection_NMUj8U": {
-          "disabled": false,
-          "settings": {
-            "products_count": 26
-          }
-        }
-      }
-    },
-    "image_with_text_overlay_Rd3Jwz": {
-      "disabled": false,
-      "settings": {
-        "image_size": "auto",
-        "enable_image_link": true,
-        "image_link": "shopify://collections/accessori-casa-cucina-carousel"
-      },
-      "blocks": {}
-    },
-    "image_with_text_overlay_xT6TV": {
-      "settings": {},
-      "blocks": {
-        "button_D3UzVk": {
-          "settings": {
-            "text": "Scopri la Infant Collection",
-            "url": "shopify://collections/infant-as-roma"
-          }
-        }
-      }
-    },
-    "featured_collections_iCxrqc": {
-      "settings": {},
-      "blocks": {
-        "collection_wBAg4q": {
-          "settings": {
-            "link_text": "Scopri la Infant Collection"
-          }
-        }
-      }
-    },
-    "featured_collections_XtrEzn": {
-      "disabled": true,
-      "settings": {},
-      "blocks": {}
     },
     "collection_list_LEqCw4": {
       "settings": {},
@@ -222,11 +227,6 @@
         "product_TaxE3p",
         "product_YgqD4k"
       ]
-    },
-    "featured_collections_PVHEUF": {
-      "disabled": false,
-      "settings": {},
-      "blocks": {}
     }
   },
   "order": [
