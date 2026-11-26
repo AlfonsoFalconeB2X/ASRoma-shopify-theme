@@ -82,7 +82,7 @@
       "blocks": {}
     },
     "image_with_text_overlay_e7VyVW": {
-      "disabled": true,
+      "disabled": false,
       "settings": {},
       "blocks": {}
     },
@@ -222,6 +222,11 @@
         "product_TaxE3p",
         "product_YgqD4k"
       ]
+    },
+    "featured_collections_PVHEUF": {
+      "disabled": false,
+      "settings": {},
+      "blocks": {}
     }
   },
   "order": [
@@ -232,6 +237,7 @@
     "image_with_text_overlay_DPXRU8",
     "react_product_selector_rjQCQY",
     "image_with_text_overlay_e7VyVW",
+    "featured_collections_PVHEUF",
     "image_with_text_overlay_j8nrRg",
     "featured_collections_jdaTBY",
     "image_with_text_overlay_789TTQ",
