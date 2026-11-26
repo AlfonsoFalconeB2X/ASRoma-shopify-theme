@@ -223,11 +223,11 @@
         "collection_ktF6HJ": {
           "type": "collection",
           "settings": {
-            "collection": "kit-gara-home",
+            "collection": "kit-gara-away",
             "products_count": 15,
             "title": "",
             "link_url": "shopify://collections/kit-gara-home",
-            "link_text": "Scopri Home Kit 26/27",
+            "link_text": "Scopri Away Kit 26/27",
             "link_type": "primary",
             "link_position": "bottom",
             "show_icon": true
