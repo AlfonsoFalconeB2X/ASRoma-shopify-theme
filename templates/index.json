@@ -217,6 +217,37 @@
         "main_title": "Home Kit 26/27"
       }
     },
+    "featured_collections_PVHEUF": {
+      "type": "featured-collections",
+      "blocks": {
+        "collection_ktF6HJ": {
+          "type": "collection",
+          "settings": {
+            "collection": "kit-gara-home",
+            "products_count": 15,
+            "title": "",
+            "link_url": "shopify://collections/kit-gara-home",
+            "link_text": "Scopri Home Kit 26/27",
+            "link_type": "primary",
+            "link_position": "bottom",
+            "show_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "collection_ktF6HJ"
+      ],
+      "name": "Carousel Away 26/27",
+      "settings": {
+        "separate_section_with_border": false,
+        "hide_product_information": false,
+        "stack_products": false,
+        "products_per_row_mobile": "2",
+        "products_per_row_desktop": 4,
+        "content_position": "start",
+        "main_title": "Away Kit 26/27"
+      }
+    },
     "image_with_text_overlay_789TTQ": {
       "type": "image-with-text-overlay",
       "blocks": {
@@ -1182,7 +1213,7 @@
           "settings": {
             "style": "outline",
             "text": "",
-            "url": "shopify://collections/kit-gara-home",
+            "url": "shopify://collections/kit-gara-away",
             "button_style": "link",
             "button_variant": "secondary"
           }
@@ -1213,6 +1244,7 @@
   "order": [
     "slideshow",
     "featured_collections_Y6jGhz",
+    "featured_collections_PVHEUF",
     "image_with_text_overlay_789TTQ",
     "featured_collections_c4HQey",
     "image_with_text_overlay_DPXRU8",
