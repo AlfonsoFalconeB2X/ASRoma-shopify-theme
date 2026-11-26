@@ -55,10 +55,6 @@
         "cycle_speed": 6
       },
       "blocks": {
-        "message_68qxAL": {
-          "disabled": true,
-          "settings": {}
-        },
         "message_cxYN7R": {
           "disabled": true,
           "settings": {}
@@ -70,7 +66,6 @@
       },
       "block_order": [
         "message_YMzxbQ",
-        "message_68qxAL",
         "message_cxYN7R",
         "message_PqTtHr",
         "message_F8NQaN"

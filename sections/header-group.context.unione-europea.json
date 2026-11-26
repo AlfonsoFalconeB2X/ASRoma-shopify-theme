@@ -32,15 +32,10 @@
         "message_PqTtHr": {
           "disabled": true,
           "settings": {}
-        },
-        "message_68qxAL": {
-          "disabled": true,
-          "settings": {}
         }
       },
       "block_order": [
         "message_cxYN7R",
-        "message_68qxAL",
         "message_F8NQaN",
         "message_PqTtHr"
       ]
