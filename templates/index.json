@@ -861,6 +861,7 @@
       "block_order": [
         "collection_Wen3Wj"
       ],
+      "disabled": true,
       "name": "Carousel Black Friday",
       "settings": {
         "separate_section_with_border": false,
