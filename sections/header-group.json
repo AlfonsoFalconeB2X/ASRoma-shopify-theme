@@ -14,16 +14,16 @@
     "announcement_bar_McT9Bq": {
       "type": "announcement-bar",
       "blocks": {
+        "message_neBY8T": {
+          "type": "message",
+          "settings": {
+            "text": "&nbsp;Black Friday fino al 60% 🔥"
+          }
+        },
         "message_YMzxbQ": {
           "type": "message",
           "settings": {
             "text": "<a href=\"/collections/idee-regalo\" title=\"Idee regalo\">Natale Idee regalo 🎁</a>"
-          }
-        },
-        "message_68qxAL": {
-          "type": "message",
-          "settings": {
-            "text": "<a href=\"/collections/abbigliamento-neonato\" title=\"Abbigliamento - Neonato\">Novità linea neonato 🥳</a>"
           }
         },
         "message_cxYN7R": {
@@ -49,8 +49,8 @@
         }
       },
       "block_order": [
+        "message_neBY8T",
         "message_YMzxbQ",
-        "message_68qxAL",
         "message_cxYN7R",
         "message_F8NQaN",
         "message_PqTtHr"
