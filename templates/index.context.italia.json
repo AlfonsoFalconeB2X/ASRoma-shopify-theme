@@ -13,41 +13,13 @@
   },
   "parent": "index.json",
   "sections": {
-    "slideshow": {
-      "settings": {},
-      "blocks": {
-        "image_J3t83i": {
-          "disabled": true,
-          "settings": {}
-        },
-        "image_jFwRbg": {
-          "disabled": true,
-          "settings": {}
-        },
-        "image_F63Mzh": {
-          "disabled": false,
-          "settings": {
-            "end_date": "2026-11-26 23:59",
-            "image": "shopify://shop_images/3200x1200-slider-as-roma-home-kit-26-27.webp"
-          }
-        },
-        "image_r7gbFB": {
-          "disabled": true,
-          "settings": {
-            "gradient_overlay": "linear-gradient(180deg, rgba(NaN, NaN, NaN, 0), rgba(4, 4, 4, 0.65) 100%)"
-          }
-        }
-      },
-      "block_order": [
-        "image_J3t83i",
-        "image_jFwRbg",
-        "image_y3FKaw",
-        "image_F63Mzh",
-        "image_r7gbFB"
-      ]
-    },
     "featured_collections_XtrEzn": {
       "disabled": false,
+      "settings": {},
+      "blocks": {}
+    },
+    "featured_collections_Y6jGhz": {
+      "disabled": true,
       "settings": {},
       "blocks": {}
     },
@@ -228,10 +200,39 @@
         "product_YgqD4k"
       ]
     },
-    "featured_collections_Y6jGhz": {
-      "disabled": true,
+    "slideshow": {
       "settings": {},
-      "blocks": {}
+      "blocks": {
+        "image_J3t83i": {
+          "disabled": true,
+          "settings": {}
+        },
+        "image_jFwRbg": {
+          "disabled": true,
+          "settings": {}
+        },
+        "image_F63Mzh": {
+          "disabled": false,
+          "settings": {
+            "end_date": "2026-11-26 23:59",
+            "image": "shopify://shop_images/3200x1200-slider-as-roma-home-kit-26-27.webp"
+          }
+        },
+        "image_r7gbFB": {
+          "disabled": true,
+          "settings": {
+            "gradient_overlay": "linear-gradient(180deg, rgba(NaN, NaN, NaN, 0), rgba(4, 4, 4, 0.65) 100%)"
+          }
+        }
+      },
+      "block_order": [
+        "image_y3FKaw",
+        "image_FV3U6m",
+        "image_J3t83i",
+        "image_jFwRbg",
+        "image_F63Mzh",
+        "image_r7gbFB"
+      ]
     }
   },
   "order": [
