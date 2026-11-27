@@ -16,10 +16,10 @@
     "cart-drawer": {
       "settings": {
         "cross_sell_products": [
+          "roma-roma-roma-di-antonello-venditti-45-giri",
           "portachiavi-as-roma-peluche-romolo-13cm",
           "portachiavi-as-roma-peluche-romina-13cm",
           "coppia-tovagliette-da-cucina-elvis-lives-x-as-roma",
-          "kit-del-tifoso-as-roma",
           "sciarpa-as-roma-jaquard-a-righe-con-logo-champions-league"
         ],
         "cross_sell_stack_products": true
